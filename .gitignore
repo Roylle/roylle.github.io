@@ -1,0 +1,9 @@
+node_modules/
+dist/
+.DS_Store
+
+# Local research and QA artifacts
+Grab/
+evidence/
+.env
+.env.*
