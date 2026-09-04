@@ -2,6 +2,7 @@ import '@fontsource-variable/manrope';
 import '@fontsource/instrument-serif/latin-400-italic.css';
 import './style.css';
 import './mobile.css';
+import './project-covers.css';
 import { projects } from './projects.js';
 import { createPixelField } from './pixels.js';
 import zaloIcon from './icons/zalo.svg?raw';
@@ -76,7 +77,7 @@ let lastTrigger = null;
 function renderProjects() {
   const filtered = activeFilter === 'all' ? projects : projects.filter(p => p.category === activeFilter);
   const shown = activeFilter === 'all' && !expanded ? filtered.slice(0, 6) : filtered;
-  grid.innerHTML = shown.map((p) => `<article class="project-card"><button class="project-open" data-project="${p.slug}" aria-label="View ${p.name} project"><span class="project-image" style="--project-bg:${p.color}"><img src="${p.image}" alt="${p.name} — ${p.scope}" width="808" height="632" loading="lazy" decoding="async"><span class="project-hover">Explore project ${arrow}</span><span class="project-index mono">${String(projects.indexOf(p) + 1).padStart(2, '0')} /</span></span><span class="project-info"><span><span class="project-name">${p.name}</span><span class="project-subtitle">${p.subtitle}</span></span><span class="project-link-icon">${arrow}</span></span></button><p class="project-type mono">${p.type}</p></article>`).join('');
+  grid.innerHTML = shown.map((p) => `<article class="project-card"><button class="project-open" data-project="${p.slug}" aria-label="View ${p.name} project"><span class="project-image${p.presentation === 'device' ? ' device-cover' : ''}" style="--project-bg:${p.color}"><img src="${p.image}" alt="${p.name} — ${p.scope}" width="808" height="632" loading="lazy" decoding="async"><span class="project-hover">Explore case study ${arrow}</span><span class="project-index mono">${String(projects.indexOf(p) + 1).padStart(2, '0')} /</span>${p.local ? '<span class="project-badge mono">CASE STUDY</span>' : ''}</span><span class="project-info"><span><span class="project-name">${p.name}</span><span class="project-subtitle">${p.subtitle}</span></span><span class="project-link-icon">${arrow}</span></span></button><p class="project-type mono">${p.type}</p></article>`).join('');
   showMore.hidden = activeFilter !== 'all';
   showMore.innerHTML = expanded ? 'Show selected projects <span aria-hidden="true">↑</span>' : `Explore all ${projects.length} projects <span aria-hidden="true">↗</span>`;
   document.querySelector('#filter-status').textContent = `Showing ${shown.length} ${activeFilter === 'all' ? 'projects' : document.querySelector(`[data-filter="${activeFilter}"]`).textContent.replace(/\d/g, '').trim() + ' projects'}`;

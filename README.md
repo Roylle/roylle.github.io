@@ -14,8 +14,8 @@ Open the local URL printed by Vite. `npm run build` creates `dist/`; `npm run pr
 ## Content
 
 - Profile: [Hoang Le on Behance](https://www.behance.net/hoangle1999), checked September 3, 2026.
-- Twelve public project covers are stored locally; six projects are selected for the initial gallery, including the new local Forma concept.
-- Five selected projects also include their original long-form artwork in the preview dialog. Existing projects link to their own full Behance presentation; Forma links to its local case study.
+- Twelve public project covers are stored locally alongside three local case studies; six projects are selected for the initial gallery, led by GrabRoy, CrypRoy and Forma.
+- Five selected projects also include their original long-form artwork in the preview dialog. Existing projects link to their own full Behance presentation; the three independent concepts link to local case studies.
 - Project names, source URLs and categories live in `src/projects.js`.
 - Profile details also use the user-supplied `CV_UIUX_hoangJimNew.pdf`: Hoang Le (Roylle), UI/UX work starting in 2022 (corrected by the user), Dai Quoc Viet (October 2022–April 2025), education, immersive design, mentoring, and design tools. Dai Quoc Viet dates remain those in the CV. The user also supplied nanoHome and Orchestars, UI/UX collaboration with CoderPush, and marketing/e-commerce experience at nanoHome; the two new roles have no dates until supplied.
 - The AI Product Designer direction and proficiency in Codex, ChatGPT, Gemini, Flow Labs, and Claude were supplied directly by the user on September 3, 2026. Introductory copy describes this as the next chapter of their practice. Existing projects are not relabeled as AI projects, and no AI project results or metrics are claimed.
@@ -41,8 +41,8 @@ Icon sources: [Zalo / Simple Icons](https://github.com/simple-icons/simple-icons
 
 - Production build succeeds.
 - Real browser checks at 375, 768, 1024 and 1440 pixels: no horizontal overflow.
-- Category filters return 5 websites, 6 apps/systems and 2 explorations, including the local Forma concept.
-- Expand/collapse changes between 6 selected and all 13 projects.
+- Category filters return 5 websites, 8 apps/systems and 2 explorations, including three local concepts.
+- Expand/collapse changes between 6 selected and all 15 projects.
 - Desktop and mobile dialogs open/close; Escape restores focus to the originating card.
 - Email and Behance destinations inspected; no email sent.
 - Motion pause/resume and emulated reduced-motion preference verified.
@@ -53,7 +53,7 @@ The contact section shares the site's paper background, ink text, and cobalt acc
 
 ## Hosting
 
-Published with GitHub Pages at https://roylle.github.io/. The deployment workflow builds both HTML entry points and deploys `dist/` on pushes to `main`. Local research in `Grab/` and QA screenshots in `evidence/` are excluded from the public repository.
+Published with GitHub Pages at https://roylle.github.io/. The deployment workflow builds every HTML entry point and deploys `dist/` on pushes to `main`. Local research in `Grab/` and QA screenshots in `evidence/` are excluded from the public repository.
 
 Local development: http://127.0.0.1:1102/.
 
@@ -69,3 +69,13 @@ Added September 3, 2026. Open `/forma.html` or select **Forma** in the portfolio
 - This is a design concept, not a launched bank or validated client engagement. No user research, conversion metrics or real product outcomes are claimed.
 - Files: `forma.html`, `src/forma.js`, `src/forma.css`, `public/projects/forma.svg`; multi-page build configuration in `vite.config.js`.
 - Browser verification and limitations are recorded in `evidence/forma-qa.md`.
+
+## GrabRoy and CrypRoy — independent redesign studies
+
+Added September 4, 2026. Open `/grabroy.html` and `/cryproy.html`, or select either project at the top of the portfolio gallery.
+
+- Both pages explicitly identify the work as independent and unaffiliated. Source screenshots are acknowledged as reference evidence rather than presented as original product discovery or client work.
+- Each case study separates observed design complexity, a design hypothesis, process evidence, potential value and unvalidated limitations. Artifact counts are used only as proof of scope; no business or usability outcomes are invented.
+- GrabRoy presents the 60-screen super-app system through cross-service consistency, reusable interaction families and recovery routes.
+- CrypRoy presents a focused spot-buy flow through decision clarity, inline validation, review, duplicate-submit protection and timeout recovery.
+- Shared presentation files: `src/case-study.js` and `src/case-study.css`. Portfolio card treatment is in `src/project-covers.css`; optimized Figma evidence is stored under `public/projects/`.
