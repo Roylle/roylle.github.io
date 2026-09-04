@@ -18,6 +18,11 @@ const projects = {
     intro: 'A systems-led redesign exploring how mobility, food, delivery, wallet and support can share one predictable interaction language — without flattening the needs of each service.',
     heroImage: '/projects/grabroy-home.webp',
     heroAlt: 'GrabRoy home screen showing ride, food and delivery services in one interface',
+    mockups: [
+      { src: '/projects/grabroy-mockup-urban.webp', width: 1600, height: 901, alt: 'GrabRoy home screen presented on a phone beside a Ho Chi Minh City street at morning', label: '01 / URBAN CONTEXT', caption: 'The interface is framed where service choices actually happen: between movement, food, delivery and the rhythm of the city.' },
+      { src: '/projects/grabroy-mockup-wallet.webp', width: 1600, height: 1067, alt: 'GrabRoy wallet top-up screen held at a cafe payment counter', label: '02 / MOMENT OF COMMITMENT', caption: 'Payment details move from abstract UI into a familiar moment: checking the source, fee and total before confirming.' },
+      { src: '/projects/grabroy-mockup-ecosystem.webp', width: 1600, height: 901, alt: 'Two GrabRoy app screens arranged with urban mobility and delivery objects', label: '03 / ONE SERVICE LANGUAGE', caption: 'Mobility and wallet screens share one visual grammar while preserving the information each task needs.' },
+    ],
     figma: 'https://www.figma.com/design/qlJA7PYF4vu1NsQIwGN260/Royle_port?node-id=41-547',
     facts: [
       ['ROLE', 'Product designer · Independent'],
@@ -73,6 +78,11 @@ const projects = {
     intro: 'A focused spot-trading redesign that makes market context, order review, processing and failure recovery easier to read before any irreversible action is taken.',
     heroImage: '/projects/cryproy-home.webp',
     heroAlt: 'CrypRoy home screen showing balance, quick actions and market assets',
+    mockups: [
+      { src: '/projects/cryproy-mockup-desk.webp', width: 1600, height: 901, alt: 'CrypRoy market home screen on a phone at a dark professional trading desk', label: '01 / DECISION ENVIRONMENT', caption: 'The visual world is intentionally calm and analytical: market context is present, but the interface remains the focal point.' },
+      { src: '/projects/cryproy-mockup-review.webp', width: 1600, height: 1067, alt: 'CrypRoy order review screen held above a risk-check document', label: '02 / REVIEW BEFORE COMMITMENT', caption: 'The review state turns a high-stakes tap into a deliberate checkpoint for amount, fee, estimate and available balance.' },
+      { src: '/projects/cryproy-mockup-system.webp', width: 1600, height: 901, alt: 'Three CrypRoy screens displayed with dark design-system boards and token objects', label: '03 / SYSTEM IN USE', caption: 'Home, market detail and order outcome demonstrate how the same tokens support discovery, analysis and feedback.' },
+    ],
     figma: 'https://www.figma.com/design/G40J1jrBLzBNwJyyiij5is/CrypRoy?node-id=2022-4',
     facts: [
       ['ROLE', 'Product designer · Independent'],
@@ -163,6 +173,10 @@ document.querySelector('#app').innerHTML = `
         <div class="overview-phone phone-b"><img src="${project.secondImage}" alt="${project.secondAlt}" loading="lazy" decoding="async"></div>
       </div>
     </section>
+    <figure class="story-image story-image-hero">
+      <img src="${project.mockups[0].src}" alt="${project.mockups[0].alt}" width="${project.mockups[0].width}" height="${project.mockups[0].height}" fetchpriority="high">
+      <figcaption><span>${project.mockups[0].label}</span><p>${project.mockups[0].caption}</p></figcaption>
+    </figure>
     <section class="case-toc" aria-labelledby="toc-title">
       <div class="toc-title"><span>CASE STUDY</span><h2 id="toc-title">Table of<br>contents</h2><p>Scroll story · approximately 6 minutes</p></div>
       <ol><li><a href="#why"><span>01</span><strong>Project framing</strong><small>Context, problem and design hypothesis</small></a></li><li><a href="#approach"><span>02</span><strong>Research & structure</strong><small>Reference audit, sitemap and flow</small></a></li><li><a href="#system"><span>03</span><strong>Design development</strong><small>System choices and connected screens</small></a></li><li><a href="#prototype"><span>04</span><strong>Interactive prototype</strong><small>Test the meaningful paths in-browser</small></a></li><li><a href="#outcome"><span>05</span><strong>Outcome & reflection</strong><small>Evidence, hypotheses and limits</small></a></li></ol>
@@ -175,6 +189,10 @@ document.querySelector('#app').innerHTML = `
       <div class="section-kicker"><span>01 / WHY THIS PROJECT</span><span>FROM REFERENCE TO REASONING</span></div>
       <div class="narrative-grid"><h2>${project.whyTitle}</h2><div>${project.whyBody.map(p => `<p>${p}</p>`).join('')}</div></div>
       <div class="question-grid">${project.questions.map(([n, title, body]) => `<article><span>${n}</span><h3>${title}</h3><p>${body}</p></article>`).join('')}</div>
+    </section>
+    <section class="context-story section-pad" aria-label="Product in context">
+      <figure><img src="${project.mockups[1].src}" alt="${project.mockups[1].alt}" width="${project.mockups[1].width}" height="${project.mockups[1].height}" loading="lazy" decoding="async"></figure>
+      <div><span>${project.mockups[1].label}</span><h2>${isCrypRoy ? 'A safer interaction begins before the final tap.' : 'Trust is built where money, time and intent meet.'}</h2><p>${project.mockups[1].caption}</p></div>
     </section>
 
     <div class="chapter-banner chapter-two"><span>PART II</span><h2>Research &<br>Structure</h2><p>The reference material defines the domain. The design work begins when observations become explicit rules, routes and testable decisions.</p></div>
@@ -190,6 +208,11 @@ document.querySelector('#app').innerHTML = `
       <div class="section-kicker"><span>03 / SYSTEM & FLOW</span><span>DETAIL WITH A PURPOSE</span></div>
       <div class="decision-grid"><div><h2>${project.decisionTitle}</h2><p>${project.decisionBody}</p><ul><li>${icon('check')} Primary and recovery paths designed together</li><li>${icon('check')} Reusable language across repeated states</li><li>${icon('check')} Explicit feedback before and after commitment</li></ul></div><div class="device-detail"><img src="${project.secondImage}" alt="${project.secondAlt}" loading="lazy" decoding="async"></div></div>
       <figure class="wide-figure showcase"><img src="${project.flowImage}" alt="${project.flowAlt}" loading="lazy" decoding="async"><figcaption>The result is presented as a connected product slice, not a gallery of isolated screens.</figcaption></figure>
+    </section>
+
+    <section class="visual-proof section-pad" aria-label="Themed product mockup">
+      <div class="visual-proof-copy"><span>${project.mockups[2].label}</span><h2>${isCrypRoy ? 'One system across the full decision arc.' : 'A service family, not a stack of unrelated screens.'}</h2><p>${project.mockups[2].caption}</p></div>
+      <figure><img src="${project.mockups[2].src}" alt="${project.mockups[2].alt}" width="${project.mockups[2].width}" height="${project.mockups[2].height}" loading="lazy" decoding="async"></figure>
     </section>
 
     <div class="chapter-banner chapter-four"><span>PART IV</span><h2>Prototype &<br>Validation</h2><p>Static screens become credible when the reviewer can follow a decision, receive feedback and recover from a problem.</p></div>
