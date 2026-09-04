@@ -123,6 +123,7 @@ const projects = {
 };
 
 const project = projects[document.body.dataset.project] || projects.grabroy;
+const isCrypRoy = project.name === 'CrypRoy';
 document.body.classList.add(project.className);
 
 document.querySelector('#app').innerHTML = `
@@ -132,7 +133,7 @@ document.querySelector('#app').innerHTML = `
     <a class="header-action" href="${project.figma}" target="_blank" rel="noopener noreferrer">Open Figma ${icon('arrow')}</a>
   </header>
   <nav class="case-nav" aria-label="Case study sections">
-    <a class="case-nav-try" href="#prototype">Try it</a><a href="#why">Why</a><a href="#approach">Approach</a><a href="#system">System</a><a href="#outcome">Outcome</a><a href="#reflection">Reflection</a>
+    <a href="#overview">Overview</a><a href="#why">Problem</a><a href="#approach">Research</a><a href="#system">System</a><a class="case-nav-try" href="#prototype">Try it</a><a href="#outcome">Outcome</a>
   </nav>
   <main id="case-main">
     <section class="case-hero">
@@ -150,48 +151,79 @@ document.querySelector('#app').innerHTML = `
         <span class="visual-note">Independent concept<br>Designed in Figma</span>
       </div>
     </section>
+    <section class="case-overview" id="overview">
+      <div class="overview-copy">
+        <p class="eyebrow">MOBILE APPLICATION DESIGN</p>
+        <h2>${project.name}</h2>
+        <p>${isCrypRoy ? 'A focused experience for making a high-stakes market decision with clearer context, review and recovery.' : 'A cross-service mobile experience that makes moving, ordering, paying and recovering feel like one product.'}</p>
+        <dl><div><dt>DESIGN DIRECTION</dt><dd>${isCrypRoy ? 'Clarity under pressure' : 'One system, many intents'}</dd></div><div><dt>DELIVERABLE</dt><dd>Product story · UI system · Live prototype</dd></div></dl>
+      </div>
+      <div class="overview-devices" aria-label="Selected interface screens">
+        <div class="overview-phone phone-a"><img src="${project.heroImage}" alt="${project.heroAlt}" width="393" height="852"></div>
+        <div class="overview-phone phone-b"><img src="${project.secondImage}" alt="${project.secondAlt}" loading="lazy" decoding="async"></div>
+      </div>
+    </section>
+    <section class="case-toc" aria-labelledby="toc-title">
+      <div class="toc-title"><span>CASE STUDY</span><h2 id="toc-title">Table of<br>contents</h2><p>Scroll story · approximately 6 minutes</p></div>
+      <ol><li><a href="#why"><span>01</span><strong>Project framing</strong><small>Context, problem and design hypothesis</small></a></li><li><a href="#approach"><span>02</span><strong>Research & structure</strong><small>Reference audit, sitemap and flow</small></a></li><li><a href="#system"><span>03</span><strong>Design development</strong><small>System choices and connected screens</small></a></li><li><a href="#prototype"><span>04</span><strong>Interactive prototype</strong><small>Test the meaningful paths in-browser</small></a></li><li><a href="#outcome"><span>05</span><strong>Outcome & reflection</strong><small>Evidence, hypotheses and limits</small></a></li></ol>
+    </section>
+    <div class="chapter-banner chapter-one"><span>PART I</span><h2>Project<br>Introduction</h2><p>${isCrypRoy ? 'How might a trading interface explain consequence before commitment?' : 'How might a broad service ecosystem still behave like one coherent app?'}</p></div>
     <section class="fact-grid" aria-label="Project facts">${project.facts.map(([label, value]) => `<div><span>${label}</span><p>${value}</p></div>`).join('')}</section>
     <aside class="disclosure"><span>01 / TRANSPARENCY</span><p>${project.disclosure}</p></aside>
-    <section class="prototype-section" id="prototype" aria-label="Interactive browser prototype"><div class="prototype-mount"></div></section>
 
     <section class="section-pad narrative" id="why">
-      <div class="section-kicker"><span>03 / WHY THIS PROJECT</span><span>FROM REFERENCE TO REASONING</span></div>
+      <div class="section-kicker"><span>01 / WHY THIS PROJECT</span><span>FROM REFERENCE TO REASONING</span></div>
       <div class="narrative-grid"><h2>${project.whyTitle}</h2><div>${project.whyBody.map(p => `<p>${p}</p>`).join('')}</div></div>
       <div class="question-grid">${project.questions.map(([n, title, body]) => `<article><span>${n}</span><h3>${title}</h3><p>${body}</p></article>`).join('')}</div>
     </section>
 
+    <div class="chapter-banner chapter-two"><span>PART II</span><h2>Research &<br>Structure</h2><p>The reference material defines the domain. The design work begins when observations become explicit rules, routes and testable decisions.</p></div>
     <section class="section-pad approach" id="approach">
-      <div class="section-kicker"><span>04 / APPROACH</span><span>STRUCTURE BEFORE SURFACE</span></div>
+      <div class="section-kicker"><span>02 / APPROACH</span><span>STRUCTURE BEFORE SURFACE</span></div>
       <div class="section-heading"><h2>A redesign built from decisions, not imitation.</h2><p>The source established the domain. The work was to identify what deserved to stay, what needed a clearer rule, and how the pieces should behave as a coherent system.</p></div>
       <ol class="method-list">${project.method.map(([title, body], i) => `<li><span>${String(i + 1).padStart(2, '0')}</span><div><h3>${title}</h3><p>${body}</p></div></li>`).join('')}</ol>
       <figure class="wide-figure"><img src="${project.architectureImage}" alt="${project.architectureAlt}" loading="lazy" decoding="async"><figcaption>Information architecture and recovery routes were resolved before full visual production.</figcaption></figure>
     </section>
 
+    <div class="chapter-banner chapter-three"><span>PART III</span><h2>Design<br>Development</h2><p>${isCrypRoy ? 'A compact financial system where hierarchy separates information, decision and commitment.' : 'A shared interaction grammar that can flex across mobility, wallet and support.'}</p></div>
     <section class="section-pad system-section" id="system">
-      <div class="section-kicker"><span>05 / SYSTEM & FLOW</span><span>DETAIL WITH A PURPOSE</span></div>
+      <div class="section-kicker"><span>03 / SYSTEM & FLOW</span><span>DETAIL WITH A PURPOSE</span></div>
       <div class="decision-grid"><div><h2>${project.decisionTitle}</h2><p>${project.decisionBody}</p><ul><li>${icon('check')} Primary and recovery paths designed together</li><li>${icon('check')} Reusable language across repeated states</li><li>${icon('check')} Explicit feedback before and after commitment</li></ul></div><div class="device-detail"><img src="${project.secondImage}" alt="${project.secondAlt}" loading="lazy" decoding="async"></div></div>
       <figure class="wide-figure showcase"><img src="${project.flowImage}" alt="${project.flowAlt}" loading="lazy" decoding="async"><figcaption>The result is presented as a connected product slice, not a gallery of isolated screens.</figcaption></figure>
     </section>
 
+    <div class="chapter-banner chapter-four"><span>PART IV</span><h2>Prototype &<br>Validation</h2><p>Static screens become credible when the reviewer can follow a decision, receive feedback and recover from a problem.</p></div>
+    <section class="prototype-section" id="prototype" aria-label="Interactive browser prototype"><div class="prototype-mount"></div></section>
+
     <section class="section-pad outcome" id="outcome">
-      <div class="section-kicker"><span>06 / OUTCOME</span><span>ARTIFACT EVIDENCE, NOT VANITY METRICS</span></div>
+      <div class="section-kicker"><span>05 / OUTCOME</span><span>ARTIFACT EVIDENCE, NOT VANITY METRICS</span></div>
       <div class="evidence-grid">${project.evidence.map(([value, label]) => `<div><strong>${value}</strong><span>${label}</span></div>`).join('')}</div>
       <div class="section-heading"><h2>What this direction could solve.</h2><p>These are product hypotheses supported by the prototype — not claims of shipped impact. They define what should be tested next.</p></div>
       <div class="potential-grid">${project.potential.map(([title, body], i) => `<article><span>0${i + 1}</span><h3>${title}</h3><p>${body}</p></article>`).join('')}</div>
     </section>
 
     <section class="section-pad reflection" id="reflection">
-      <div class="section-kicker"><span>07 / REFLECTION</span><span>WHAT THE WORK DOES — AND DOES NOT — PROVE</span></div>
+      <div class="section-kicker"><span>06 / REFLECTION</span><span>WHAT THE WORK DOES — AND DOES NOT — PROVE</span></div>
       <div class="reflection-grid"><h2>The honest boundary makes the project stronger.</h2><div><p>${project.limits}</p><a class="primary-link" href="${project.figma}" target="_blank" rel="noopener noreferrer">Inspect the editable Figma work ${icon('arrow')}</a></div></div>
     </section>
   </main>
   <footer class="case-footer"><a href="/#work">${icon('back')} All selected work</a><span>ROYLLE · INDEPENDENT PRODUCT DESIGN · 2026</span><a href="${project.nextHref}">Next: ${project.nextName} ${icon('arrow')}</a></footer>
 `;
 
-mountPrototype(document.querySelector('.prototype-mount'), project.name === 'CrypRoy' ? 'cryproy' : 'grabroy');
+mountPrototype(document.querySelector('.prototype-mount'), isCrypRoy ? 'cryproy' : 'grabroy');
 
 // The app shell is injected after the browser resolves a hash, so restore deep-link
 // positioning once the target section exists (e.g. /cryproy.html#prototype).
 if (window.location.hash) {
-  requestAnimationFrame(() => document.getElementById(window.location.hash.slice(1))?.scrollIntoView());
+  const scrollToHashTarget = () => document.getElementById(window.location.hash.slice(1))?.scrollIntoView();
+  requestAnimationFrame(scrollToHashTarget);
+  window.addEventListener('load', scrollToHashTarget, { once: true });
+  const pendingImages = [...document.images]
+    .filter(image => !image.complete)
+    .map(image => new Promise(resolve => {
+      image.addEventListener('load', resolve, { once: true });
+      image.addEventListener('error', resolve, { once: true });
+    }));
+  Promise.allSettled(pendingImages).then(scrollToHashTarget);
+  document.fonts?.ready.then(scrollToHashTarget);
 }
