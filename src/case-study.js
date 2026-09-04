@@ -1,4 +1,5 @@
 import '@fontsource-variable/manrope';
+import '@fontsource-variable/space-grotesk';
 import '@fontsource/instrument-serif/latin-400-italic.css';
 import './case-study.css';
 import { mountPrototype } from './case-prototypes.js';
@@ -22,6 +23,12 @@ const projects = {
       { src: '/projects/grabroy-mockup-urban.webp', width: 1600, height: 901, alt: 'GrabRoy home screen presented on a phone beside a Ho Chi Minh City street at morning', label: '01 / URBAN CONTEXT', caption: 'The interface is framed where service choices actually happen: between movement, food, delivery and the rhythm of the city.' },
       { src: '/projects/grabroy-mockup-wallet.webp', width: 1600, height: 1067, alt: 'GrabRoy wallet top-up screen held at a cafe payment counter', label: '02 / MOMENT OF COMMITMENT', caption: 'Payment details move from abstract UI into a familiar moment: checking the source, fee and total before confirming.' },
       { src: '/projects/grabroy-mockup-ecosystem.webp', width: 1600, height: 901, alt: 'Two GrabRoy app screens arranged with urban mobility and delivery objects', label: '03 / ONE SERVICE LANGUAGE', caption: 'Mobility and wallet screens share one visual grammar while preserving the information each task needs.' },
+    ],
+    chapterImages: [
+      { src: '/projects/grabroy-bg-city-v2.webp', width: 1600, height: 901, position: 'center' },
+      { src: '/projects/grabroy-bg-map-v2.webp', width: 1600, height: 901, position: 'center' },
+      { src: '/projects/grabroy-bg-system-v2.webp', width: 1600, height: 901, position: 'center' },
+      { src: '/projects/grabroy-mockup-wallet.webp', width: 1600, height: 1067, position: 'center 58%' },
     ],
     figma: 'https://www.figma.com/design/qlJA7PYF4vu1NsQIwGN260/Royle_port?node-id=41-547',
     facts: [
@@ -83,6 +90,12 @@ const projects = {
       { src: '/projects/cryproy-mockup-review.webp', width: 1600, height: 1067, alt: 'CrypRoy order review screen held above a risk-check document', label: '02 / REVIEW BEFORE COMMITMENT', caption: 'The review state turns a high-stakes tap into a deliberate checkpoint for amount, fee, estimate and available balance.' },
       { src: '/projects/cryproy-mockup-system.webp', width: 1600, height: 901, alt: 'Three CrypRoy screens displayed with dark design-system boards and token objects', label: '03 / SYSTEM IN USE', caption: 'Home, market detail and order outcome demonstrate how the same tokens support discovery, analysis and feedback.' },
     ],
+    chapterImages: [
+      { src: '/projects/cryproy-bg-market-v2.webp', width: 1600, height: 901, position: 'center' },
+      { src: '/projects/cryproy-bg-flow-v2.webp', width: 1600, height: 901, position: 'center' },
+      { src: '/projects/cryproy-bg-system-v2.webp', width: 1600, height: 901, position: 'center' },
+      { src: '/projects/cryproy-mockup-review.webp', width: 1600, height: 1067, position: 'center 54%' },
+    ],
     figma: 'https://www.figma.com/design/G40J1jrBLzBNwJyyiij5is/CrypRoy?node-id=2022-4',
     facts: [
       ['ROLE', 'Product designer · Independent'],
@@ -134,6 +147,7 @@ const projects = {
 
 const project = projects[document.body.dataset.project] || projects.grabroy;
 const isCrypRoy = project.name === 'CrypRoy';
+const chapterMedia = ({ src, width, height, position }) => `<img class="chapter-media" src="${src}" alt="" width="${width}" height="${height}" style="object-position:${position}" loading="lazy" decoding="async" aria-hidden="true">`;
 document.body.classList.add(project.className);
 
 document.querySelector('#app').innerHTML = `
@@ -181,7 +195,7 @@ document.querySelector('#app').innerHTML = `
       <div class="toc-title"><span>CASE STUDY</span><h2 id="toc-title">Table of<br>contents</h2><p>Scroll story · approximately 6 minutes</p></div>
       <ol><li><a href="#why"><span>01</span><strong>Project framing</strong><small>Context, problem and design hypothesis</small></a></li><li><a href="#approach"><span>02</span><strong>Research & structure</strong><small>Reference audit, sitemap and flow</small></a></li><li><a href="#system"><span>03</span><strong>Design development</strong><small>System choices and connected screens</small></a></li><li><a href="#prototype"><span>04</span><strong>Interactive prototype</strong><small>Test the meaningful paths in-browser</small></a></li><li><a href="#outcome"><span>05</span><strong>Outcome & reflection</strong><small>Evidence, hypotheses and limits</small></a></li></ol>
     </section>
-    <div class="chapter-banner chapter-one"><span>PART I</span><h2>Project<br>Introduction</h2><p>${isCrypRoy ? 'How might a trading interface explain consequence before commitment?' : 'How might a broad service ecosystem still behave like one coherent app?'}</p></div>
+    <div class="chapter-banner chapter-one">${chapterMedia(project.chapterImages[0])}<span>PART I</span><h2>Project<br>Introduction</h2><p>${isCrypRoy ? 'How might a trading interface explain consequence before commitment?' : 'How might a broad service ecosystem still behave like one coherent app?'}</p></div>
     <section class="fact-grid" aria-label="Project facts">${project.facts.map(([label, value]) => `<div><span>${label}</span><p>${value}</p></div>`).join('')}</section>
     <aside class="disclosure"><span>01 / TRANSPARENCY</span><p>${project.disclosure}</p></aside>
 
@@ -195,7 +209,7 @@ document.querySelector('#app').innerHTML = `
       <div><span>${project.mockups[1].label}</span><h2>${isCrypRoy ? 'A safer interaction begins before the final tap.' : 'Trust is built where money, time and intent meet.'}</h2><p>${project.mockups[1].caption}</p></div>
     </section>
 
-    <div class="chapter-banner chapter-two"><span>PART II</span><h2>Research &<br>Structure</h2><p>The reference material defines the domain. The design work begins when observations become explicit rules, routes and testable decisions.</p></div>
+    <div class="chapter-banner chapter-two">${chapterMedia(project.chapterImages[1])}<span>PART II</span><h2>Research &<br>Structure</h2><p>The reference material defines the domain. The design work begins when observations become explicit rules, routes and testable decisions.</p></div>
     <section class="section-pad approach" id="approach">
       <div class="section-kicker"><span>02 / APPROACH</span><span>STRUCTURE BEFORE SURFACE</span></div>
       <div class="section-heading"><h2>A redesign built from decisions, not imitation.</h2><p>The source established the domain. The work was to identify what deserved to stay, what needed a clearer rule, and how the pieces should behave as a coherent system.</p></div>
@@ -203,7 +217,7 @@ document.querySelector('#app').innerHTML = `
       <figure class="wide-figure"><img src="${project.architectureImage}" alt="${project.architectureAlt}" loading="lazy" decoding="async"><figcaption>Information architecture and recovery routes were resolved before full visual production.</figcaption></figure>
     </section>
 
-    <div class="chapter-banner chapter-three"><span>PART III</span><h2>Design<br>Development</h2><p>${isCrypRoy ? 'A compact financial system where hierarchy separates information, decision and commitment.' : 'A shared interaction grammar that can flex across mobility, wallet and support.'}</p></div>
+    <div class="chapter-banner chapter-three">${chapterMedia(project.chapterImages[2])}<span>PART III</span><h2>Design<br>Development</h2><p>${isCrypRoy ? 'A compact financial system where hierarchy separates information, decision and commitment.' : 'A shared interaction grammar that can flex across mobility, wallet and support.'}</p></div>
     <section class="section-pad system-section" id="system">
       <div class="section-kicker"><span>03 / SYSTEM & FLOW</span><span>DETAIL WITH A PURPOSE</span></div>
       <div class="decision-grid"><div><h2>${project.decisionTitle}</h2><p>${project.decisionBody}</p><ul><li>${icon('check')} Primary and recovery paths designed together</li><li>${icon('check')} Reusable language across repeated states</li><li>${icon('check')} Explicit feedback before and after commitment</li></ul></div><div class="device-detail"><img src="${project.secondImage}" alt="${project.secondAlt}" loading="lazy" decoding="async"></div></div>
@@ -215,7 +229,7 @@ document.querySelector('#app').innerHTML = `
       <figure><img src="${project.mockups[2].src}" alt="${project.mockups[2].alt}" width="${project.mockups[2].width}" height="${project.mockups[2].height}" loading="lazy" decoding="async"></figure>
     </section>
 
-    <div class="chapter-banner chapter-four"><span>PART IV</span><h2>Prototype &<br>Validation</h2><p>Static screens become credible when the reviewer can follow a decision, receive feedback and recover from a problem.</p></div>
+    <div class="chapter-banner chapter-four">${chapterMedia(project.chapterImages[3])}<span>PART IV</span><h2>Prototype &<br>Validation</h2><p>Static screens become credible when the reviewer can follow a decision, receive feedback and recover from a problem.</p></div>
     <section class="prototype-section" id="prototype" aria-label="Interactive browser prototype"><div class="prototype-mount"></div></section>
 
     <section class="section-pad outcome" id="outcome">
