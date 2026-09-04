@@ -1,6 +1,7 @@
 import '@fontsource-variable/manrope';
 import '@fontsource/instrument-serif/latin-400-italic.css';
 import './case-study.css';
+import { mountPrototype } from './case-prototypes.js';
 
 const icon = name => ({
   arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>',
@@ -131,7 +132,7 @@ document.querySelector('#app').innerHTML = `
     <a class="header-action" href="${project.figma}" target="_blank" rel="noopener noreferrer">Open Figma ${icon('arrow')}</a>
   </header>
   <nav class="case-nav" aria-label="Case study sections">
-    <a href="#why">Why</a><a href="#approach">Approach</a><a href="#system">System</a><a href="#outcome">Outcome</a><a href="#reflection">Reflection</a>
+    <a class="case-nav-try" href="#prototype">Try it</a><a href="#why">Why</a><a href="#approach">Approach</a><a href="#system">System</a><a href="#outcome">Outcome</a><a href="#reflection">Reflection</a>
   </nav>
   <main id="case-main">
     <section class="case-hero">
@@ -140,7 +141,8 @@ document.querySelector('#app').innerHTML = `
         <p class="project-word">${project.name}</p>
         <h1>${project.title}</h1>
         <p class="hero-intro">${project.intro}</p>
-        <a class="primary-link" href="#why">Read the thinking <span aria-hidden="true">↓</span></a>
+        <div class="hero-proof"><span><b>LIVE</b> Browser prototype</span><span><b>NO</b> Figma required</span></div>
+        <a class="primary-link" href="#prototype">Try the interaction <span aria-hidden="true">↓</span></a>
       </div>
       <div class="hero-visual">
         <span class="visual-label">CORE INTERFACE / 01</span>
@@ -150,37 +152,46 @@ document.querySelector('#app').innerHTML = `
     </section>
     <section class="fact-grid" aria-label="Project facts">${project.facts.map(([label, value]) => `<div><span>${label}</span><p>${value}</p></div>`).join('')}</section>
     <aside class="disclosure"><span>01 / TRANSPARENCY</span><p>${project.disclosure}</p></aside>
+    <section class="prototype-section" id="prototype" aria-label="Interactive browser prototype"><div class="prototype-mount"></div></section>
 
     <section class="section-pad narrative" id="why">
-      <div class="section-kicker"><span>02 / WHY THIS PROJECT</span><span>FROM REFERENCE TO REASONING</span></div>
+      <div class="section-kicker"><span>03 / WHY THIS PROJECT</span><span>FROM REFERENCE TO REASONING</span></div>
       <div class="narrative-grid"><h2>${project.whyTitle}</h2><div>${project.whyBody.map(p => `<p>${p}</p>`).join('')}</div></div>
       <div class="question-grid">${project.questions.map(([n, title, body]) => `<article><span>${n}</span><h3>${title}</h3><p>${body}</p></article>`).join('')}</div>
     </section>
 
     <section class="section-pad approach" id="approach">
-      <div class="section-kicker"><span>03 / APPROACH</span><span>STRUCTURE BEFORE SURFACE</span></div>
+      <div class="section-kicker"><span>04 / APPROACH</span><span>STRUCTURE BEFORE SURFACE</span></div>
       <div class="section-heading"><h2>A redesign built from decisions, not imitation.</h2><p>The source established the domain. The work was to identify what deserved to stay, what needed a clearer rule, and how the pieces should behave as a coherent system.</p></div>
       <ol class="method-list">${project.method.map(([title, body], i) => `<li><span>${String(i + 1).padStart(2, '0')}</span><div><h3>${title}</h3><p>${body}</p></div></li>`).join('')}</ol>
       <figure class="wide-figure"><img src="${project.architectureImage}" alt="${project.architectureAlt}" loading="lazy" decoding="async"><figcaption>Information architecture and recovery routes were resolved before full visual production.</figcaption></figure>
     </section>
 
     <section class="section-pad system-section" id="system">
-      <div class="section-kicker"><span>04 / SYSTEM & FLOW</span><span>DETAIL WITH A PURPOSE</span></div>
+      <div class="section-kicker"><span>05 / SYSTEM & FLOW</span><span>DETAIL WITH A PURPOSE</span></div>
       <div class="decision-grid"><div><h2>${project.decisionTitle}</h2><p>${project.decisionBody}</p><ul><li>${icon('check')} Primary and recovery paths designed together</li><li>${icon('check')} Reusable language across repeated states</li><li>${icon('check')} Explicit feedback before and after commitment</li></ul></div><div class="device-detail"><img src="${project.secondImage}" alt="${project.secondAlt}" loading="lazy" decoding="async"></div></div>
       <figure class="wide-figure showcase"><img src="${project.flowImage}" alt="${project.flowAlt}" loading="lazy" decoding="async"><figcaption>The result is presented as a connected product slice, not a gallery of isolated screens.</figcaption></figure>
     </section>
 
     <section class="section-pad outcome" id="outcome">
-      <div class="section-kicker"><span>05 / OUTCOME</span><span>ARTIFACT EVIDENCE, NOT VANITY METRICS</span></div>
+      <div class="section-kicker"><span>06 / OUTCOME</span><span>ARTIFACT EVIDENCE, NOT VANITY METRICS</span></div>
       <div class="evidence-grid">${project.evidence.map(([value, label]) => `<div><strong>${value}</strong><span>${label}</span></div>`).join('')}</div>
       <div class="section-heading"><h2>What this direction could solve.</h2><p>These are product hypotheses supported by the prototype — not claims of shipped impact. They define what should be tested next.</p></div>
       <div class="potential-grid">${project.potential.map(([title, body], i) => `<article><span>0${i + 1}</span><h3>${title}</h3><p>${body}</p></article>`).join('')}</div>
     </section>
 
     <section class="section-pad reflection" id="reflection">
-      <div class="section-kicker"><span>06 / REFLECTION</span><span>WHAT THE WORK DOES — AND DOES NOT — PROVE</span></div>
+      <div class="section-kicker"><span>07 / REFLECTION</span><span>WHAT THE WORK DOES — AND DOES NOT — PROVE</span></div>
       <div class="reflection-grid"><h2>The honest boundary makes the project stronger.</h2><div><p>${project.limits}</p><a class="primary-link" href="${project.figma}" target="_blank" rel="noopener noreferrer">Inspect the editable Figma work ${icon('arrow')}</a></div></div>
     </section>
   </main>
   <footer class="case-footer"><a href="/#work">${icon('back')} All selected work</a><span>ROYLLE · INDEPENDENT PRODUCT DESIGN · 2026</span><a href="${project.nextHref}">Next: ${project.nextName} ${icon('arrow')}</a></footer>
 `;
+
+mountPrototype(document.querySelector('.prototype-mount'), project.name === 'CrypRoy' ? 'cryproy' : 'grabroy');
+
+// The app shell is injected after the browser resolves a hash, so restore deep-link
+// positioning once the target section exists (e.g. /cryproy.html#prototype).
+if (window.location.hash) {
+  requestAnimationFrame(() => document.getElementById(window.location.hash.slice(1))?.scrollIntoView());
+}

@@ -78,4 +78,5 @@ Added September 4, 2026. Open `/grabroy.html` and `/cryproy.html`, or select eit
 - Each case study separates observed design complexity, a design hypothesis, process evidence, potential value and unvalidated limitations. Artifact counts are used only as proof of scope; no business or usability outcomes are invented.
 - GrabRoy presents the 60-screen super-app system through cross-service consistency, reusable interaction families and recovery routes.
 - CrypRoy presents a focused spot-buy flow through decision clarity, inline validation, review, duplicate-submit protection and timeout recovery.
-- Shared presentation files: `src/case-study.js` and `src/case-study.css`. Portfolio card treatment is in `src/project-covers.css`; optimized Figma evidence is stored under `public/projects/`.
+- Both pages lead with a browser-native prototype at `#prototype`, so a reviewer can test meaningful state changes without leaving the case study: GrabRoy Ride/Wallet/Support and CrypRoy amount validation, review, processing, success and timeout recovery. All data is explicitly illustrative.
+- Shared presentation files: `src/case-study.js`, `src/case-prototypes.js` and `src/case-study.css`. Portfolio card treatment is in `src/project-covers.css`; optimized Figma evidence is stored under `public/projects/`.
