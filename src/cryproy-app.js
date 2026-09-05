@@ -9,7 +9,7 @@ const change = c => `<span class="${c.change >= 0 ? 'cr-positive' : 'cr-negative
 const button = (label, action, cls='cr-primary', attrs='') => `<button class="${cls}" data-action="${action}" ${attrs}>${label}</button>`;
 const summary = rows => `<dl class="cr-summary">${rows.map(([label,value])=>`<div><dt>${label}</dt><dd>${value}</dd></div>`).join('')}</dl>`;
 
-export function mountCrypRoy(root, {standalone=false}={}) {
+export function mountCrypRoy(root, {standalone=false,caseStudy=false}={}) {
   let account = createAccount();
   let state = {screen:'home',symbol:'BTC',side:'buy',amount:'500',filter:'All',search:'',period:'1H',outcome:'success',favorites:['BTC','ETH'],pending:null,detail:null};
   let timer, serial=0;
@@ -72,6 +72,22 @@ export function mountCrypRoy(root, {standalone=false}={}) {
     return `<nav class="cr-nav" aria-label="App navigation">${[['home','star','Home'],['markets','search','Markets'],['trade','trade','Trade'],['wallet','wallet','Wallet']].map(([dest,img,label])=>button(`${icon(img)}<span>${label}</span>`,dest,'cr-nav-item',`aria-current="${dest===state.screen?'page':'false'}"`)).join('')}</nav>`;
   }
   root.innerHTML=`<div class="cr-experience ${standalone?'cr-standalone':''}"><aside class="cr-guide"><p class="cr-eyebrow">04 / INTERACTIVE APP DEMO</p><h2>Your next move,<br>made clearer.</h2><p>From a market insight to a reviewed order. Try the CrypRoy app, built from the Figma design.</p><ol><li><span>01</span> Explore markets & choose a coin</li><li><span>02</span> Enter an amount & review the fee</li><li><span>03</span> Confirm & see your wallet update</li></ol><div class="cr-test-controls"><label for="cr-scenario">Order response</label><select id="cr-scenario"><option value="success">Successful execution</option><option value="timeout">Timeout → check status</option></select>${button('Reset demo ↺','reset','cr-reset')}</div><p class="cr-disclosure">Simulated data. No real money, wallet connection or sign-in.</p>${standalone?'<a href="/cryproy.html#prototype">← Back to Case Study</a>':'<a href="/cryproy-demo.html" target="_blank" rel="noopener">Open demo in a new tab ↗</a>'}<a class="cr-figma-link" href="https://www.figma.com/design/G40J1jrBLzBNwJyyiij5is/CrypRoy?node-id=2044-310" target="_blank" rel="noopener">View original Figma ↗</a></aside><div class="cr-device-area"><div class="cr-device-label"><span class="cr-live-dot"></span> CRYPROY / PLAYABLE DEMO</div><div class="cr-app" aria-label="CrypRoy demo app"><div class="cr-status"><span>9:41</span><span>DEMO · 100%</span></div><div class="cr-screen"></div></div><p class="cr-device-caption">Designed in Figma. Ready to explore here.</p></div></div><div class="cr-announcement" role="status" aria-live="polite"></div>`;
+  if (caseStudy) {
+    const experience = root.querySelector('.cr-experience');
+    experience.classList.add('cr-case-experience');
+    const guide = root.querySelector('.cr-guide');
+    const controls = root.querySelector('.cr-test-controls');
+    guide.innerHTML = `<p class="cr-eyebrow">PRODUCT DESIGN · INTERACTIVE CONCEPT</p><h1>CrypRoy<span>Trade with clarity.</span></h1><p class="cr-case-intro">Explore a coin, place a demo order, and see your wallet update.</p><p class="cr-case-meta">UX/UI · Design system · Browser demo</p><a class="cr-notes-link" href="#design-notes">Behind the design ↓</a>`;
+    const options = document.createElement('details');
+    options.className = 'cr-demo-options';
+    options.innerHTML = '<summary>Demo options <span aria-hidden="true">+</span></summary>';
+    options.append(controls);
+    const area = root.querySelector('.cr-device-area');
+    area.querySelector('.cr-device-label').remove();
+    area.querySelector('.cr-device-caption').remove();
+    area.insertAdjacentHTML('beforeend', '<p class="cr-demo-hint">Demo funds only · No sign-in needed</p>');
+    area.append(options);
+  }
   function render({focus=false, preserve=false}={}) {
     const screen=root.querySelector('.cr-screen'), scroll=screen.querySelector('.cr-content')?.scrollTop||0;
     screen.innerHTML=`${header()}<div class="cr-content">${content()}</div>${nav()}`;

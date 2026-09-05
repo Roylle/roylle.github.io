@@ -94,3 +94,7 @@ Added September 4, 2026. Open `/grabroy.html` and `/cryproy.html`, or select eit
 - Add demo funds is functional. Send/receive and Earn clearly explain the spot-demo scope; they do not collect real addresses or payment details.
 - Core calculations: `src/cryproy-model.js`. UI: `src/cryproy-app.js` and `src/cryproy-app.css`. Standalone entry: `src/cryproy-demo.js`.
 - Verification: `node --test tests/cryproy-model.test.js` and `pnpm build`. Browser QA covers actual buy/recovery paths and responsive widths 320, 375, 390, 768, 1024 and 1440.
+
+### CrypRoy Case Study: app first
+
+The CrypRoy page now opens directly into the playable app, followed by three concise design decisions. The long hero, repeated mockups, table of contents and chapter banners are replaced with a short summary and an expandable Figma resource section. Demo scenario/reset controls are under “Demo options”. The standalone demo and GrabRoy case study keep their existing layout.

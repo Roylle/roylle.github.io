@@ -4,6 +4,7 @@ import '@fontsource/instrument-serif/latin-400-italic.css';
 import './case-study.css';
 import { mountPrototype } from './case-prototypes.js';
 import { mountCrypRoy } from './cryproy-app.js';
+import { cryproyCase } from './cryproy-case.js';
 
 const icon = name => ({
   arrow: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><path d="M5 19 19 5M5 5h14v14"/></svg>',
@@ -151,7 +152,7 @@ const isCrypRoy = project.name === 'CrypRoy';
 const chapterMedia = ({ src, width, height, position }) => `<img class="chapter-media" src="${src}" alt="" width="${width}" height="${height}" style="object-position:${position}" loading="lazy" decoding="async" aria-hidden="true">`;
 document.body.classList.add(project.className);
 
-document.querySelector('#app').innerHTML = `
+document.querySelector('#app').innerHTML = isCrypRoy ? cryproyCase() : `
   <a class="skip-link" href="#case-main">Skip to case study</a>
   <header class="case-header">
     <a class="portfolio-back" href="/#work">${icon('back')}<span>roylle.</span><span class="header-context">/ Selected work</span></a>
@@ -248,7 +249,7 @@ document.querySelector('#app').innerHTML = `
   <footer class="case-footer"><a href="/#work">${icon('back')} All selected work</a><span>ROYLLE · INDEPENDENT PRODUCT DESIGN · 2026</span><a href="${project.nextHref}">Next: ${project.nextName} ${icon('arrow')}</a></footer>
 `;
 
-if (isCrypRoy) mountCrypRoy(document.querySelector('.prototype-mount'));
+if (isCrypRoy) mountCrypRoy(document.querySelector('.prototype-mount'), {caseStudy:true});
 else mountPrototype(document.querySelector('.prototype-mount'), 'grabroy');
 
 // The app shell is injected after the browser resolves a hash, so restore deep-link
