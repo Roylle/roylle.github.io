@@ -81,3 +81,16 @@ Added September 4, 2026. Open `/grabroy.html` and `/cryproy.html`, or select eit
 - Both pages use an image-led long-form narrative with project overview, table of contents and distinct framing, research, system, prototype and outcome chapters. The pacing is informed by strong editorial case-study conventions while retaining original project identities and content.
 - Chapter four contains a browser-native prototype at `#prototype`, so a reviewer can test meaningful state changes without leaving the case study: GrabRoy Ride/Wallet/Support and CrypRoy amount validation, review, processing, success and timeout recovery. All data is explicitly illustrative.
 - Shared presentation files: `src/case-study.js`, `src/case-prototypes.js` and `src/case-study.css`. Portfolio card treatment is in `src/project-covers.css`; optimized Figma evidence is stored under `public/projects/`.
+
+## CrypRoy playable app — September 5, 2026
+
+`/cryproy.html#prototype` now mounts the full browser demo. `/cryproy-demo.html` opens the same app on its own, with a mobile-first viewport and a return link to the case study.
+
+- Figma source: `G40J1jrBLzBNwJyyiij5is`, UI page `2022:4`; Home `2044:310`, Pair `2044:548`, Amount `2044:664`, Review `2044:811`, Wallet `2044:1016`.
+- Reuses the Figma light palette, dark balance card, yellow actions, Inter typography, and locally saved original navigation icons. Touch targets and text contrast are adjusted for browser accessibility.
+- Home, searchable markets, favorites, sample chart intervals, coin-specific buys/sells, amount validation, 0.1% fees, fee-aware MAX, review, processing, success, timeout recovery, wallet allocation, order history and receipts.
+- Confirmation is guarded during processing. Checking a timed-out request resolves the existing order without submitting another. Reset cancels pending timers and restores the initial account.
+- Account values are coherent demo values, rather than inconsistent static amounts from separate Figma frames. Balances live in memory only; reload clears them. Charts and quotes are illustrative. No exchange, payment, account or wallet API is connected.
+- Add demo funds is functional. Send/receive and Earn clearly explain the spot-demo scope; they do not collect real addresses or payment details.
+- Core calculations: `src/cryproy-model.js`. UI: `src/cryproy-app.js` and `src/cryproy-app.css`. Standalone entry: `src/cryproy-demo.js`.
+- Verification: `node --test tests/cryproy-model.test.js` and `pnpm build`. Browser QA covers actual buy/recovery paths and responsive widths 320, 375, 390, 768, 1024 and 1440.
