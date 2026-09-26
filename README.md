@@ -98,3 +98,7 @@ Added September 4, 2026. Open `/grabroy.html` and `/cryproy.html`, or select eit
 ### CrypRoy Case Study: app first
 
 The CrypRoy page now opens directly into the playable app, followed by three concise design decisions. The long hero, repeated mockups, table of contents and chapter banners are replaced with a short summary and an expandable Figma resource section. Demo scenario/reset controls are under “Demo options”. The standalone demo and GrabRoy case study keep their existing layout.
+
+## Roy Fintech
+
+Open `/fintech-roy/` or select Roy Fintech in the portfolio. Independent personal finance demo with simulated data stored in browser localStorage; no banking integration or real payments. Published via existing GitHub Pages only; Sites is prohibited. Static app source is in `public/fintech-roy/`.
