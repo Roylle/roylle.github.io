@@ -1,6 +1,6 @@
-# Roylle — Hạ Long Seafood & portfolio
+# Roylle — Portfolio
 
-The public homepage at [roylle.github.io](https://roylle.github.io/) now presents Hạ Long Seafood. The original personal portfolio remains available at [/portfolio.html](https://roylle.github.io/portfolio.html), with its case studies at their existing routes.
+The personal portfolio lives at [roylle.github.io](https://roylle.github.io/). Hạ Long Seafood is a featured Work project at [/halongseafood/](https://roylle.github.io/halongseafood/). Its static build and media are in `public/halongseafood/`; the source project is maintained separately. The former `/portfolio.html` link redirects to the homepage.
 
 The portfolio is inspired by the spacious typography and interactive pixel language of [Craft by wild](https://craft.wild.as/), with original layout, copy and canvas implementation.
 
