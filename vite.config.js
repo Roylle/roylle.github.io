@@ -2,7 +2,8 @@ import { defineConfig } from 'vite';
 import { fileURLToPath } from 'node:url';
 export default defineConfig({
   build: { rollupOptions: { input: {
-    portfolio: fileURLToPath(new URL('./index.html', import.meta.url)),
+    portfolio: fileURLToPath(new URL('./portfolio.html', import.meta.url)),
+    halongSeafood: fileURLToPath(new URL('./index.html', import.meta.url)),
     forma: fileURLToPath(new URL('./forma.html', import.meta.url)),
     grabroy: fileURLToPath(new URL('./grabroy.html', import.meta.url)),
     cryproyDemo: fileURLToPath(new URL('./cryproy-demo.html', import.meta.url)),

@@ -1,6 +1,8 @@
-# Roylle — personal portfolio
+# Roylle — Hạ Long Seafood & portfolio
 
-A personal portfolio, inspired by the spacious typography and interactive pixel language of [Craft by wild](https://craft.wild.as/), with original layout, copy and canvas implementation.
+The public homepage at [roylle.github.io](https://roylle.github.io/) now presents Hạ Long Seafood. The original personal portfolio remains available at [/portfolio.html](https://roylle.github.io/portfolio.html), with its case studies at their existing routes.
+
+The portfolio is inspired by the spacious typography and interactive pixel language of [Craft by wild](https://craft.wild.as/), with original layout, copy and canvas implementation.
 
 ## Run
 
@@ -9,7 +11,7 @@ pnpm install
 pnpm dev
 ```
 
-Open the local URL printed by Vite. `npm run build` creates `dist/`; `npm run preview` serves that production build locally. No hosting service, database, API key, or paid dependency is required.
+Open the local URL printed by Vite. `npm run build` creates `dist/`; `npm run preview` serves that production build locally.
 
 ## Content
 

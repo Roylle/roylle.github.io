@@ -1,0 +1,47 @@
+[
+  {
+    "id": "museum-exterior",
+    "title": "Quang Ninh Museum and Quang Ninh Library facades",
+    "source": "https://commons.wikimedia.org/wiki/File:Quang_Ninh_Museum_and_Quang_Ninh_Library_facades.jpg",
+    "author": "Hoangkid",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "modifications": "Resized, converted to WebP; cropped in CSS. Adapted image remains CC BY-SA 4.0."
+  },
+  {
+    "id": "museum-interior",
+    "title": "Quang Ninh Museum entrance hall",
+    "source": "https://commons.wikimedia.org/wiki/File:Quang_Ninh_Museum_entrance_hall.jpg",
+    "author": "Hoangkid",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "modifications": "Resized, converted to WebP; cropped in CSS. Adapted image remains CC BY-SA 4.0."
+  },
+  {
+    "id": "bai-chay-real",
+    "title": "Bai Chay beach, Ha Long, Vietnam, 20240129 0915 3958",
+    "source": "https://commons.wikimedia.org/wiki/File:Bai_Chay_beach,_Ha_Long,_Vietnam,_20240129_0915_3958.jpg",
+    "author": "Jakub Hałun",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "modifications": "Resized, converted to WebP; cropped in CSS."
+  },
+  {
+    "id": "long-tien-real",
+    "title": "Chùa Long Tiên dưới chân núi Bài Thơ",
+    "source": "https://www.quangninh.gov.vn/Trang/ChiTietBVGioiThieu.aspx?bvid=537",
+    "author": "Cổng thông tin điện tử Quảng Ninh",
+    "license": null,
+    "licenseUrl": null,
+    "modifications": "Converted to WebP; cropped in CSS. No AI editing. No open licence asserted."
+  },
+  {
+    "id": "market-real",
+    "title": "Chợ Hạ Long 1 — ảnh mặt tiền",
+    "source": "https://visitquangninh.com/vi/kham-pha-10-cho-ha-long-noi-tieng-an-ngon-sam-da-tay",
+    "author": "Visit Quang Ninh (Ảnh: Sưu tầm)",
+    "license": null,
+    "licenseUrl": null,
+    "modifications": "Converted to WebP; cropped in CSS. No AI editing. No open licence asserted."
+  }
+]
