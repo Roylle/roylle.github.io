@@ -1,5 +1,6 @@
 import { homeTemplate, placeCard } from './home.js';
 import { places, dishes, categories, sources, reading, checkedOn, mapUrl } from './places.js';
+import { pageTemplate, pageTitle, pageUrl } from './pages.js';
 const $=(s,root=document)=>root.querySelector(s), $$=(s,root=document)=>[...root.querySelectorAll(s)];
 let language=localStorage.getItem('halong-language')==='en'?'en':'vi';
 const t=(vi,en)=>language==='vi'?vi:en, choose=values=>values[language==='vi'?0:1];
@@ -12,22 +13,33 @@ let saved=[];try{saved=JSON.parse(localStorage.getItem('halong-saved-places')||'
 let sourceRequestId=0,heroExplicitPlay=false;
 let filter='all',query='',slideIndex=0,carouselPaused=false,slideTimer,journeyIndex=0,revealObserver,cleanupMotion=()=>{},soundOn=false,audioContext,ambientGain;
 const dialog=$('#overlay');
+const params=new URLSearchParams(location.search);
+const route=params.has('page')?{page:params.get('page')||'',id:params.get('id')||''}:null;
 const normalise=value=>value.normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/đ/g,'d').replace(/Đ/g,'D').toLowerCase();
 const photoCaption=p=>p.photo==='illustration'?t('Ảnh minh họa AI; không phải ảnh của địa điểm.','AI illustration; not a photograph of the venue.'):p.id==='temple'?t('Ảnh: Cổng thông tin điện tử Quảng Ninh','Photo: Quang Ninh provincial portal'):p.id==='market'?t('Ảnh: Visit Quang Ninh · Sưu tầm','Photo: Visit Quang Ninh · Collected image'):p.id==='museum'?'Hoangkid · CC BY-SA 4.0 / Wikimedia Commons':p.id==='beach'?'Jakub Hałun · CC BY 4.0 / Wikimedia Commons':'Sergey Guk / Pexels';
 function render(){
  clearInterval(slideTimer);cleanupMotion();
- document.documentElement.lang=language;document.title=t('Hạ Long Seafood — Hải sản & đặc sản miền biển','Ha Long Seafood — Coastal flavours & specialities');
+ document.documentElement.lang=language;
+ const ctx={t,choose,img,arrow,wave,globe,places,dishes,categories,reading,sources,saved,language,url:pageUrl,route};
+ document.title=route?pageTitle(route,ctx):t('Hạ Long Seafood — Hải sản & đặc sản miền biển','Ha Long Seafood — Coastal flavours & specialities');
  document.querySelector('meta[name=description]').content=t('Khám phá hải sản Hạ Long: chả mực, mực biển, hàu, gợi ý thưởng thức và địa chỉ mua đặc sản có nguồn tham khảo.','Explore Ha Long seafood: squid cakes, squid, oysters, dining ideas and sourced addresses for local specialities.');
- $('#app').innerHTML=homeTemplate({t,choose,img,arrow,wave,globe,places,dishes,categories,reading,saved,language});
- setSlide(slideIndex,false);setJourney(journeyIndex);startCarousel();setupReveal();setupMotion();
+ $('#app').innerHTML=route?pageTemplate(ctx):homeTemplate(ctx);
+ if(!route){
+  setSlide(slideIndex,false);setJourney(journeyIndex);startCarousel();setupReveal();setupMotion();
+  $('.pause-button').addEventListener('click',()=>{if(($('.hero-film')?.paused&&!carouselPaused)||(!heroExplicitPlay&&(matchMedia('(prefers-reduced-motion: reduce)').matches||navigator.connection?.saveData))){heroExplicitPlay=true;carouselPaused=false;}else carouselPaused=!carouselPaused;startCarousel();});
+  $$('.slide-tab').forEach(b=>b.addEventListener('click',()=>setSlide(Number(b.dataset.slide))));
+  $('.slide-tabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?2:(slideIndex+(e.key==='ArrowRight'?1:2))%3;setSlide(next);$(`.slide-tab[data-slide="${next}"]`).focus();});
+  $('.journey-tabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const n=e.key==='Home'?0:e.key==='End'?2:(journeyIndex+(e.key==='ArrowRight'?1:2))%3;setJourney(n);$(`[data-journey="${n}"]`).focus();});
+ }else{
+  $$('.page-section,.page-product,.place-detail,.page-about,.page-sources,.editorial-article').forEach(el=>el.classList.add('reveal'));
+  $$('.catalog-card,.directory-card,.story-card,.plan-steps article').forEach(el=>el.classList.add('reveal'));
+  setupReveal();
+ }
  $('.language-toggle').addEventListener('click',()=>{const scroll=scrollY;language=language==='vi'?'en':'vi';localStorage.setItem('halong-language',language);render();scrollTo({top:scroll,behavior:'instant'});});
- $('.pause-button').addEventListener('click',()=>{if(($('.hero-film')?.paused&&!carouselPaused)||(!heroExplicitPlay&&(matchMedia('(prefers-reduced-motion: reduce)').matches||navigator.connection?.saveData))){heroExplicitPlay=true;carouselPaused=false;}else carouselPaused=!carouselPaused;startCarousel();});
  $('.sound-toggle').setAttribute('aria-pressed',String(soundOn));
  $('.sound-toggle').setAttribute('aria-label',soundOn?t('Tắt âm thanh sóng biển','Turn off ocean ambience'):t('Bật âm thanh sóng biển','Turn on ocean ambience'));
  $('.sound-toggle').addEventListener('click',toggleSound);
- $$('.slide-tab').forEach(b=>b.addEventListener('click',()=>setSlide(Number(b.dataset.slide))));
- $('.slide-tabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const next=e.key==='Home'?0:e.key==='End'?2:(slideIndex+(e.key==='ArrowRight'?1:2))%3;setSlide(next);$(`.slide-tab[data-slide="${next}"]`).focus();});
- $('.journey-tabs').addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight','Home','End'].includes(e.key))return;e.preventDefault();const n=e.key==='Home'?0:e.key==='End'?2:(journeyIndex+(e.key==='ArrowRight'?1:2))%3;setJourney(n);$(`[data-journey="${n}"]`).focus();});
+ if(!route)startCarousel();
 }
 function filterPlaces(){
  if(!$('#places-grid'))return;
@@ -48,7 +60,7 @@ function setSlide(index,userAction=true){
  $$('.hero-image').forEach((e,i)=>e.classList.toggle('active',i===index));
  $$('.slide-tab').forEach((e,i)=>{e.classList.toggle('active',i===index);e.setAttribute('aria-selected',String(i===index));e.tabIndex=i===index?0:-1;});
  $('.hero-content h1').innerHTML=slides[index][0];$('.hero-link span').textContent=slides[index][1];
- const cta=$('.hero-link');delete cta.dataset.story;delete cta.dataset.action;if(slides[index][2])cta.dataset.story=slides[index][2];else cta.dataset.action='dishes';
+ const cta=$('.hero-link');cta.href=slides[index][2]?pageUrl('product',slides[index][2]):pageUrl('seafood');
  $('.hero-content').setAttribute('aria-labelledby',`hero-tab-${index}`);syncFilm();
  if(userAction){startCarousel();if(innerWidth<650&&$('.hero').getBoundingClientRect().bottom>0)$(`.slide-tab[data-slide="${index}"]`).scrollIntoView({behavior:'instant',block:'nearest',inline:'start'});}
 }
@@ -58,7 +70,7 @@ function setJourney(index){
  $$('.journey-tabs>button').forEach((b,i)=>{b.classList.toggle('active',i===index);b.setAttribute('aria-selected',String(i===index));b.tabIndex=i===index?0:-1;});
  $$('.journey-scene').forEach((im,i)=>im.classList.toggle('active',i===index));
  const panel=$('#journey-panel');panel.innerHTML=`<span class="journey-chapter">0${index+1} / 03</span><p>${stops[index].text}</p>`;panel.setAttribute('aria-labelledby',`journey-tab-${index}`);
- const cta=$('[data-journey-open]');cta.dataset.story=stops[index].id;$('span',cta).textContent=stops[index].label;
+ const cta=$('[data-journey-open]');cta.href=pageUrl('product',stops[index].id);$('span',cta).textContent=stops[index].label;
  // Find each portrait's actual location on the same SVG path to keep progress and stops aligned.
  const path=$('.route-progress'),length=path.getTotalLength(),target=[[200,170],[600,70],[1000,170]][index];let best=Infinity,fraction=0;
  for(let i=0;i<=1000;i++){const p=path.getPointAtLength(length*i/1000),d=(p.x-target[0])**2+(p.y-target[1])**2;if(d<best){best=d;fraction=i;}}
@@ -173,7 +185,7 @@ function openSaved(){
 function downloadSaved(){const lines=places.filter(p=>saved.includes(p.id)).map(p=>`${choose(p.name)}\n${choose(p.address)}\n${mapUrl(p)}\n${sources[p.source].url}`).join('\n\n');const url=URL.createObjectURL(new Blob([`HẠ LONG SEAFOOD\nSources checked: ${checkedOn}\n\n${lines}`],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='ha-long-dia-diem.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function openItinerary(id){openPlace(id==='hon-gai'?'market':'phuong-nam');}
 function openStory(id){const s=[...dishes,...reading].find(x=>x.id===id);if(!s)return;openDialog(`<article class="article-dialog">${img(s.image,choose(s.title),'',true)}<div><p class="eyebrow">${choose(s.tag)}</p><h2 id="dialog-title">${choose(s.title)}</h2><p>${choose(s.body)}</p><button class="text-link" data-action="browse">${t('Tìm địa chỉ mua & thưởng thức','Find places to buy & enjoy')} →</button><div class="venue-source"><p>${t('Tìm hiểu từ nguồn','Explore the source')}</p>${external(sources[s.source].label,sources[s.source].url)}<small>${s.photo==='real'?'Visit Quang Ninh · Ảnh sưu tầm':t('Ảnh món ăn minh họa AI; không đại diện cho sản phẩm của cơ sở.','AI food illustration; not a photograph of a venue’s product.')}</small></div></div></article>`,'article');}
-function openMenu(){openDialog(`<nav class="full-menu"><p class="eyebrow">HẠ LONG SEAFOOD</p><h2 id="dialog-title">${t('Khám phá vị biển.','Explore coastal flavours.')}</h2>${[['#places',t('Hải sản','Seafood')],['#story',t('Câu chuyện','Our story')],['#journey',t('Đặc sản','Specialities')],['#food',t('Thưởng thức','Savour')],['#culture',t('Địa chỉ','Where to go')],['#journal',t('Góc bếp','Food stories')]].map(([href,label],i)=>`<a data-close-link href="${href}"><span>0${i+1}</span>${label}<i>↗</i></a>`).join('')}<button class="text-link" data-action="saved">${t('Địa chỉ đã lưu','Saved addresses')} (${saved.length}) ♡</button></nav>`,'menu');}
+function openMenu(){openDialog(`<nav class="full-menu"><p class="eyebrow">HẠ LONG SEAFOOD</p><h2 id="dialog-title">${t('Khám phá vị biển.','Explore coastal flavours.')}</h2>${[['seafood',t('Hải sản & đặc sản','Seafood & specialities')],['places',t('Địa chỉ mua & ăn','Places to buy & eat')],['stories',t('Góc bếp','Food stories')],['plan',t('Lên kế hoạch','Plan a visit')],['about',t('Câu chuyện','Our story')],['sources',t('Nguồn nội dung & ảnh','Sources & image credits')]].map(([page,label],i)=>`<a data-close-link href="${pageUrl(page)}"><span>0${i+1}</span>${label}<i>↗</i></a>`).join('')}<a class="text-link" data-close-link href="${pageUrl('plan')}">${t('Địa chỉ đã lưu','Saved addresses')} (${saved.length}) ♡</a></nav>`,'menu');}
 function openAbout(){openDialog(`<div class="prose-dialog"><p class="eyebrow">HẠ LONG SEAFOOD</p><h2 id="dialog-title">${t('Một miền biển, nhiều vị ngon.','One coast, so many flavours.')}</h2><p>${t('Khám phá hải sản và đặc sản Hạ Long qua những món ăn, chuyện miền biển và địa chỉ mua, thưởng thức có nguồn tham khảo.','Discover Ha Long seafood and local specialities through dishes, coastal stories and sourced places to buy and eat.')}</p><p>${t('Thông tin địa chỉ được dẫn từ kênh của cơ sở và nguồn du lịch địa phương. Ảnh món ăn là minh họa AI. Bạn có thể xem bản đồ và liên hệ trực tiếp cơ sở để hỏi món, giá và giờ phục vụ.','Venue information links to operators and local tourism sources. Food images are AI illustrations. Use the maps and contact venues directly for dishes, prices and service times.')}</p></div>`);}
 async function openSources(){
  const request=++sourceRequestId;
