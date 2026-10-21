@@ -1,0 +1,167 @@
+{
+  "source": "https://www.figma.com/design/Nef5uw6lnOujRDHzkNLHDV/TECH-TALK---AI-UI-UX?node-id=170-4",
+  "sourcePage": "170:4",
+  "slideCount": 17,
+  "slides": [
+    {
+      "id": "170:5",
+      "name": "01 · From Figma to Frontend"
+    },
+    {
+      "id": "170:10",
+      "name": "02 · Hành trình 06 giai đoạn"
+    },
+    {
+      "id": "170:26",
+      "name": "03 · Brief quyết định cách sử dụng AI"
+    },
+    {
+      "id": "170:209",
+      "name": "04 · Full-Auto AI · Bản nháp để trao đổi"
+    },
+    {
+      "id": "170:112",
+      "name": "05 · Clone & Customize · Reference là brief thị giác"
+    },
+    {
+      "id": "170:92",
+      "name": "06 · AI-Assisted Workflow · Designer duyệt từng bước"
+    },
+    {
+      "id": "170:214",
+      "name": "07.1 · Intro Moodboard định hướng thị giác"
+    },
+    {
+      "id": "170:496",
+      "name": "07.2 · Moodboard định hướng thị giác"
+    },
+    {
+      "id": "170:404",
+      "name": "08 · Từ một reference thành nhiều phương án"
+    },
+    {
+      "id": "172:100",
+      "name": "09 · Chọn direction và dừng đúng lúc"
+    },
+    {
+      "id": "170:236",
+      "name": "10 · Từ ảnh ý tưởng thành UI có cấu trúc"
+    },
+    {
+      "id": "170:292",
+      "name": "11 · Từ UI đơn lẻ đến Design System"
+    },
+    {
+      "id": "170:380",
+      "name": "12 · AI đề xuất cấu trúc UX"
+    },
+    {
+      "id": "170:433",
+      "name": "13 · Dùng Frontend để kiểm thử UX"
+    },
+    {
+      "id": "170:231",
+      "name": "14 · ChatGPT và Codex trong workflow của tôi"
+    },
+    {
+      "id": "172:206",
+      "name": "15 · Nối Figma với Frontend thực tế"
+    },
+    {
+      "id": "170:468",
+      "name": "16 · Designer kết nối toàn bộ hành trình"
+    }
+  ],
+  "assets": [
+    {
+      "path": "assets/01-chat-gpt-image05-ux-testing.png",
+      "bytes": 1849449,
+      "sha256": "9e7de90ab965b4e05e59246526b905c7b3bdf3b1bd2179b9f6e03a970dd77cf5"
+    },
+    {
+      "path": "assets/02-illustration-image3-d.png",
+      "bytes": 1653323,
+      "sha256": "25a58a930cc5a57880c32bda7df4f6867672d2c12b0471fe7d96424beb58bffb"
+    },
+    {
+      "path": "assets/03-screenshot20261022-at0204201.png",
+      "bytes": 1575494,
+      "sha256": "66976652c8a764895faf1b43ec6c18ab9d5f7b3f2cb555218a3a021a620dfc26"
+    },
+    {
+      "path": "assets/04-screenshot20261022-at0206061.png",
+      "bytes": 1319732,
+      "sha256": "b5a8752ba4804faad330fcaf4cb2bd055adfd0ccb271afbe3f2dc1bb0be73407"
+    },
+    {
+      "path": "assets/05-35-in-stock1.png",
+      "bytes": 1978110,
+      "sha256": "b6b3d0c735ea5c1933e6b8d9a290cf48f7a55b927250ad5e11947a39fc2d7f89"
+    },
+    {
+      "path": "assets/06-17.png",
+      "bytes": 6075741,
+      "sha256": "f6ad2856391cadb6654fcedf2df2de5b351fe4da944cc6ef03cd76db8109b07b"
+    },
+    {
+      "path": "assets/07-chat-gpt-image03-design-direction.png",
+      "bytes": 2499474,
+      "sha256": "0b0e3fd08592d6ab75be66dd4a879042d0d6bfc5653aa2a0d64d49dd355a6302"
+    },
+    {
+      "path": "assets/08-illustration-image3-d.png",
+      "bytes": 1676595,
+      "sha256": "f3adccc87049e6a70d83c57049389fc543f08cfe7e224c8bc8e44cae8f00f277"
+    },
+    {
+      "path": "assets/09-chat-gpt-image02-moodboard.png",
+      "bytes": 1932812,
+      "sha256": "62138900fda59766f317af0676d2a2d6427a9153c3896c1a13d4c281048edf2e"
+    },
+    {
+      "path": "assets/10-illustration-image3-d.png",
+      "bytes": 1675634,
+      "sha256": "c267829c439a17cb44d6c52dd68e957846da81b06e1c3c04555829415d8fd63d"
+    },
+    {
+      "path": "assets/11-dot.svg",
+      "bytes": 236,
+      "sha256": "aadc454361bef39de668b8df8cb23700a83e1ea5fce4f24afb4db1a4e0e7a485"
+    },
+    {
+      "path": "assets/12-chat-gpt-image01-idea-brief.png",
+      "bytes": 1860862,
+      "sha256": "14b2e51a6ebf56cf175cde0bca72da1b5d5929fb22d34a04c39a87a22f81e35b"
+    },
+    {
+      "path": "assets/13-chat-gpt-image06-frontend.png",
+      "bytes": 1803319,
+      "sha256": "3c766f4afd6c0b632b2074cbcb3c2515c578250c86c18340208a653303bb5bfb"
+    },
+    {
+      "path": "assets/14-dot.svg",
+      "bytes": 236,
+      "sha256": "48ab99b5e0fa58ccaccb1158a08e2784113e844afe76309b35ad0bcea95700d4"
+    },
+    {
+      "path": "assets/15-ui-visual-group.svg",
+      "bytes": 415,
+      "sha256": "af29795d9b48b2f01db4d0a6119f2875bd5fd1db5f1819688711dcc4a7c2aef4"
+    },
+    {
+      "path": "assets/16-album-artwork1.png",
+      "bytes": 1462668,
+      "sha256": "4ca4de6d9f6de4e0f45b6d0a7d4ee8ea1fe374fa3c35cf3b4b496d494195fad5"
+    },
+    {
+      "path": "assets/17-chat-gpt-image04-figma-editable.png",
+      "bytes": 1851594,
+      "sha256": "c2520a05a60f0e9f7f81447ebedf30003f9a1f6618584718fb934810104fcce2"
+    },
+    {
+      "path": "assets/18-illustration-image3-d.png",
+      "bytes": 1697448,
+      "sha256": "c66e81b786ea246a4cf94801f4d6ee4524e273844f5f0934aec19cb0cdfa94a3"
+    }
+  ]
+}

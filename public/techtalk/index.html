@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0a0b08">
+<meta name="description" content="From Figma to Frontend — UI/UX Designer trong thời đại AI Coding. 17 slide về hành trình từ Brief đến Frontend.">
+<title>From Figma to Frontend · Tech Talk</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/fonts/inter.css">
+<style>
+/* === FIXED PRESENTATION STAGE === */
+*{box-sizing:border-box;margin:0;padding:0;border:0 solid transparent}
+:root{--stage-bg:#10120d;--slide-bg:#0a0b08;--accent:#c7f641;--muted:#a4ab97;color-scheme:dark;font-family:Inter,sans-serif;font-synthesis:none}
+/* ===========================================
+   FIXED 16:9 STAGE: MANDATORY BASE STYLES
+   Include this ENTIRE file in every presentation.
+   Slides are authored at 1920×1080 and scaled as a whole.
+   =========================================== */
+
+/* 1. Lock the browser viewport */
+html,
+body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 2. Full-window deck viewport */
+.deck-viewport {
+    position: fixed;
+    inset: 0;
+    overflow: hidden;
+    background: var(--stage-bg, #000);
+}
+
+/* 3. Fixed 16:9 design canvas.
+   JavaScript sets transform: translate(...) scale(...). */
+.deck-stage {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    transform-origin: 0 0;
+    background: var(--slide-bg, #fff);
+}
+
+/* 4. Slides stack inside the fixed stage.
+   Content must be laid out at 1920×1080, not reflowed per device. */
+.slide {
+    position: absolute;
+    inset: 0;
+    width: 1920px;
+    height: 1080px;
+    overflow: hidden;
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
+    background: var(--slide-bg, #fff);
+}
+
+.slide.active,
+.slide.visible {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 1;
+}
+
+/* 5. Keep media inside authored slide bounds */
+img,
+video,
+canvas,
+svg {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* 6. Presentation chrome stays outside the slide design system */
+.deck-controls {
+    position: fixed;
+    left: 50%;
+    bottom: 22px;
+    transform: translateX(-50%);
+    z-index: 1000;
+}
+
+/* 7. Print one fixed-size slide per page */
+@media print {
+    html,
+    body {
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-viewport {
+        position: static;
+        overflow: visible;
+        background: #fff;
+    }
+
+    .deck-stage {
+        position: static;
+        width: auto;
+        height: auto;
+        transform: none !important;
+        background: none;
+    }
+
+    .slide {
+        position: relative;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        pointer-events: auto !important;
+        width: 1920px;
+        height: 1080px;
+        break-after: page;
+        page-break-after: always;
+    }
+
+    .slide:last-child {
+        break-after: auto;
+        page-break-after: auto;
+    }
+
+    .deck-controls {
+        display: none !important;
+    }
+}
+
+/* 8. Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.2s !important;
+    }
+}
+
+body{color:#f3f3e9}
+button{font:inherit;cursor:pointer;color:inherit;background:none;-webkit-tap-highlight-color:transparent}
+button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:4px}
+.deck-stage{box-shadow:0 20px 100px #0005;transition:none!important}
+.source-canvas{position:absolute;width:1681px;height:946px;left:.465px;top:0;transform:scale(1.1416490486);transform-origin:0 0}
+.source-canvas>div{width:1681px!important;height:946px!important}
+.source-canvas img{display:block;max-height:none}
+.slide{transition:opacity .38s ease;isolation:isolate}
+.slide.leaving{visibility:visible;opacity:0;z-index:0;pointer-events:none}
+.slide.active{z-index:2}
+.motion{will-change:auto}
+.slide.active .motion{animation:reveal .72s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--delay,0ms)}
+.slide.active .visual-motion{animation:visualReveal .95s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--delay,80ms)}
+@keyframes reveal{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes visualReveal{from{opacity:0;transform:translateX(28px) scale(.98)}to{opacity:1;transform:translateX(0) scale(1)}}
+/* === PRESENTATION CONTROLS, OUTSIDE THE DESIGN === */
+.deck-controls{display:flex;align-items:center;gap:3px;padding:5px;border:1px solid #363d2a;border-radius:15px;background:#191d13f5;box-shadow:0 8px 35px #0005;bottom:max(12px,env(safe-area-inset-bottom));transition:opacity .22s,transform .22s;white-space:nowrap}
+.deck-controls button{display:grid;place-items:center;width:36px;height:34px;border-radius:9px;color:#b9bfac;transition:background .15s,color .15s}
+.deck-controls button:hover{background:#303724;color:var(--accent)}
+.deck-controls button[aria-pressed=true]{background:#3b4720;color:var(--accent)}
+.deck-controls button:disabled{opacity:.25;cursor:default;background:none}
+.deck-controls svg,.help-close svg{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.deck-controls .page-button{display:flex;gap:7px;width:auto;min-width:76px;padding:0 12px;font-size:12px;font-variant-numeric:tabular-nums}
+.page-button strong{color:var(--accent);font-weight:600}
+.page-button span{color:#8c947b}
+.separator{width:1px;height:17px;background:#3a422d;margin:0 4px}
+.progress{position:fixed;bottom:0;left:0;width:100%;height:2px;background:#323a24;z-index:900}
+.progress span{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:0 0 10px #c7f64670}
+.slide-status{display:none}
+body.ui-awake .slide-status{opacity:1}
+body.ui-asleep .deck-controls{opacity:0;transform:translate(-50%,8px);pointer-events:none}
+body.ui-asleep{cursor:none}
+.controls-zone{position:fixed;bottom:0;left:0;right:0;height:70px;z-index:999}
+.controls-zone:has(.deck-controls:hover){pointer-events:auto}
+.controls-zone{pointer-events:none}
+.deck-controls{pointer-events:auto}
+.screen-reader{position:absolute;width:1px;height:1px;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+/* === OVERVIEW AND KEYBOARD HELP === */
+dialog{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:26px 30px;border:0;background:#10130df9;color:#f3f3e9;z-index:2000;overflow:auto}
+dialog::backdrop{background:#080b08dc;backdrop-filter:blur(14px)}
+.dialog-top{display:flex;justify-content:space-between;align-items:center;gap:20px;max-width:1500px;margin:0 auto 24px}
+.dialog-top h2{font-size:21px;font-weight:600;letter-spacing:-.02em}
+.dialog-top p{font-size:12px;color:#9fa88d;margin-top:7px}
+.close-button{display:grid;place-items:center;width:38px;height:38px;border:1px solid #3d452f;border-radius:50%;font-size:24px;color:#afb79c}
+.close-button:hover{color:var(--accent);border-color:var(--accent)}
+.overview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px;max-width:1500px;margin:auto;padding-bottom:25px}
+.overview-item{text-align:left;min-width:0;padding:8px;border:1px solid #353d29;border-radius:12px;background:#1c2116}
+.overview-item:hover{border-color:#718b38}
+.overview-item[aria-current=true]{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent)}
+.thumbnail{position:relative;aspect-ratio:1681/946;overflow:hidden;border-radius:5px;background:#0a0b08;pointer-events:none}
+.thumbnail>.source-canvas{left:0;transform:scale(var(--thumb-scale,.17));transform-origin:0 0}
+.overview-title{display:flex;gap:12px;align-items:baseline;padding:12px 3px 3px;font-size:12px;line-height:1.45;color:#e0e6d6}
+.overview-title span{color:var(--accent);font-variant-numeric:tabular-nums}
+.help-dialog{inset:50% auto auto 50%;transform:translate(-50%,-50%);width:min(440px,calc(100% - 32px));height:auto;border:1px solid #3d472f;border-radius:20px;padding:26px;background:#191e14;box-shadow:0 20px 100px #0008}
+.help-dialog .dialog-top{margin-bottom:20px}
+.shortcut-list{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;font-size:13px;color:#b8c1a5}
+kbd{font:11px Inter,sans-serif;background:#303926;border:1px solid #465236;padding:5px 8px;border-radius:6px;color:#eef5df}
+.help-foot{margin-top:22px;padding-top:18px;border-top:1px solid #35402b;font-size:11px;color:#8e9b7a;line-height:1.7}
+.help-foot a{color:#c7f641;text-underline-offset:3px}
+/* === PRESENTER TOOLS === */
+.laser{position:fixed;display:none;width:13px;height:13px;border:2px solid #f5ffd5;border-radius:50%;background:#c7f641;box-shadow:0 0 0 7px #c7f64125,0 0 23px #c7f641;pointer-events:none;z-index:1500;transform:translate(-50%,-50%)}
+body.laser-on{cursor:none}
+body.laser-on .laser{display:block}
+.blackout{position:fixed;inset:0;background:#000;z-index:3000;visibility:hidden;opacity:0;transition:opacity .2s}
+body.blacked-out .blackout{visibility:visible;opacity:1}
+.toast{position:fixed;left:50%;top:25px;transform:translateX(-50%);padding:10px 17px;border:1px solid #60753c;border-radius:10px;font-size:12px;color:#e8f4d2;background:#253018;z-index:5000;opacity:0;pointer-events:none;transition:opacity .2s}
+.toast.show{opacity:1}
+.edit-hotzone{position:fixed;left:0;top:0;width:72px;height:64px;z-index:1001}
+.edit-toggle{position:fixed;left:16px;top:14px;z-index:1002;border:1px solid #43532d;border-radius:9px;background:#202817;padding:9px 12px;font-size:11px;opacity:0;pointer-events:none;transition:opacity .2s}
+.edit-toggle.show,.edit-toggle.active,.edit-toggle:focus-visible{opacity:1;pointer-events:auto}
+.editing .slide-status{display:none}
+.editing [contenteditable]{outline:1px dashed #c7f64165;cursor:text}
+.edit-save{position:fixed;top:14px;right:16px;z-index:1002;border-radius:9px;background:var(--accent);color:#17210b;padding:10px 14px;font-size:11px;display:none}
+.editing .edit-save{display:block}
+@media(max-width:600px){dialog{padding:20px 16px}.overview-grid{grid-template-columns:1fr 1fr;gap:12px}.overview-title{font-size:10px;gap:7px}.deck-controls{gap:0;bottom:max(10px,env(safe-area-inset-bottom))}.deck-controls button{width:32px}.deck-controls .page-button{min-width:70px;padding:0 8px}.slide-status{font-size:10px;top:14px;left:14px}.dialog-top h2{font-size:18px}.edit-hotzone{width:45px;height:45px}}
+@media(prefers-reduced-motion:reduce){.slide.active .motion,.slide.active .visual-motion{animation:none}.slide{transition:none}.progress span{transition:none}}
+@media print{.source-canvas{left:.465px!important;transform:scale(1.1416490486)!important}.motion,.visual-motion{animation:none!important;opacity:1!important;transform:none!important}dialog,.controls-zone,.progress,.slide-status,.edit-hotzone,.edit-toggle,.edit-save,.toast,.laser,.blackout{display:none!important}@page{size:1920px 1080px;margin:0}}
+</style>
+</head>
+<body class="ui-awake">
+<div class="deck-viewport"><main class="deck-stage" id="deckStage" aria-label="From Figma to Frontend — 17 slide"><section class="slide" id="slide-1" data-title="01 · From Figma to Frontend" role="group" aria-roledescription="slide" aria-label="1 / 17 — 01 · From Figma to Frontend" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:5" data-name="01 · From Figma to Frontend">
+      <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:0;left:76px;font-style:normal;color:#f3f3e9;font-size:88px;top:253px;width:720px" data-node-id="170:6">
+        <p style="margin-bottom:0">
+          <span style="line-height:1.15">From </span>
+          <span style="line-height:1.15;color:#c7f641">Figma</span>
+        </p>
+        <p style="line-height:1.15">to Frontend</p>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:31px;line-height:1.25;left:78px;font-style:normal;color:#f3f3e9;font-size:31px;top:495px;width:680px" data-node-id="170:7">UI/UX Designer trong thời đại AI Coding</p>
+      <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:0;left:78px;font-style:normal;color:#a4a69c;font-size:24px;top:570px;width:665px" data-node-id="170:8">
+        <p style="line-height:1.35;margin-bottom:0">Từ Brief, khám phá thị giác và Figma editable</p>
+        <p style="line-height:1.35">đến UX và Frontend chạy được.</p>
+      </div>
+      <div style="position:absolute;height:720px;left:753px;top:92px;width:914px" data-node-id="170:9" data-name="Illustration · image 3D">
+        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+          <img alt="" style="position:absolute;height:131.39%;left:-82.39%;max-width:none;top:-12.78%;width:183.92%" src="assets/18-illustration-image3-d.png" />
+        </div>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:2">FROM FIGMA TO FRONTEND  /  UI/UX DESIGNER TRONG THỜI ĐẠI AI CODING</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:3">01 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-2" data-title="02 · Hành trình 06 giai đoạn" role="group" aria-roledescription="slide" aria-label="2 / 17 — 02 · Hành trình 06 giai đoạn" aria-hidden="true"><div class="source-canvas"><div style="overflow-wrap:break-word;background-color:#f6f6ee;line-height:1.28;font-style:normal;position:relative;width:100%;height:100%" data-node-id="170:10" data-name="02 · Hành trình 06 giai đoạn">
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;top:64px;width:1529px" data-node-id="172:4" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:18px;width:1529px" data-node-id="172:5">HÀNH TRÌNH 06 GIAI ĐOẠN</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:62px;width:1529px" data-node-id="172:6">Từ Brief đến Frontend</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:1529px" data-node-id="172:7">AI hỗ trợ từng mắt xích. Designer định hướng và kiểm chứng xuyên suốt.</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:76px;top:300px;width:470px" data-node-id="172:8" data-name="Giai đoạn 1">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:52px;width:470px" data-node-id="172:9">01</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:31px;width:470px" data-node-id="172:10">Idea &amp; Brief</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:470px" data-node-id="172:11">Chọn cách làm việc với AI</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:601px;top:300px;width:470px" data-node-id="172:12" data-name="Giai đoạn 2">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:52px;width:470px" data-node-id="172:13">02</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:31px;width:470px" data-node-id="172:14">Visual Exploration</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:470px" data-node-id="172:15">Định hướng bằng moodboard</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:1126px;top:300px;width:470px" data-node-id="172:16" data-name="Giai đoạn 3">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:52px;width:470px" data-node-id="172:17">03</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:31px;width:470px" data-node-id="172:18">Design Direction</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:470px" data-node-id="172:19">Tạo nhiều phương án, chọn một</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:76px;top:560px;width:470px" data-node-id="172:20" data-name="Giai đoạn 4">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:52px;width:470px" data-node-id="172:21">04</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:31px;width:470px" data-node-id="172:22">UI Design</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:470px" data-node-id="172:23">Từ ảnh sang Figma editable</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:601px;top:560px;width:470px" data-node-id="172:24" data-name="Giai đoạn 5">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:52px;width:470px" data-node-id="172:25">05</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:31px;width:470px" data-node-id="172:26">UX Architecture</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:470px" data-node-id="172:27">User Flow, interaction, kiểm thử</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:1126px;top:560px;width:470px" data-node-id="172:28" data-name="Giai đoạn 6">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:52px;width:470px" data-node-id="172:29">06</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:31px;width:470px" data-node-id="172:30">Frontend Development</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:470px" data-node-id="172:31">ChatGPT + Codex</p>
+      </div>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:400;left:76px;color:#636c5b;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:32">FROM FIGMA TO FRONTEND  /  06 GIAI ĐOẠN</p>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:700;left:1510px;color:#636c5b;font-size:15px;top:900px;width:95px" data-node-id="172:33">02 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-3" data-title="03 · Brief quyết định cách sử dụng AI" role="group" aria-roledescription="slide" aria-label="3 / 17 — 03 · Brief quyết định cách sử dụng AI" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:26" data-name="03 · Brief quyết định cách sử dụng AI">
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:780px" data-node-id="172:34" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:780px" data-node-id="172:35">01 / IDEA &amp; BRIEF</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:58px;width:780px" data-node-id="172:36">
+          <p style="line-height:1.28;margin-bottom:0">Brief quyết định</p>
+          <p style="line-height:1.28">cách tôi sử dụng AI</p>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:780px" data-node-id="172:37">Chọn chiến lược theo thông tin đầu vào.</p>
+      </div>
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:28px;align-items:flex-start;line-height:1.28;left:76px;font-style:normal;top:340px;width:735px" data-node-id="172:38" data-name="Ba tình trạng brief">
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:730px" data-node-id="172:39" data-name="Brief sơ sài → Full-Auto AI">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:30px;width:730px;white-space:pre-wrap" data-node-id="172:40">A  /  Brief sơ sài → Full-Auto AI</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:24px;width:730px" data-node-id="172:41">AI tạo nhanh concept để trao đổi và làm rõ yêu cầu.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:730px" data-node-id="172:42" data-name="Có reference → Clone & Customize">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:30px;width:730px;white-space:pre-wrap" data-node-id="172:43">A.5  /  Có reference → Clone &amp; Customize</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:24px;width:730px" data-node-id="172:44">Reference trở thành “brief thị giác” để phát triển hướng riêng.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:730px" data-node-id="172:45" data-name="Brief đầy đủ → AI-Assisted">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:30px;width:730px;white-space:pre-wrap" data-node-id="172:46">B  /  Brief đầy đủ → AI-Assisted</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:24px;width:730px" data-node-id="172:47">Chia nhỏ công việc, Designer duyệt từng bước.</p>
+        </div>
+      </div>
+      <div style="position:absolute;height:555px;left:865px;top:240px;width:740px" data-node-id="172:48" data-name="ChatGPT Image · 01-idea-brief">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:contain;pointer-events:none;width:100%;height:100%" src="assets/12-chat-gpt-image01-idea-brief.png" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:28px;top:830px;width:1500px" data-node-id="172:49">Brief càng ít thông tin, AI càng phải tự giả định nhiều.</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:50">FROM FIGMA TO FRONTEND  /  01 / IDEA &amp; BRIEF</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:51">03 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-4" data-title="04 · Full-Auto AI · Bản nháp để trao đổi" role="group" aria-roledescription="slide" aria-label="4 / 17 — 04 · Full-Auto AI · Bản nháp để trao đổi" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:209" data-name="04 · Full-Auto AI · Bản nháp để trao đổi">
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.25;left:76px;font-style:normal;color:#f3f3e9;font-size:82px;top:200px;width:580px" data-node-id="170:210">Full-Auto AI</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.25;left:76px;font-style:normal;color:#f3f3e9;font-size:36px;top:325px;width:590px" data-node-id="170:211">Brief sơ sài → 3–4 concept</p>
+      <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:0;left:76px;font-style:normal;color:#b7baaf;font-size:25px;top:420px;width:550px;white-space:pre-wrap" data-node-id="170:212">
+        <p style="line-height:1.32;margin-bottom:0">Ví dụ: “Làm cho anh một website bán cà phê”.</p>
+        <p style="line-height:1.32;margin-bottom:0">​</p>
+        <p style="line-height:1.32;margin-bottom:0">Tôi để AI tự giả định và tạo nhanh bản nháp để hỏi ngược khách hàng, làm rõ yêu cầu.</p>
+        <p style="line-height:1.32;margin-bottom:0">​</p>
+        <p style="line-height:1.32">Khi chưa có tiêu chí rõ ràng, khó đánh giá kết quả là đúng.</p>
+      </div>
+      <div style="position:absolute;height:625px;left:653px;top:110px;width:1015px" data-node-id="170:213" data-name="Illustration · image 3D">
+        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+          <img alt="" style="position:absolute;height:151.36%;left:-64.33%;max-width:none;top:-23.36%;width:165.62%" src="assets/08-illustration-image3-d.png" />
+        </div>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:18px;top:76px;width:700px" data-node-id="172:52">01 / IDEA &amp; BRIEF · A</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:28px;top:815px;width:1510px" data-node-id="172:53">Prompt → AI Generate → Review → Edit → Bản nháp để trao đổi</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:54">FROM FIGMA TO FRONTEND  /  01 / IDEA &amp; BRIEF</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:55">04 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-5" data-title="05 · Clone &amp; Customize · Reference là brief thị giác" role="group" aria-roledescription="slide" aria-label="5 / 17 — 05 · Clone &amp; Customize · Reference là brief thị giác" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:112" data-name="05 · Clone & Customize · Reference là brief thị giác">
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.25;left:76px;font-style:normal;color:#f3f3e9;font-size:68px;top:105px;width:835px" data-node-id="170:113">Clone &amp; Customize</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.25;left:76px;font-style:normal;color:#f3f3e9;font-size:34px;top:190px;width:820px" data-node-id="170:114">Reference là “brief thị giác”</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:980px;font-style:normal;color:#f3f3e9;font-size:24px;top:105px;width:620px" data-node-id="170:115">Khách hàng chỉ ra giao diện mình thích. Tôi tham khảo cấu trúc và cách sắp xếp, rồi phát triển lại theo thương hiệu, nội dung và trải nghiệm riêng.</p>
+      <div style="position:absolute;background-color:#a8aea0;height:91px;left:917px;top:115px;width:1px" data-node-id="170:116" data-name="rect"></div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:33px;line-height:1.25;left:76px;font-style:normal;color:#92968a;font-size:33px;top:265px;width:70px" data-node-id="170:117">01</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:24px;line-height:1.25;left:146px;font-style:normal;color:#f3f3e9;font-size:24px;top:271px;width:405px" data-node-id="170:118">Reference UI</p>
+      <div style="position:absolute;background-color:#10120d;border-width:2px;border-color:#3d4330;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:351px;align-items:flex-start;left:76px;border-radius:14px;top:322px;width:472px" data-node-id="170:119" data-name="UI · ◉ Spotify">
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:19px;font-style:normal;color:#f0f4e9;font-size:18px;top:22px;width:150px" data-node-id="170:120">◉ Spotify</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:169px;font-style:normal;color:#a3ab97;font-size:11px;top:24px;width:291px;white-space:pre-wrap" data-node-id="170:121">Home    Search    Your Library</p>
+        <div style="position:absolute;background-color:#303b25;height:274px;left:138px;top:55px;width:1px" data-node-id="170:122" data-name="rect"></div>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:20px;font-style:normal;color:#c7f641;font-size:12px;top:72px;width:117px" data-node-id="170:123">⌂ Home</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:20px;font-style:normal;color:#a3ab97;font-size:12px;top:107px;width:117px" data-node-id="170:124">♧ Made for you</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:20px;font-style:normal;color:#a3ab97;font-size:12px;top:142px;width:117px" data-node-id="170:125">♥ Liked Songs</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:20px;font-style:normal;color:#a3ab97;font-size:12px;top:177px;width:117px" data-node-id="170:126">◷ Your Episodes</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:159px;font-style:normal;color:#f0f4e9;font-size:16px;top:69px;width:293px" data-node-id="170:127">Good afternoon</p>
+        <div
+          style="position:absolute;background-color:#242b1e;border-width:1px;border-color:#242b1e;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:159px;border-radius:5px;top:100px;width:133px"
+          data-node-id="170:128"
+          data-name="UI · Discover
+Weekly"
+        >
+          <div style="position:absolute;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:129" data-name="Album artwork 1">
+            <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:4px">
+              <img alt="" style="position:absolute;height:1784.91%;left:-458.82%;max-width:none;top:-858.49%;width:3296.08%" src="assets/16-album-artwork1.png" />
+            </div>
+          </div>
+          <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:0;left:52px;font-style:normal;color:#f0f4e9;font-size:10px;top:10px;width:77px" data-node-id="170:130">
+            <p style="line-height:1.25;margin-bottom:0">Discover</p>
+            <p style="line-height:1.25">Weekly</p>
+          </div>
+        </div>
+        <div style="position:absolute;background-color:#242b1e;border-width:1px;border-color:#242b1e;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:301px;border-radius:5px;top:100px;width:133px" data-node-id="170:131" data-name="UI · Lofi Beats">
+          <div style="position:absolute;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:132" data-name="Album artwork 2">
+            <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:4px">
+              <img alt="" style="position:absolute;height:1784.91%;left:-758.82%;max-width:none;top:-858.49%;width:3296.08%" src="assets/16-album-artwork1.png" />
+            </div>
+          </div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#f0f4e9;font-size:10px;top:10px;width:77px" data-node-id="170:133">Lofi Beats</p>
+        </div>
+        <div style="position:absolute;background-color:#242b1e;border-width:1px;border-color:#242b1e;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:159px;border-radius:5px;top:165px;width:133px" data-node-id="170:134" data-name="UI · Focus Flow">
+          <div style="position:absolute;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:135" data-name="Album artwork 3">
+            <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:4px">
+              <img alt="" style="position:absolute;height:1784.91%;left:-458.82%;max-width:none;top:-979.25%;width:3296.08%" src="assets/16-album-artwork1.png" />
+            </div>
+          </div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#f0f4e9;font-size:10px;top:10px;width:77px" data-node-id="170:136">Focus Flow</p>
+        </div>
+        <div style="position:absolute;background-color:#242b1e;border-width:1px;border-color:#242b1e;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:301px;border-radius:5px;top:165px;width:133px" data-node-id="170:137" data-name="UI · Chill Vibes">
+          <div style="position:absolute;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:138" data-name="Album artwork 4">
+            <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:4px">
+              <img alt="" style="position:absolute;height:1784.91%;left:-758.82%;max-width:none;top:-979.25%;width:3296.08%" src="assets/16-album-artwork1.png" />
+            </div>
+          </div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#f0f4e9;font-size:10px;top:10px;width:77px" data-node-id="170:139">Chill Vibes</p>
+        </div>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:159px;font-style:normal;color:#f0f4e9;font-size:14px;top:249px;width:302px" data-node-id="170:140">Recently played</p>
+        <div style="position:absolute;height:61px;left:159px;border-radius:5px;top:277px;width:62px" data-node-id="170:141" data-name="Recently played artwork 1">
+          <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:5px">
+            <img alt="" style="position:absolute;height:1550.82%;left:-371.43%;max-width:none;top:-1044.26%;width:2668.25%" src="assets/16-album-artwork1.png" />
+          </div>
+        </div>
+        <div style="position:absolute;height:61px;left:230px;border-radius:5px;top:277px;width:62px" data-node-id="170:142" data-name="Recently played artwork 2">
+          <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:5px">
+            <img alt="" style="position:absolute;height:1550.82%;left:-493.65%;max-width:none;top:-1044.26%;width:2668.25%" src="assets/16-album-artwork1.png" />
+          </div>
+        </div>
+        <div style="position:absolute;height:61px;left:301px;border-radius:5px;top:277px;width:62px" data-node-id="170:143" data-name="Recently played artwork 3">
+          <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:5px">
+            <img alt="" style="position:absolute;height:1550.82%;left:-615.87%;max-width:none;top:-1044.26%;width:2668.25%" src="assets/16-album-artwork1.png" />
+          </div>
+        </div>
+        <div style="position:absolute;height:61px;left:372px;border-radius:5px;top:277px;width:62px" data-node-id="170:144" data-name="Recently played artwork 4">
+          <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:5px">
+            <img alt="" style="position:absolute;height:1550.82%;left:-738.1%;max-width:none;top:-1044.26%;width:2668.25%" src="assets/16-album-artwork1.png" />
+          </div>
+        </div>
+      </div>
+      <div style="position:absolute;background-color:#eef4d9;align-content:stretch;display:flex;flex-direction:column;height:79px;align-items:center;justify-content:center;left:76px;border-radius:16px;top:715px;width:496px" data-node-id="170:145" data-name="Card · ϟ   Nhanh">
+        <p style="overflow-wrap:break-word;font-family:'Inter',sans-serif;font-weight:700;line-height:1.25;font-style:normal;position:relative;flex-shrink:0;color:#111611;font-size:32px;white-space:nowrap" data-node-id="170:146">Nhanh</p>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:33px;line-height:1.25;left:622px;font-style:normal;color:#92968a;font-size:33px;top:265px;width:70px" data-node-id="170:147">02</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:24px;line-height:1.25;left:692px;font-style:normal;color:#f3f3e9;font-size:24px;top:271px;width:405px" data-node-id="170:148">AI Reconstruction</p>
+      <div style="position:absolute;background-color:#eaebdd;border-width:2px;border-color:#c7cbbe;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:351px;align-items:flex-start;left:622px;border-radius:14px;top:322px;width:438px" data-node-id="170:149" data-name="UI · ● MusicApp">
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:19px;font-style:normal;color:#282e21;font-size:18px;top:22px;width:150px" data-node-id="170:150">● MusicApp</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:169px;font-style:normal;color:#868e7a;font-size:11px;top:24px;width:257px;white-space:pre-wrap" data-node-id="170:151">Home    Search    Your Library</p>
+        <div style="position:absolute;background-color:#ced4c1;height:274px;left:138px;top:55px;width:1px" data-node-id="170:152" data-name="rect"></div>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:20px;font-style:normal;color:#282e21;font-size:12px;top:72px;width:117px" data-node-id="170:153">⌂ Home</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:20px;font-style:normal;color:#868e7a;font-size:12px;top:107px;width:117px" data-node-id="170:154">♧ Made for you</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:20px;font-style:normal;color:#868e7a;font-size:12px;top:142px;width:117px" data-node-id="170:155">♥ Liked Songs</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:20px;font-style:normal;color:#868e7a;font-size:12px;top:177px;width:117px" data-node-id="170:156">◷ Your Episodes</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:159px;font-style:normal;color:#282e21;font-size:16px;top:69px;width:259px" data-node-id="170:157">Good afternoon</p>
+        <div
+          style="position:absolute;background-color:#dfe3d4;border-width:1px;border-color:#dfe3d4;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:159px;border-radius:5px;top:100px;width:113px"
+          data-node-id="170:158"
+          data-name="UI · Discover
+Weekly"
+        >
+          <div style="position:absolute;background-color:#cbd0c1;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:159" data-name="rect"></div>
+          <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:0;left:52px;font-style:normal;color:#282e21;font-size:10px;top:10px;width:55px" data-node-id="170:160">
+            <p style="line-height:1.25;margin-bottom:0">Discover</p>
+            <p style="line-height:1.25">Weekly</p>
+          </div>
+        </div>
+        <div style="position:absolute;background-color:#dfe3d4;border-width:1px;border-color:#dfe3d4;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:284px;border-radius:5px;top:100px;width:113px" data-node-id="170:161" data-name="UI · Lofi Beats">
+          <div style="position:absolute;background-color:#cbd0c1;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:162" data-name="rect"></div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#282e21;font-size:10px;top:10px;width:55px" data-node-id="170:163">Lofi Beats</p>
+        </div>
+        <div style="position:absolute;background-color:#dfe3d4;border-width:1px;border-color:#dfe3d4;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:159px;border-radius:5px;top:165px;width:113px" data-node-id="170:164" data-name="UI · Focus Flow">
+          <div style="position:absolute;background-color:#cbd0c1;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:165" data-name="rect"></div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#282e21;font-size:10px;top:10px;width:55px" data-node-id="170:166">Focus Flow</p>
+        </div>
+        <div style="position:absolute;background-color:#dfe3d4;border-width:1px;border-color:#dfe3d4;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:284px;border-radius:5px;top:165px;width:113px" data-node-id="170:167" data-name="UI · Chill Vibes">
+          <div style="position:absolute;background-color:#cbd0c1;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:168" data-name="rect"></div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#282e21;font-size:10px;top:10px;width:55px" data-node-id="170:169">Chill Vibes</p>
+        </div>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:159px;font-style:normal;color:#282e21;font-size:14px;top:249px;width:268px" data-node-id="170:170">Recently played</p>
+        <div style="position:absolute;background-color:#cdd3c1;height:61px;left:159px;border-radius:5px;top:277px;width:53px" data-node-id="170:171" data-name="rect"></div>
+        <div style="position:absolute;background-color:#cdd3c1;height:61px;left:221px;border-radius:5px;top:277px;width:53px" data-node-id="170:172" data-name="rect"></div>
+        <div style="position:absolute;background-color:#cdd3c1;height:61px;left:283px;border-radius:5px;top:277px;width:53px" data-node-id="170:173" data-name="rect"></div>
+        <div style="position:absolute;background-color:#cdd3c1;height:61px;left:345px;border-radius:5px;top:277px;width:53px" data-node-id="170:174" data-name="rect"></div>
+      </div>
+      <div style="position:absolute;background-color:#eef4d9;align-content:stretch;display:flex;flex-direction:column;height:79px;align-items:center;justify-content:center;left:622px;border-radius:16px;top:715px;width:466px" data-node-id="170:175" data-name="Card · ▤   Có điểm tựa">
+        <p style="overflow-wrap:break-word;font-family:'Inter',sans-serif;font-weight:700;line-height:1.25;font-style:normal;position:relative;flex-shrink:0;color:#111611;font-size:32px;white-space:nowrap" data-node-id="170:176">Có điểm tựa</p>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:33px;line-height:1.25;left:1135px;font-style:normal;color:#92968a;font-size:33px;top:265px;width:70px" data-node-id="170:177">03</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:24px;line-height:1.25;left:1205px;font-style:normal;color:#f3f3e9;font-size:24px;top:271px;width:405px" data-node-id="170:178">Customized Output</p>
+      <div style="position:absolute;background-color:#10120d;border-width:2px;border-color:#3d4330;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:351px;align-items:flex-start;left:1135px;border-radius:14px;top:322px;width:472px" data-node-id="170:179" data-name="UI · ✣ FlowBeat">
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:19px;font-style:normal;color:#f0f4e9;font-size:18px;top:22px;width:150px" data-node-id="170:180">✣ FlowBeat</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:169px;font-style:normal;color:#a3ab97;font-size:11px;top:24px;width:291px;white-space:pre-wrap" data-node-id="170:181">Home   Khám phá   Thư viện</p>
+        <div style="position:absolute;background-color:#303b25;height:274px;left:138px;top:55px;width:1px" data-node-id="170:182" data-name="rect"></div>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:20px;font-style:normal;color:#c7f641;font-size:12px;top:72px;width:117px" data-node-id="170:183">⌂ Home</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:20px;font-style:normal;color:#a3ab97;font-size:12px;top:107px;width:117px" data-node-id="170:184">♧ Dành cho bạn</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:20px;font-style:normal;color:#a3ab97;font-size:12px;top:142px;width:117px" data-node-id="170:185">♥ Bài hát đã thích</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:20px;font-style:normal;color:#a3ab97;font-size:12px;top:177px;width:117px" data-node-id="170:186">◷ Podcast</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:159px;font-style:normal;color:#f0f4e9;font-size:16px;top:69px;width:293px" data-node-id="170:187">Chào buổi chiều</p>
+        <div style="position:absolute;background-color:#242b1e;border-width:1px;border-color:#242b1e;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:159px;border-radius:5px;top:100px;width:133px" data-node-id="170:188" data-name="UI · Tập trung">
+          <div style="position:absolute;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:189" data-name="Album artwork 1">
+            <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:4px">
+              <img alt="" style="position:absolute;height:1784.91%;left:-2519.61%;max-width:none;top:-858.49%;width:3296.08%" src="assets/16-album-artwork1.png" />
+            </div>
+          </div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#f0f4e9;font-size:10px;top:10px;width:77px" data-node-id="170:190">Tập trung</p>
+        </div>
+        <div style="position:absolute;background-color:#242b1e;border-width:1px;border-color:#242b1e;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:301px;border-radius:5px;top:100px;width:133px" data-node-id="170:191" data-name="UI · Chill nhẹ">
+          <div style="position:absolute;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:192" data-name="Album artwork 2">
+            <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:4px">
+              <img alt="" style="position:absolute;height:1784.91%;left:-2825.49%;max-width:none;top:-858.49%;width:3296.08%" src="assets/16-album-artwork1.png" />
+            </div>
+          </div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#f0f4e9;font-size:10px;top:10px;width:77px" data-node-id="170:193">Chill nhẹ</p>
+        </div>
+        <div style="position:absolute;background-color:#242b1e;border-width:1px;border-color:#242b1e;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:159px;border-radius:5px;top:165px;width:133px" data-node-id="170:194" data-name="UI · Năng lượng">
+          <div style="position:absolute;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:195" data-name="Album artwork 3">
+            <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:4px">
+              <img alt="" style="position:absolute;height:1784.91%;left:-2519.61%;max-width:none;top:-979.25%;width:3296.08%" src="assets/16-album-artwork1.png" />
+            </div>
+          </div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#f0f4e9;font-size:10px;top:10px;width:77px" data-node-id="170:196">Năng lượng</p>
+        </div>
+        <div style="position:absolute;background-color:#242b1e;border-width:1px;border-color:#242b1e;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:53px;align-items:flex-start;left:301px;border-radius:5px;top:165px;width:133px" data-node-id="170:197" data-name="UI · Indie Việt">
+          <div style="position:absolute;left:4px;border-radius:4px;width:43px;height:43px;top:4px" data-node-id="170:198" data-name="Album artwork 4">
+            <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:4px">
+              <img alt="" style="position:absolute;height:1784.91%;left:-2825.49%;max-width:none;top:-979.25%;width:3296.08%" src="assets/16-album-artwork1.png" />
+            </div>
+          </div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:52px;font-style:normal;color:#f0f4e9;font-size:10px;top:10px;width:77px" data-node-id="170:199">Indie Việt</p>
+        </div>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:159px;font-style:normal;color:#f0f4e9;font-size:14px;top:249px;width:302px" data-node-id="170:200">Nghe gần đây</p>
+        <div style="position:absolute;height:61px;left:159px;border-radius:5px;top:277px;width:62px" data-node-id="170:201" data-name="Recently played artwork 1">
+          <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:5px">
+            <img alt="" style="position:absolute;height:1550.82%;left:-2036.51%;max-width:none;top:-1044.26%;width:2668.25%" src="assets/16-album-artwork1.png" />
+          </div>
+        </div>
+        <div style="position:absolute;height:61px;left:230px;border-radius:5px;top:277px;width:62px" data-node-id="170:202" data-name="Recently played artwork 2">
+          <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:5px">
+            <img alt="" style="position:absolute;height:1550.82%;left:-2161.9%;max-width:none;top:-1044.26%;width:2668.25%" src="assets/16-album-artwork1.png" />
+          </div>
+        </div>
+        <div style="position:absolute;height:61px;left:301px;border-radius:5px;top:277px;width:62px" data-node-id="170:203" data-name="Recently played artwork 3">
+          <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:5px">
+            <img alt="" style="position:absolute;height:1550.82%;left:-2287.3%;max-width:none;top:-1044.26%;width:2668.25%" src="assets/16-album-artwork1.png" />
+          </div>
+        </div>
+        <div style="position:absolute;height:61px;left:372px;border-radius:5px;top:277px;width:62px" data-node-id="170:204" data-name="Recently played artwork 4">
+          <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none;border-radius:5px">
+            <img alt="" style="position:absolute;height:1550.82%;left:-2412.7%;max-width:none;top:-1044.26%;width:2668.25%" src="assets/16-album-artwork1.png" />
+          </div>
+        </div>
+      </div>
+      <div style="position:absolute;background-color:#eef4d9;align-content:stretch;display:flex;flex-direction:column;height:79px;align-items:center;justify-content:center;left:1135px;border-radius:16px;top:715px;width:472px" data-node-id="170:205" data-name="Card · ☷   Dễ kiểm soát">
+        <p style="overflow-wrap:break-word;font-family:'Inter',sans-serif;font-weight:700;line-height:1.25;font-style:normal;position:relative;flex-shrink:0;color:#111611;font-size:32px;white-space:nowrap" data-node-id="170:206">Dễ kiểm soát</p>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:43px;line-height:1.25;left:568px;font-style:normal;color:#777d6e;font-size:43px;top:479px;width:50px" data-node-id="170:207">→</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:43px;line-height:1.25;left:1079px;font-style:normal;color:#777d6e;font-size:43px;top:479px;width:50px" data-node-id="170:208">→</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:18px;top:56px;width:730px" data-node-id="172:56">01 / IDEA &amp; BRIEF · A.5</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:28px;top:806px;width:1510px" data-node-id="172:57">Reference → AI tái tạo hướng UI → Customize → Kiểm duyệt</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:58">FROM FIGMA TO FRONTEND  /  01 / IDEA &amp; BRIEF</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:59">05 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-6" data-title="06 · AI-Assisted Workflow · Designer duyệt từng bước" role="group" aria-roledescription="slide" aria-label="6 / 17 — 06 · AI-Assisted Workflow · Designer duyệt từng bước" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:92" data-name="06 · AI-Assisted Workflow · Designer duyệt từng bước">
+      <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:0;left:76px;font-style:normal;color:#f3f3e9;font-size:76px;top:210px;width:550px" data-node-id="170:93">
+        <p style="line-height:1.15;margin-bottom:0">AI-Assisted</p>
+        <p style="line-height:1.15">Workflow</p>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.25;left:78px;font-style:normal;color:#f3f3e9;font-size:31px;top:415px;width:550px" data-node-id="170:94">Brief đầy đủ, chia nhỏ task</p>
+      <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:0;left:78px;font-style:normal;color:#a9ada0;font-size:25px;top:485px;width:510px;white-space:pre-wrap" data-node-id="170:95">
+        <p style="line-height:1.32;margin-bottom:0">Có mục tiêu, người dùng, chức năng và nhận diện: ta đặt ràng buộc, chia việc để AI hỗ trợ từng bước.</p>
+        <p style="line-height:1.32;margin-bottom:0">​</p>
+        <p style="line-height:1.32">Designer kiểm duyệt kết quả trước khi tiếp tục.</p>
+      </div>
+      <div style="position:absolute;height:643px;left:585px;top:33px;width:1065px" data-node-id="170:96" data-name="Illustration · image 3D">
+        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+          <img alt="" style="position:absolute;height:147.12%;left:-54.93%;max-width:none;top:-10.73%;width:157.84%" src="assets/10-illustration-image3-d.png" />
+        </div>
+      </div>
+      <div style="position:absolute;left:580px;width:61px;height:61px;top:708px" data-node-id="170:97" data-name="dot">
+        <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/11-dot.svg" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:21px;line-height:1.25;left:597px;font-style:normal;color:#c7f641;font-size:21px;top:724px;width:50px" data-node-id="170:98">01</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:23px;line-height:1.25;left:662px;font-style:normal;color:#f3f3e9;font-size:23px;top:730px;width:155px" data-node-id="170:99">Define</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:26px;line-height:1.25;left:798px;font-style:normal;color:#829465;font-size:26px;top:724px;width:40px" data-node-id="170:100">→</p>
+      <div style="position:absolute;left:847px;width:61px;height:61px;top:708px" data-node-id="170:101" data-name="dot">
+        <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/11-dot.svg" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:21px;line-height:1.25;left:864px;font-style:normal;color:#c7f641;font-size:21px;top:724px;width:50px" data-node-id="170:102">02</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:23px;line-height:1.25;left:929px;font-style:normal;color:#f3f3e9;font-size:23px;top:730px;width:155px" data-node-id="170:103">Generate</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:26px;line-height:1.25;left:1065px;font-style:normal;color:#829465;font-size:26px;top:724px;width:40px" data-node-id="170:104">→</p>
+      <div style="position:absolute;left:1114px;width:61px;height:61px;top:708px" data-node-id="170:105" data-name="dot">
+        <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/11-dot.svg" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:21px;line-height:1.25;left:1131px;font-style:normal;color:#c7f641;font-size:21px;top:724px;width:50px" data-node-id="170:106">03</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:23px;line-height:1.25;left:1196px;font-style:normal;color:#f3f3e9;font-size:23px;top:730px;width:155px" data-node-id="170:107">Review</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:26px;line-height:1.25;left:1332px;font-style:normal;color:#829465;font-size:26px;top:724px;width:40px" data-node-id="170:108">→</p>
+      <div style="position:absolute;left:1381px;width:61px;height:61px;top:708px" data-node-id="170:109" data-name="dot">
+        <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/11-dot.svg" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:21px;line-height:1.25;left:1398px;font-style:normal;color:#c7f641;font-size:21px;top:724px;width:50px" data-node-id="170:110">04</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:23px;line-height:1.25;left:1463px;font-style:normal;color:#f3f3e9;font-size:23px;top:730px;width:155px" data-node-id="170:111">Refine</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:18px;top:76px;width:700px" data-node-id="172:60">01 / IDEA &amp; BRIEF · B</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:25px;top:812px;width:1510px" data-node-id="172:61">Brief quyết định AI biết gì. Chiến lược quyết định AI được làm gì.</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#f3f3e9;font-size:25px;top:852px;width:1510px" data-node-id="172:62">Designer quyết định kết quả nào được giữ lại.</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:63">FROM FIGMA TO FRONTEND  /  01 / IDEA &amp; BRIEF</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:64">06 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-7" data-title="07.1 · Intro Moodboard định hướng thị giác" role="group" aria-roledescription="slide" aria-label="7 / 17 — 07.1 · Intro Moodboard định hướng thị giác" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:214" data-name="07.1 · Intro Moodboard định hướng thị giác">
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;font-family:'Inter',sans-serif;font-weight:700;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:750px" data-node-id="172:65" data-name="Header">
+        <p style="line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:750px" data-node-id="172:66">02 / VISUAL EXPLORATION</p>
+        <div style="line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:54px;width:750px" data-node-id="172:67">
+          <p style="line-height:1.28;margin-bottom:0">Dùng moodboard để AI</p>
+          <p style="line-height:1.28">hiểu đúng tinh thần thiết kế</p>
+        </div>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:80">FROM FIGMA TO FRONTEND  /  02 / VISUAL EXPLORATION</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:81">07 / 16</p>
+      <div style="position:absolute;height:252px;left:103px;top:289px;width:489px" data-node-id="170:475" data-name="Screenshot 2026-10-22 at 02.04.20 1">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:cover;pointer-events:none;width:100%;height:100%" src="assets/03-screenshot20261022-at0204201.png" />
+      </div>
+      <div style="position:absolute;height:328px;left:428px;top:497px;width:426px" data-node-id="170:495" data-name="Screenshot 2026-10-22 at 02.06.06 1">
+        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+          <img alt="" style="position:absolute;height:100%;left:-25.2%;max-width:none;top:0;width:150.4%" src="assets/04-screenshot20261022-at0206061.png" />
+        </div>
+      </div>
+      <div style="position:absolute;height:730px;left:1254px;top:108px;width:377px" data-node-id="170:514" data-name="35% in-stock 1">
+        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+          <img alt="" style="position:absolute;height:194.61%;left:0;max-width:none;top:-0.05%;width:100%" src="assets/05-35-in-stock1.png" />
+        </div>
+      </div>
+      <div style="position:absolute;height:730px;left:864px;top:108px;width:351px" data-node-id="170:516" data-name="1 7">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:cover;pointer-events:none;width:100%;height:100%" src="assets/06-17.png" />
+      </div>
+    </div></div></section>
+<section class="slide" id="slide-8" data-title="07.2 · Moodboard định hướng thị giác" role="group" aria-roledescription="slide" aria-label="8 / 17 — 07.2 · Moodboard định hướng thị giác" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:496" data-name="07.2 · Moodboard định hướng thị giác">
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:750px" data-node-id="170:497" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:750px" data-node-id="170:498">02 / VISUAL EXPLORATION</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:54px;width:750px" data-node-id="170:499">
+          <p style="line-height:1.28;margin-bottom:0">Dùng moodboard để AI</p>
+          <p style="line-height:1.28">hiểu đúng tinh thần thiết kế</p>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:750px" data-node-id="170:500">Prompt chữ thường cho kết quả an toàn, chung chung, chưa đúng gu thẩm mỹ.</p>
+      </div>
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:27px;align-items:flex-start;line-height:1.28;left:76px;font-style:normal;top:360px;width:725px" data-node-id="170:501" data-name="Định hướng bằng hình ảnh">
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;flex-shrink:0;width:725px" data-node-id="170:502" data-name="Thu thập reference">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:725px" data-node-id="170:503">Thu thập reference</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:25px;width:725px" data-node-id="170:504">Homepage, full-page screenshot, một section UI tốt, mockup hoặc hình từ Pinterest.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;flex-shrink:0;width:725px" data-node-id="170:505" data-name="Cho AI nhìn thấy">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:725px" data-node-id="170:506">Cho AI nhìn thấy</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:25px;width:725px" data-node-id="170:507">Layout, typography, màu sắc, hình ảnh, khoảng trắng và cảm xúc thương hiệu.</p>
+        </div>
+      </div>
+      <div style="position:absolute;height:562px;left:855px;top:230px;width:750px" data-node-id="170:508" data-name="ChatGPT Image · 02-moodboard">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:contain;pointer-events:none;width:100%;height:100%" src="assets/09-chat-gpt-image02-moodboard.png" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:25px;top:750px;width:1510px;white-space:pre-wrap" data-node-id="170:509">Nội thất: quiet luxury  ·  Vé gia đình: gần gũi  ·  E-commerce: đúng tinh thần mua sắm</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:28px;top:803px;width:1510px" data-node-id="170:510">Brief → Reference → Moodboard → AI → Khám phá hướng thị giác</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#f3f3e9;font-size:24px;top:850px;width:1510px" data-node-id="170:511">Cùng một hướng thẩm mỹ trước khi tạo phương án UI.</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="170:512">FROM FIGMA TO FRONTEND  /  02 / VISUAL EXPLORATION</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="170:513">07 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-9" data-title="08 · Từ một reference thành nhiều phương án" role="group" aria-roledescription="slide" aria-label="9 / 17 — 08 · Từ một reference thành nhiều phương án" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:404" data-name="08 · Từ một reference thành nhiều phương án">
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:780px" data-node-id="172:82" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:780px" data-node-id="172:83">03 / DESIGN DIRECTION</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:56px;width:780px" data-node-id="172:84">
+          <p style="line-height:1.28;margin-bottom:0">Từ một reference</p>
+          <p style="line-height:1.28">thành nhiều phương án</p>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:780px" data-node-id="172:85">Chọn một ảnh hoặc full-page reference có tinh thần gần với brief.</p>
+      </div>
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:26px;align-items:flex-start;line-height:1.28;left:76px;font-style:normal;top:370px;width:720px" data-node-id="172:86" data-name="Quá trình tạo phương án">
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:720px" data-node-id="172:87" data-name="Tạo 10 thiết kế mới">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:30px;width:720px;white-space:pre-wrap" data-node-id="172:88">01  /  Tạo 10 thiết kế mới</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:24px;width:720px" data-node-id="172:89">Khác style, cải thiện UI hoặc chuyển về một phong cách cụ thể.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:720px" data-node-id="172:90" data-name="Xem riêng từng phương án">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:30px;width:720px;white-space:pre-wrap" data-node-id="172:91">02  /  Xem riêng từng phương án</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:24px;width:720px" data-node-id="172:92">So sánh, chọn những hướng đáng phát triển.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:720px" data-node-id="172:93" data-name="Tinh chỉnh và tiếp tục">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:30px;width:720px;white-space:pre-wrap" data-node-id="172:94">03  /  Tinh chỉnh và tiếp tục</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:24px;width:720px" data-node-id="172:95">Đổi prompt, reference hoặc thử các vòng 10–20–30 phương án.</p>
+        </div>
+      </div>
+      <div style="position:absolute;height:562px;left:876px;border-radius:36px;top:137px;width:750px" data-node-id="172:96" data-name="ChatGPT Image · 03-design-direction">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:contain;pointer-events:none;border-radius:36px;width:100%;height:100%" src="assets/07-chat-gpt-image03-design-direction.png" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:25px;top:835px;width:1510px" data-node-id="172:97">Reference → 10 options → Review → Chọn / Loại → Tinh chỉnh → 01 direction</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:98">FROM FIGMA TO FRONTEND  /  03 / DESIGN DIRECTION</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:99">08 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-10" data-title="09 · Chọn direction và dừng đúng lúc" role="group" aria-roledescription="slide" aria-label="10 / 17 — 09 · Chọn direction và dừng đúng lúc" aria-hidden="true"><div class="source-canvas"><div style="overflow-wrap:break-word;background-color:#f6f6ee;font-style:normal;position:relative;width:100%;height:100%" data-node-id="172:100" data-name="09 · Chọn direction và dừng đúng lúc">
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;line-height:1.28;left:76px;top:64px;width:1529px" data-node-id="172:101" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:18px;width:1529px" data-node-id="172:102">03 / DESIGN DIRECTION</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:62px;width:1529px" data-node-id="172:103">Chọn direction và dừng đúng lúc</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:1529px" data-node-id="172:104">Nhiều lựa chọn chỉ có giá trị khi có tiêu chí sàng lọc.</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:29px;align-items:flex-start;line-height:1.28;left:76px;top:300px;width:730px" data-node-id="172:105" data-name="Tiêu chí lựa chọn">
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:730px" data-node-id="172:106" data-name="Đúng concept">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:30px;width:730px;white-space:pre-wrap" data-node-id="172:107">01  /  Đúng concept</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:24px;width:730px" data-node-id="172:108">Đúng cảm xúc thương hiệu mà brief yêu cầu.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:730px" data-node-id="172:109" data-name="Thẩm mỹ và khác biệt">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:30px;width:730px;white-space:pre-wrap" data-node-id="172:110">02  /  Thẩm mỹ và khác biệt</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:24px;width:730px" data-node-id="172:111">Có điểm nhấn, khác biệt rõ giữa các phương án.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:730px" data-node-id="172:112" data-name="Phù hợp sản phẩm và người dùng">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:30px;width:730px;white-space:pre-wrap" data-node-id="172:113">03  /  Phù hợp sản phẩm và người dùng</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:24px;width:730px" data-node-id="172:114">Đáp ứng tính chất sản phẩm và trải nghiệm.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:10px;align-items:flex-start;position:relative;flex-shrink:0;width:730px" data-node-id="172:115" data-name="Có thể phát triển thành UI thực tế">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:30px;width:730px;white-space:pre-wrap" data-node-id="172:116">04  /  Có thể phát triển thành UI thực tế</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:24px;width:730px" data-node-id="172:117">Cần vượt qua mức đẹp khi nhìn như một tấm ảnh.</p>
+        </div>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:30px;align-items:flex-start;left:895px;top:300px;width:690px" data-node-id="172:118" data-name="Nếu 20–30 phương án vẫn chưa đạt">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#4d660f;font-size:96px;width:690px" data-node-id="172:119">20–30</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#111611;font-size:32px;width:690px" data-node-id="172:120">Vẫn chưa đạt? Xem lại nguyên nhân</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:400;line-height:0;position:relative;flex-shrink:0;color:#636c5b;font-size:27px;width:690px" data-node-id="172:121">
+          <p style="line-height:1.28;margin-bottom:0">Prompt chưa đủ rõ?</p>
+          <p style="line-height:1.28;margin-bottom:0">Moodboard sai định hướng?</p>
+          <p style="line-height:1.28">Khả năng AI chưa phù hợp với yêu cầu?</p>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#111611;font-size:28px;width:690px" data-node-id="172:122">Xác định nguyên nhân trước khi tạo vòng tiếp theo.</p>
+      </div>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;color:#636c5b;font-size:25px;top:830px;width:1510px" data-node-id="172:123">Reference là cảm hứng. Cần kiểm soát lại nội dung, hình ảnh, bố cục và nhận diện riêng.</p>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;color:#636c5b;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:124">FROM FIGMA TO FRONTEND  /  03 / DESIGN DIRECTION</p>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;color:#636c5b;font-size:15px;top:900px;width:95px" data-node-id="172:125">09 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-11" data-title="10 · Từ ảnh ý tưởng thành UI có cấu trúc" role="group" aria-roledescription="slide" aria-label="11 / 17 — 10 · Từ ảnh ý tưởng thành UI có cấu trúc" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:236" data-name="10 · Từ ảnh ý tưởng thành UI có cấu trúc">
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:780px" data-node-id="172:126" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:780px" data-node-id="172:127">04 / UI DESIGN</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:56px;width:780px" data-node-id="172:128">
+          <p style="line-height:1.28;margin-bottom:0">Từ một bức ảnh</p>
+          <p style="line-height:1.28">thành UI chỉnh sửa được</p>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:780px" data-node-id="172:129">Phương án được chọn mới là ảnh, chưa phải file UI có thể chỉnh sửa thực sự.</p>
+      </div>
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:28px;align-items:flex-start;line-height:1.28;left:76px;font-style:normal;top:360px;width:725px" data-node-id="172:130" data-name="Cấu trúc Figma editable">
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;flex-shrink:0;width:725px" data-node-id="172:131" data-name="AI hỗ trợ tái dựng trên Figma">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:725px" data-node-id="172:132">AI hỗ trợ tái dựng trên Figma</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:725px" data-node-id="172:133">Layout và section; hình ảnh và text; button, card, navigation, component; màu sắc, typography và spacing.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;flex-shrink:0;width:725px" data-node-id="172:134" data-name="Designer kiểm tra lại">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:725px" data-node-id="172:135">Designer kiểm tra lại</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:725px" data-node-id="172:136">Rà soát layer, kích thước, assets và component; không mặc định AI tái tạo đúng mọi chi tiết.</p>
+        </div>
+      </div>
+      <div style="position:absolute;height:562px;left:855px;top:240px;width:750px" data-node-id="172:137" data-name="ChatGPT Image · 04-figma-editable">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:contain;pointer-events:none;width:100%;height:100%" src="assets/17-chat-gpt-image04-figma-editable.png" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:27px;top:835px;width:1510px" data-node-id="172:138">01 ảnh được chọn → AI hỗ trợ tái dựng → Figma editable → Design System</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:139">FROM FIGMA TO FRONTEND  /  04 / UI DESIGN</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:140">10 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-12" data-title="11 · Từ UI đơn lẻ đến Design System" role="group" aria-roledescription="slide" aria-label="12 / 17 — 11 · Từ UI đơn lẻ đến Design System" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:292" data-name="11 · Từ UI đơn lẻ đến Design System">
+      <div style="position:absolute;background-color:#151810;border-width:1px;border-color:#3b4231;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:237px;align-items:flex-start;left:60px;border-radius:12px;top:287px;width:348px" data-node-id="170:295" data-name="UI · ATOM">
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:24px;font-style:normal;color:#f3f3e9;font-size:17px;top:18px;width:300px" data-node-id="170:296">ATOM</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:24px;font-style:normal;color:#adb1a6;font-size:17px;top:46px;width:300px" data-node-id="170:297">Những phần tử cơ bản</p>
+        <div style="position:absolute;left:31px;width:39px;height:39px;top:120px" data-node-id="170:298" data-name="dot">
+          <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/14-dot.svg" />
+        </div>
+        <div style="position:absolute;background-color:#141a0f;border-width:1px;border-color:#45542b;border-style:solid;left:97px;border-radius:5px;width:47px;height:47px;top:115px" data-node-id="170:299" data-name="UI · Visual group"></div>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:29px;line-height:1.25;left:172px;font-style:normal;color:#f3f3e9;font-size:29px;top:122px;width:68px" data-node-id="170:300">Aa</p>
+        <div style="position:absolute;height:31px;left:248px;top:125px;width:60px" data-node-id="170:301" data-name="UI · Visual group">
+          <img alt="" style="position:absolute;display:block;inset:0;max-width:none;width:100%;height:100%" src="assets/15-ui-visual-group.svg" />
+        </div>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:34px;line-height:1.25;left:425px;font-style:normal;color:#b5c59c;font-size:34px;top:369px;width:55px" data-node-id="170:303">→</p>
+      <div style="position:absolute;background-color:#151810;border-width:1px;border-color:#3b4231;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:237px;align-items:flex-start;left:473px;border-radius:12px;top:287px;width:340px" data-node-id="170:304" data-name="UI · COMPONENT">
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:24px;font-style:normal;color:#f3f3e9;font-size:17px;top:18px;width:300px" data-node-id="170:305">COMPONENT</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:24px;font-style:normal;color:#adb1a6;font-size:17px;top:46px;width:300px" data-node-id="170:306">Kết hợp các atoms</p>
+        <div style="position:absolute;background-color:#c7f641;border-width:1px;border-color:#c7f641;border-style:solid;height:40px;left:35px;border-radius:22px;top:97px;width:140px" data-node-id="170:307" data-name="UI · Visual group"></div>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:63px;font-style:normal;color:#18210c;font-size:16px;top:107px;width:118px;white-space:pre-wrap" data-node-id="170:308">Button  →</p>
+        <div style="position:absolute;background-color:#242b1e;border-width:1px;border-color:#45542b;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:42px;align-items:flex-start;left:35px;padding-left:20px;padding-top:12px;border-radius:10px;top:158px;width:257px" data-node-id="170:309" data-name="Card · ⌕  Tìm kiếm...">
+          <p style="overflow-wrap:break-word;font-family:'Inter',sans-serif;font-weight:400;line-height:1.25;font-style:normal;position:relative;flex-shrink:0;color:#a6b396;font-size:16px;width:220px;white-space:pre-wrap" data-node-id="170:310">⌕  Tìm kiếm...</p>
+        </div>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:34px;line-height:1.25;left:838px;font-style:normal;color:#b5c59c;font-size:34px;top:369px;width:55px" data-node-id="170:311">→</p>
+      <div style="position:absolute;background-color:#151810;border-width:1px;border-color:#3b4231;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:237px;align-items:flex-start;left:874px;border-radius:12px;top:287px;width:342px" data-node-id="170:312" data-name="UI · SECTION">
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:24px;font-style:normal;color:#f3f3e9;font-size:17px;top:18px;width:300px" data-node-id="170:313">SECTION</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:24px;font-style:normal;color:#adb1a6;font-size:17px;top:46px;width:300px" data-node-id="170:314">Nhóm components thành khối</p>
+        <div style="position:absolute;background-color:#22291b;border-width:1px;border-color:#45542b;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:96px;align-items:flex-start;left:28px;border-radius:8px;top:79px;width:282px" data-node-id="170:315" data-name="UI · Visual group">
+          <div style="position:absolute;background-color:#39442d;height:71px;left:10px;border-radius:6px;top:11px;width:86px" data-node-id="170:316" data-name="rect"></div>
+          <div style="position:absolute;background-color:#81916d;height:7px;left:113px;border-radius:3px;top:17px;width:63px" data-node-id="170:317" data-name="rect"></div>
+          <div style="position:absolute;background-color:#647353;height:6px;left:113px;border-radius:3px;top:34px;width:113px" data-node-id="170:318" data-name="rect"></div>
+          <div style="position:absolute;background-color:#647353;height:6px;left:113px;border-radius:3px;top:49px;width:79px" data-node-id="170:319" data-name="rect"></div>
+          <div style="position:absolute;background-color:#c7f641;height:17px;left:113px;border-radius:9px;top:65px;width:58px" data-node-id="170:320" data-name="rect"></div>
+        </div>
+        <div style="position:absolute;background-color:#22291b;border-width:1px;border-color:#45542b;border-style:solid;height:40px;left:28px;border-radius:8px;top:184px;width:89px" data-node-id="170:321" data-name="UI · Visual group"></div>
+        <div style="position:absolute;background-color:#22291b;border-width:1px;border-color:#45542b;border-style:solid;height:40px;left:126px;border-radius:8px;top:184px;width:89px" data-node-id="170:322" data-name="UI · Visual group"></div>
+        <div style="position:absolute;background-color:#22291b;border-width:1px;border-color:#45542b;border-style:solid;height:40px;left:224px;border-radius:8px;top:184px;width:89px" data-node-id="170:323" data-name="UI · Visual group"></div>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:34px;line-height:1.25;left:1239px;font-style:normal;color:#b5c59c;font-size:34px;top:369px;width:55px" data-node-id="170:324">→</p>
+      <div style="position:absolute;background-color:#151810;border-width:1px;border-color:#3b4231;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:237px;align-items:flex-start;left:1282px;border-radius:12px;top:287px;width:344px" data-node-id="170:325" data-name="UI · PAGE">
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:24px;font-style:normal;color:#f3f3e9;font-size:17px;top:18px;width:300px" data-node-id="170:326">PAGE</p>
+        <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;height:20px;line-height:1.25;left:24px;font-style:normal;color:#adb1a6;font-size:17px;top:46px;width:300px" data-node-id="170:327">Hoàn thiện thành trải nghiệm</p>
+        <div style="position:absolute;background-color:#242c1b;border-width:1px;border-color:#45542b;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:159px;align-items:flex-start;left:25px;border-radius:7px;top:77px;width:292px" data-node-id="170:328" data-name="UI · Build better products">
+          <div style="position:absolute;background-color:#4e6139;height:4px;left:9px;top:16px;width:270px" data-node-id="170:329" data-name="rect"></div>
+          <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;height:20px;line-height:1.25;left:17px;font-style:normal;color:#f3f3e9;font-size:13px;top:33px;width:169px" data-node-id="170:330">Build better products</p>
+          <div style="position:absolute;background-color:#5d7738;height:52px;left:179px;border-radius:6px;top:32px;width:96px" data-node-id="170:331" data-name="rect"></div>
+          <div style="position:absolute;background-color:#829270;height:5px;left:17px;border-radius:2px;top:62px;width:90px" data-node-id="170:332" data-name="rect"></div>
+          <div style="position:absolute;background-color:#c7f641;height:13px;left:17px;border-radius:8px;top:75px;width:45px" data-node-id="170:333" data-name="rect"></div>
+          <div style="position:absolute;background-color:#333e28;border-width:1px;border-color:#45542b;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:44px;align-items:flex-start;left:13px;border-radius:5px;top:105px;width:83px" data-node-id="170:334" data-name="UI · Visual group">
+            <div style="position:absolute;background-color:#63794b;left:7px;border-radius:3px;width:23px;height:23px;top:9px" data-node-id="170:335" data-name="rect"></div>
+            <div style="position:absolute;background-color:#a3b394;height:4px;left:36px;border-radius:2px;top:11px;width:38px" data-node-id="170:336" data-name="rect"></div>
+          </div>
+          <div style="position:absolute;background-color:#333e28;border-width:1px;border-color:#45542b;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:44px;align-items:flex-start;left:104px;border-radius:5px;top:105px;width:83px" data-node-id="170:337" data-name="UI · Visual group">
+            <div style="position:absolute;background-color:#63794b;left:7px;border-radius:3px;width:23px;height:23px;top:9px" data-node-id="170:338" data-name="rect"></div>
+            <div style="position:absolute;background-color:#a3b394;height:4px;left:36px;border-radius:2px;top:11px;width:38px" data-node-id="170:339" data-name="rect"></div>
+          </div>
+          <div style="position:absolute;background-color:#333e28;border-width:1px;border-color:#45542b;border-style:solid;align-content:stretch;display:flex;flex-direction:column;height:44px;align-items:flex-start;left:195px;border-radius:5px;top:105px;width:83px" data-node-id="170:340" data-name="UI · Visual group">
+            <div style="position:absolute;background-color:#63794b;left:7px;border-radius:3px;width:23px;height:23px;top:9px" data-node-id="170:341" data-name="rect"></div>
+            <div style="position:absolute;background-color:#a3b394;height:4px;left:36px;border-radius:2px;top:11px;width:38px" data-node-id="170:342" data-name="rect"></div>
+          </div>
+        </div>
+      </div>
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;line-height:1.28;left:76px;font-style:normal;top:64px;width:1529px" data-node-id="172:141" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:1529px" data-node-id="172:142">04 / UI DESIGN</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:56px;width:1529px" data-node-id="172:143">Từ UI đơn lẻ đến Design System</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:1529px" data-node-id="172:144">Hệ thống hóa giá trị thiết kế và component để những trang tiếp theo giữ được sự nhất quán.</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;align-items:flex-start;left:76px;top:590px;width:710px" data-node-id="172:145" data-name="Quy tắc thiết kế">
+        <div style="overflow-wrap:break-word;align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;line-height:1.28;font-style:normal;position:relative;flex-shrink:0;width:710px" data-node-id="172:146" data-name="Quy tắc thiết kế">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:710px" data-node-id="172:147">Quy tắc thiết kế</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:28px;width:710px" data-node-id="172:148">Thiết lập cách dùng màu, kiểu chữ và khoảng cách để toàn bộ giao diện có cùng nền tảng.</p>
+        </div>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;align-items:flex-start;left:895px;top:590px;width:710px" data-node-id="172:149" data-name="Component tái sử dụng">
+        <div style="overflow-wrap:break-word;align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;line-height:1.28;font-style:normal;position:relative;flex-shrink:0;width:710px" data-node-id="172:150" data-name="Component tái sử dụng">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:710px" data-node-id="172:151">Component tái sử dụng</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:28px;width:710px" data-node-id="172:152">Chuẩn hóa các thành phần lặp lại để giảm công việc dựng lại từng phần ở các page tiếp theo.</p>
+        </div>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:25px;top:835px;width:1510px" data-node-id="172:153">UI có cấu trúc là nền tảng để Designer tiếp tục chỉnh sửa và phát triển sản phẩm.</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:154">FROM FIGMA TO FRONTEND  /  04 / UI DESIGN</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:155">11 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-13" data-title="12 · AI đề xuất cấu trúc UX" role="group" aria-roledescription="slide" aria-label="13 / 17 — 12 · AI đề xuất cấu trúc UX" aria-hidden="true"><div class="source-canvas"><div style="overflow-wrap:break-word;background-color:#f6f6ee;line-height:1.28;font-style:normal;position:relative;width:100%;height:100%" data-node-id="170:380" data-name="12 · AI đề xuất cấu trúc UX">
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;top:64px;width:1529px" data-node-id="172:156" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:18px;width:1529px" data-node-id="172:157">05 / UX ARCHITECTURE</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:62px;width:1529px" data-node-id="172:158">AI đề xuất cấu trúc UX</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:1529px" data-node-id="172:159">Một sơ đồ hợp lý trên giấy chưa đủ để biết trải nghiệm có phù hợp.</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:76px;top:300px;width:710px" data-node-id="172:160" data-name="Sitemap">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:38px;width:710px" data-node-id="172:161">01 / Sitemap</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:28px;width:710px" data-node-id="172:162">Những trang cần có và cách chúng liên kết với nhau.</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:886px;top:300px;width:710px" data-node-id="172:163" data-name="User Flow">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:38px;width:710px" data-node-id="172:164">02 / User Flow</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:28px;width:710px" data-node-id="172:165">Những bước người dùng di chuyển và thực hiện tác vụ.</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:76px;top:510px;width:710px" data-node-id="172:166" data-name="Interaction">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:38px;width:710px" data-node-id="172:167">03 / Interaction</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:28px;width:710px" data-node-id="172:168">Cách component và trang phản hồi khi người dùng thao tác.</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:14px;align-items:flex-start;left:886px;top:510px;width:710px" data-node-id="172:169" data-name="UI States">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:38px;width:710px" data-node-id="172:170">04 / UI States</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:28px;width:710px" data-node-id="172:171">Hover, loading, empty, error, success và các tình huống cần phản hồi.</p>
+      </div>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:700;left:76px;color:#111611;font-size:29px;top:750px;width:1510px" data-node-id="172:172">Mỗi thương hiệu, website và nhóm người dùng cần trải nghiệm khác nhau.</p>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:400;left:76px;color:#636c5b;font-size:25px;top:814px;width:1510px" data-node-id="172:173">Sitemap và User Flow có thể xác định sớm; ở đây tập trung hoàn thiện và kiểm chứng trên UI đã chọn.</p>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:400;left:76px;color:#636c5b;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:174">FROM FIGMA TO FRONTEND  /  05 / UX ARCHITECTURE</p>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:700;left:1510px;color:#636c5b;font-size:15px;top:900px;width:95px" data-node-id="172:175">12 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-14" data-title="13 · Dùng Frontend để kiểm thử UX" role="group" aria-roledescription="slide" aria-label="14 / 17 — 13 · Dùng Frontend để kiểm thử UX" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:433" data-name="13 · Dùng Frontend để kiểm thử UX">
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:780px" data-node-id="172:176" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:780px" data-node-id="172:177">05 / UX ARCHITECTURE</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:58px;width:780px" data-node-id="172:178">
+          <p style="line-height:1.28;margin-bottom:0">Designer trải nghiệm</p>
+          <p style="line-height:1.28">để kiểm chứng UX</p>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:780px" data-node-id="172:179">Dùng Codex dựng Frontend chạy thử từ giao diện đã thiết kế.</p>
+      </div>
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:28px;align-items:flex-start;line-height:1.28;left:76px;font-style:normal;top:370px;width:725px" data-node-id="172:180" data-name="Vòng kiểm chứng">
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;flex-shrink:0;width:725px" data-node-id="172:181" data-name="Trực tiếp tương tác">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:725px" data-node-id="172:182">Trực tiếp tương tác</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:725px" data-node-id="172:183">Người dùng có dễ hiểu, dễ thao tác và đi đúng hành trình mong muốn không?</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;flex-shrink:0;width:725px" data-node-id="172:184" data-name="Sửa và kiểm thử lại">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:725px" data-node-id="172:185">Sửa và kiểm thử lại</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:725px" data-node-id="172:186">Điều chỉnh luồng, vị trí thao tác và cách UI phản hồi; phát hiện điểm mù khi chỉ xem sơ đồ hoặc thiết kế tĩnh.</p>
+        </div>
+      </div>
+      <div style="position:absolute;height:562px;left:855px;top:240px;width:750px" data-node-id="172:187" data-name="ChatGPT Image · 05-ux-testing">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:contain;pointer-events:none;width:100%;height:100%" src="assets/01-chat-gpt-image05-ux-testing.png" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:25px;top:835px;width:1510px" data-node-id="172:188">AI đề xuất UX → Codex dựng bản chạy thử → Designer trải nghiệm → Sửa → Kiểm thử lại</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:189">FROM FIGMA TO FRONTEND  /  05 / UX ARCHITECTURE</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:190">13 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-15" data-title="14 · ChatGPT và Codex trong workflow của tôi" role="group" aria-roledescription="slide" aria-label="15 / 17 — 14 · ChatGPT và Codex trong workflow của tôi" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:231" data-name="14 · ChatGPT và Codex trong workflow của tôi">
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:780px" data-node-id="172:191" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:780px" data-node-id="172:192">06 / FRONTEND DEVELOPMENT</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:700;line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:56px;width:780px" data-node-id="172:193">
+          <p style="line-height:1.28;margin-bottom:0">ChatGPT và Codex</p>
+          <p style="line-height:1.28">trong workflow của tôi</p>
+        </div>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;position:relative;flex-shrink:0;color:#adb2a3;font-size:26px;width:780px" data-node-id="172:194">Tôi ưu tiên ChatGPT kết hợp Codex trong số nhiều lựa chọn AI Coding.</p>
+      </div>
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:34px;align-items:flex-start;line-height:1.28;left:76px;font-style:normal;top:380px;width:725px" data-node-id="172:195" data-name="Vai trò từng công cụ">
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;flex-shrink:0;width:725px" data-node-id="172:196" data-name="ChatGPT · Visual & Assets">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:725px" data-node-id="172:197">ChatGPT · Visual &amp; Assets</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:27px;width:725px" data-node-id="172:198">Phát triển ý tưởng, tạo hình ảnh và các assets trực quan phục vụ thiết kế.</p>
+        </div>
+        <div style="align-content:stretch;display:flex;flex-direction:column;gap:12px;align-items:flex-start;position:relative;flex-shrink:0;width:725px" data-node-id="172:199" data-name="Codex · Frontend & Testing">
+          <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#f3f3e9;font-size:32px;width:725px" data-node-id="172:200">Codex · Frontend &amp; Testing</p>
+          <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#adb2a3;font-size:27px;width:725px" data-node-id="172:201">Tạo code Frontend, chỉnh sửa giao diện và có website chạy thử để kiểm tra trải nghiệm.</p>
+        </div>
+      </div>
+      <div style="position:absolute;height:562px;left:855px;top:240px;width:750px" data-node-id="172:202" data-name="ChatGPT Image · 06-frontend">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:contain;pointer-events:none;width:100%;height:100%" src="assets/13-chat-gpt-image06-frontend.png" />
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:76px;font-style:normal;color:#c7f641;font-size:28px;top:835px;width:1510px" data-node-id="172:203">Từ UI và hướng UX đã chọn đến website có thể chạy, xem và tương tác.</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:204">FROM FIGMA TO FRONTEND  /  06 / FRONTEND DEVELOPMENT</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:205">14 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-16" data-title="15 · Nối Figma với Frontend thực tế" role="group" aria-roledescription="slide" aria-label="16 / 17 — 15 · Nối Figma với Frontend thực tế" aria-hidden="true"><div class="source-canvas"><div style="overflow-wrap:break-word;background-color:#f6f6ee;font-style:normal;position:relative;width:100%;height:100%" data-node-id="172:206" data-name="15 · Nối Figma với Frontend thực tế">
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;line-height:1.28;left:76px;top:64px;width:1529px" data-node-id="172:207" data-name="Header">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:18px;width:1529px" data-node-id="172:208">06 / FRONTEND DEVELOPMENT</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:62px;width:1529px" data-node-id="172:209">Nối Figma với Frontend thực tế</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:26px;width:1529px" data-node-id="172:210">Kiểm chứng nhanh quyết định về bố cục và trải nghiệm trước khi tiếp tục hoàn thiện.</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:20px;align-items:flex-start;line-height:1.28;left:76px;top:330px;width:460px" data-node-id="172:211" data-name="ChatGPT">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:55px;width:460px" data-node-id="172:212">01</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:56px;width:460px" data-node-id="172:213">ChatGPT</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:29px;width:460px" data-node-id="172:214">Ý tưởng &amp; hình ảnh</p>
+      </div>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:535px;color:#4d660f;font-size:48px;top:410px;width:70px" data-node-id="172:215">→</p>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:20px;align-items:flex-start;line-height:1.28;left:611px;top:330px;width:460px" data-node-id="172:216" data-name="Figma">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:55px;width:460px" data-node-id="172:217">02</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:56px;width:460px" data-node-id="172:218">Figma</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:29px;width:460px" data-node-id="172:219">UI &amp; hệ thống</p>
+      </div>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:1070px;color:#4d660f;font-size:48px;top:410px;width:70px" data-node-id="172:220">→</p>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:20px;align-items:flex-start;line-height:1.28;left:1146px;top:330px;width:460px" data-node-id="172:221" data-name="Codex">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#4d660f;font-size:55px;width:460px" data-node-id="172:222">03</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:700;position:relative;flex-shrink:0;color:#111611;font-size:56px;width:460px" data-node-id="172:223">Codex</p>
+        <p style="font-family:'Inter',sans-serif;font-weight:400;position:relative;flex-shrink:0;color:#636c5b;font-size:29px;width:460px" data-node-id="172:224">Frontend &amp; thử nghiệm</p>
+      </div>
+      <div style="position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:23px;align-items:flex-start;left:76px;top:630px;width:1529px" data-node-id="172:225" data-name="Giá trị thực sự">
+        <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#111611;font-size:39px;width:1529px" data-node-id="172:226">Designer có thể trực tiếp thử UI trên website thực tế</p>
+        <div style="font-family:'Inter',sans-serif;font-weight:400;line-height:0;position:relative;flex-shrink:0;color:#636c5b;font-size:29px;width:1529px" data-node-id="172:227">
+          <p style="line-height:1.28;margin-bottom:0">Phát hiện vấn đề sớm và phối hợp với AI để cải thiện nhanh hơn.</p>
+          <p style="line-height:1.28">Giá trị không nằm ở việc Designer phải tự viết toàn bộ code.</p>
+        </div>
+      </div>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;color:#636c5b;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:228">FROM FIGMA TO FRONTEND  /  06 / FRONTEND DEVELOPMENT</p>
+      <p style="position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;color:#636c5b;font-size:15px;top:900px;width:95px" data-node-id="172:229">15 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-17" data-title="16 · Designer kết nối toàn bộ hành trình" role="group" aria-roledescription="slide" aria-label="17 / 17 — 16 · Designer kết nối toàn bộ hành trình" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:468" data-name="16 · Designer kết nối toàn bộ hành trình">
+      <div style="position:absolute;background-color:#424937;height:1px;left:76px;top:873px;width:1530px" data-node-id="170:469" data-name="rect"></div>
+      <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:0;left:81px;font-style:normal;color:#f3f3e9;font-size:86px;top:121px;width:820px" data-node-id="170:470">
+        <p style="line-height:1.2;margin-bottom:0">Định hướng.</p>
+        <p style="line-height:1.2;margin-bottom:0">Lựa chọn.</p>
+        <p style="line-height:1.2">Kiểm chứng.</p>
+      </div>
+      <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:0;left:89px;font-style:normal;color:#bce939;font-size:35px;top:480px;width:800px" data-node-id="170:471">
+        <p style="line-height:1.3;margin-bottom:0">AI rút ngắn khoảng cách</p>
+        <p style="line-height:1.3">từ Figma đến Frontend.</p>
+      </div>
+      <div style="position:absolute;background-color:#a3c42d;height:2px;left:89px;top:616px;width:83px" data-node-id="170:472" data-name="rect"></div>
+      <div style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:0;left:89px;font-style:normal;color:#f3f3e9;font-size:27px;top:630px;width:800px;white-space:pre-wrap" data-node-id="170:473">
+        <p style="line-height:1.35;margin-bottom:0">Designer xác định mục tiêu, chọn cách làm, đánh giá kết quả và kết nối các bước thành một sản phẩm thống nhất.</p>
+        <p style="line-height:1.35;margin-bottom:0">​</p>
+        <p style="line-height:1.35">Tư duy UI/UX quyết định sản phẩm có đúng, đẹp và dễ sử dụng.</p>
+      </div>
+      <div style="position:absolute;height:746px;left:940px;top:54px;width:741px" data-node-id="170:474" data-name="Illustration · image 3D">
+        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+          <img alt="" style="position:absolute;height:126.81%;left:-126.86%;max-width:none;top:-14.08%;width:226.86%" src="assets/02-illustration-image3-d.png" />
+        </div>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:230">FROM FIGMA TO FRONTEND  /  BRIEF → MOODBOARD → DIRECTION → FIGMA → UX → FRONTEND</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:231">16 / 16</p>
+    </div></div></section></main></div>
+<div class="slide-status" aria-hidden="true">FROM FIGMA TO FRONTEND</div>
+<div class="controls-zone"><nav class="deck-controls" aria-label="Điều khiển trình chiếu">
+<button id="prev" aria-label="Slide trước (←)" title="Slide trước (←)"><svg viewBox="0 0 24 24"><path d="m14 6-6 6 6 6"/></svg></button>
+<button class="page-button" id="pageButton" aria-label="Mở mục lục slide"><strong id="pageNumber">01</strong><span>/ 17</span></button>
+<button id="next" aria-label="Slide tiếp theo (→)" title="Slide tiếp theo (→)"><svg viewBox="0 0 24 24"><path d="m10 6 6 6-6 6"/></svg></button>
+<i class="separator"></i>
+<button id="overviewButton" aria-label="Mục lục (G)" title="Mục lục (G)"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></button>
+<button id="laserButton" aria-label="Con trỏ trình chiếu (L)" aria-pressed="false" title="Con trỏ (L)"><svg viewBox="0 0 24 24"><path d="m5 3 14 9-7 1-3 7z"/></svg></button>
+<button id="fullscreenButton" aria-label="Toàn màn hình (F)" aria-pressed="false" title="Toàn màn hình (F)"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+<button id="helpButton" aria-label="Hướng dẫn phím tắt (?)" title="Phím tắt (?)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 2-2.5 2-2.5 4m0 3h.01"/></svg></button>
+</nav></div>
+<div class="progress" role="progressbar" aria-label="Tiến trình trình chiếu" aria-valuemin="1" aria-valuemax="17" aria-valuenow="1"><span id="progressFill"></span></div>
+<p id="announcement" class="screen-reader" aria-live="polite" aria-atomic="true"></p>
+<dialog id="overview" aria-labelledby="overviewTitle"><header class="dialog-top"><div><h2 id="overviewTitle">From Figma to Frontend</h2><p>17 slide · Chọn một slide để bắt đầu</p></div><button class="close-button" data-close="overview" aria-label="Đóng mục lục">×</button></header><div class="overview-grid" id="overviewGrid"></div></dialog>
+<dialog id="help" class="help-dialog" aria-labelledby="helpTitle"><header class="dialog-top"><h2 id="helpTitle">Điều khiển trình chiếu</h2><button class="close-button" data-close="help" aria-label="Đóng hướng dẫn">×</button></header><div class="shortcut-list"><span>Slide tiếp theo / trước</span><span><kbd>→</kbd> <kbd>←</kbd></span><span>Slide tiếp theo</span><kbd>Space</kbd><span>Slide đầu / cuối</span><span><kbd>Home</kbd> <kbd>End</kbd></span><span>Mục lục 17 slide</span><kbd>G</kbd><span>Toàn màn hình</span><kbd>F</kbd><span>Con trỏ trình chiếu</span><kbd>L</kbd><span>Tạm tắt màn hình</span><kbd>B</kbd><span>Chỉnh chữ trên máy này</span><kbd>E</kbd><span>Đóng cửa sổ</span><kbd>Esc</kbd></div><p class="help-foot">Vuốt ngang trên điện thoại hoặc cuộn chuột để chuyển slide.<br><a href="https://www.figma.com/design/Nef5uw6lnOujRDHzkNLHDV/TECH-TALK---AI-UI-UX?node-id=170-4" target="_blank" rel="noopener">Mở thiết kế Figma gốc ↗</a></p></dialog>
+<div class="laser" id="laser"></div><div class="blackout" aria-hidden="true"></div><div class="toast" id="toast" role="status"></div>
+<div class="edit-hotzone" aria-hidden="true"></div><button class="edit-toggle" id="editToggle" title="Chỉnh sửa chữ (E)">Chỉnh chữ · E</button><button class="edit-save" id="exportButton">Xuất bản HTML đã sửa ↓</button>
+<noscript><div style="position:fixed;inset:0;padding:50px;background:#10120d;color:#f3f3e9;z-index:9999">Vui lòng bật JavaScript để mở bộ trình chiếu 17 slide.</div></noscript>
+<script>
+'use strict';
+/* === SOURCE MOTION: PRESERVE ALL FIGMA POSITIONS AND IMAGE CROPS === */
+const $=s=>document.querySelector(s);
+const slides=[...document.querySelectorAll('#deckStage > .slide')];
+slides.forEach(s=>s.classList.remove('active','visible','leaving'));
+slides.forEach(slide=>{
+ let order=0;
+ [...slide.querySelector('.source-canvas').firstElementChild.children].forEach(el=>{
+  const top=parseFloat(el.style.top)||0;
+  if(top>=890)return;
+  el.classList.add(el.querySelector('img')?'visual-motion':'motion');
+  el.style.setProperty('--delay',Math.min(order++*45,240)+'ms');
+ });
+});
+/* === PRESENTATION CONTROLLER === */
+class SlidePresentation{
+ constructor(){
+  this.index=-1;this.editing=false;this.wheelTime=0;this.wheelSum=0;this.lastWheel=0;
+  this.stage=$('#deckStage');this.overview=$('#overview');this.help=$('#help');
+  this.scale();addEventListener('resize',()=>this.scale());
+  addEventListener('hashchange',()=>this.go(this.fromHash(),false));
+  this.go(this.fromHash(),false);this.bind();this.wake();
+ }
+ fromHash(){const m=location.hash.match(/^#(?:slide-)?(\d+)$/);return m?Math.min(16,Math.max(0,Number(m[1])-1)):0}
+ scale(){
+  const w=innerWidth,h=innerHeight,s=Math.min(w/1920,Math.max(1,h-72)/1080);
+  this.stage.style.transform=`translate(${(w-1920*s)/2}px,${Math.max(0,(h-64-1080*s)/2)}px) scale(${s})`;
+  if(this.overview.open)this.scaleThumbnails();
+ }
+ go(index,hash=true){
+  index=Math.max(0,Math.min(16,index));if(index===this.index)return;
+  const old=slides[this.index];
+  if(old){old.classList.remove('active','visible');old.classList.add('leaving');setTimeout(()=>old.classList.remove('leaving'),420)}
+  this.index=index;
+  slides.forEach((s,i)=>{const on=i===index;s.setAttribute('aria-hidden',String(!on));s.inert=!on});
+  slides[index].classList.remove('leaving');slides[index].classList.add('active','visible');
+  $('#pageNumber').textContent=String(index+1).padStart(2,'0');
+  $('#pageButton').setAttribute('aria-label',`Slide ${index+1} / 17. Mở mục lục`);
+  $('#prev').disabled=index===0;$('#next').disabled=index===16;
+  $('#progressFill').style.transform=`scaleX(${(index+1)/17})`;
+  $('.progress').setAttribute('aria-valuenow',String(index+1));
+  $('#announcement').textContent=`Slide ${index+1} / 17. ${slides[index].dataset.title}`;
+  document.title=`${String(index+1).padStart(2,'0')} · ${slides[index].dataset.title.replace(/^[^·]+· /,'')} — Tech Talk`;
+  if(hash)history.replaceState(null,'',`#slide-${index+1}`);
+  this.wake();
+ }
+ wake(){
+  document.body.classList.remove('ui-asleep');document.body.classList.add('ui-awake');clearTimeout(this.idleTimer);
+  this.idleTimer=setTimeout(()=>{if(this.editing||this.overview.open||this.help.open||$('.deck-controls').matches(':hover')||$('.deck-controls').contains(document.activeElement))return;document.body.classList.add('ui-asleep');document.body.classList.remove('ui-awake')},3200);
+ }
+ toast(text){$('#toast').textContent=text;$('#toast').classList.add('show');clearTimeout(this.toastTimer);this.toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2200)}
+ toggleOverview(){
+  if(this.overview.open){this.overview.close();return}
+  if(!$('#overviewGrid').children.length){
+   slides.forEach((slide,i)=>{
+    const button=document.createElement('button');button.className='overview-item';button.dataset.index=i;
+    const thumbnail=document.createElement('div');thumbnail.className='thumbnail';thumbnail.setAttribute('aria-hidden','true');
+    const source=slide.querySelector('.source-canvas').cloneNode(true);
+    source.querySelectorAll('.motion,.visual-motion').forEach(el=>el.classList.remove('motion','visual-motion'));
+    source.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));
+    thumbnail.append(source);
+    const label=document.createElement('div');label.className='overview-title';
+    const num=document.createElement('span');num.textContent=String(i+1).padStart(2,'0');
+    const title=document.createElement('strong');title.textContent=slide.dataset.title.replace(/^[^·]+· /,'');
+    label.append(num,title);button.append(thumbnail,label);button.addEventListener('click',()=>{this.go(i);this.overview.close()});
+    $('#overviewGrid').append(button);
+   });
+  }
+  [...$('#overviewGrid').children].forEach((el,i)=>el.setAttribute('aria-current',String(i===this.index)));
+  this.overview.showModal();this.scaleThumbnails();
+  const chosen=$('#overviewGrid').children[this.index];chosen.focus({preventScroll:true});chosen.scrollIntoView({block:'nearest'});
+ }
+ scaleThumbnails(){document.querySelectorAll('.thumbnail').forEach(el=>el.style.setProperty('--thumb-scale',el.clientWidth/1681))}
+ async fullscreen(){
+  try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else this.toast('Dùng nút toàn màn hình của trình duyệt')}
+  catch{this.toast('Dùng nút toàn màn hình của trình duyệt')}
+ }
+ laser(){const on=document.body.classList.toggle('laser-on');$('#laserButton').setAttribute('aria-pressed',String(on));$('#laser').style.left=innerWidth/2+'px';$('#laser').style.top=innerHeight/2+'px';this.wake()}
+ bind(){
+  $('#prev').onclick=()=>this.go(this.index-1);$('#next').onclick=()=>this.go(this.index+1);
+  $('#overviewButton').onclick=$('#pageButton').onclick=()=>this.toggleOverview();
+  $('#fullscreenButton').onclick=()=>this.fullscreen();$('#laserButton').onclick=()=>this.laser();
+  $('#helpButton').onclick=()=>this.help.showModal();
+  document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.close).close());
+  [this.overview,this.help].forEach(d=>d.addEventListener('close',()=>this.wake()));
+  document.addEventListener('fullscreenchange',()=>{$('#fullscreenButton').setAttribute('aria-pressed',String(!!document.fullscreenElement));this.scale();this.wake()});
+  document.addEventListener('keydown',e=>{
+   if(e.target.isContentEditable||/INPUT|TEXTAREA|SELECT/.test(e.target.tagName))return;
+   if(e.altKey||e.ctrlKey||e.metaKey)return;
+   if(e.target.closest('button')&&[' ','Enter'].includes(e.key))return;
+   if(document.body.classList.contains('blacked-out')){e.preventDefault();document.body.classList.remove('blacked-out');this.wake();return}
+   if(this.overview.open||this.help.open)return;
+   if(['ArrowRight','ArrowDown','PageDown',' '].includes(e.key)){e.preventDefault();if(!this.editing)this.go(this.index+1)}
+   else if(['ArrowLeft','ArrowUp','PageUp'].includes(e.key)){e.preventDefault();if(!this.editing)this.go(this.index-1)}
+   else if(e.key==='Home'){e.preventDefault();this.go(0)}else if(e.key==='End'){e.preventDefault();this.go(16)}
+   else if(['g','G','o','O'].includes(e.key)){e.preventDefault();this.toggleOverview()}
+   else if(e.key.toLowerCase()==='f'){e.preventDefault();this.fullscreen()}
+   else if(e.key.toLowerCase()==='l')this.laser();else if(e.key.toLowerCase()==='b')document.body.classList.toggle('blacked-out');
+   else if(e.key==='?'||e.key.toLowerCase()==='h')this.help.showModal();
+   else if(e.key.toLowerCase()==='e')this.toggleEdit();
+   else if(e.key==='Escape'){if(this.editing)this.toggleEdit();document.body.classList.remove('laser-on');$('#laserButton').setAttribute('aria-pressed','false')}
+  });
+  let touch;
+  this.stage.addEventListener('touchstart',e=>{touch={x:e.changedTouches[0].clientX,y:e.changedTouches[0].clientY}}, {passive:true});
+  this.stage.addEventListener('touchend',e=>{if(!touch||this.editing)return;const dx=e.changedTouches[0].clientX-touch.x,dy=e.changedTouches[0].clientY-touch.y;if(Math.abs(dx)>45&&Math.abs(dx)>Math.abs(dy)*1.3)this.go(this.index+(dx<0?1:-1));touch=null},{passive:true});
+  addEventListener('wheel',e=>{if(this.editing||this.overview.open||this.help.open||document.body.classList.contains('blacked-out'))return;e.preventDefault();const t=performance.now();if(t-this.lastWheel>180)this.wheelSum=0;this.lastWheel=t;if(t-this.wheelTime<800)return;this.wheelSum+=Math.abs(e.deltaX)>Math.abs(e.deltaY)?e.deltaX:e.deltaY;if(Math.abs(this.wheelSum)>45){this.go(this.index+(this.wheelSum>0?1:-1));this.wheelSum=0;this.wheelTime=t}},{passive:false});
+  addEventListener('pointermove',e=>{$('#laser').style.left=e.clientX+'px';$('#laser').style.top=e.clientY+'px';this.wake()},{passive:true});
+  addEventListener('pointerdown',()=>this.wake(),{passive:true});addEventListener('focusin',()=>this.wake());
+  $('.blackout').onclick=()=>document.body.classList.remove('blacked-out');
+ }
+ /* === LOCAL TEXT EDITING AND PORTABLE HTML EXPORT === */
+ editNodes(){return [...this.stage.querySelectorAll('[data-node-id]')].filter(el=>!el.querySelector('[data-node-id],img,svg')&&el.textContent.trim())}
+ toggleEdit(){
+  this.editing=!this.editing;document.body.classList.toggle('editing',this.editing);$('#editToggle').classList.toggle('active',this.editing);
+  this.editNodes().forEach(el=>{if(this.editing)el.setAttribute('contenteditable','plaintext-only');else el.removeAttribute('contenteditable')});
+  if(!this.editing){document.activeElement.blur();$('#overviewGrid').replaceChildren()}this.wake();this.toast(this.editing?'Chỉnh chữ · tự lưu trên trình duyệt này':'Đã lưu thay đổi trên trình duyệt này');
+ }
+}
+const deck=new SlidePresentation();
+const storageKey='roylle-techtalk-text-v1';
+let saved={};try{saved=JSON.parse(localStorage.getItem(storageKey)||'{}')}catch{}
+deck.editNodes().forEach(el=>{if(Object.prototype.hasOwnProperty.call(saved,el.dataset.nodeId))el.textContent=saved[el.dataset.nodeId]});
+$('#deckStage').addEventListener('input',e=>{const el=e.target.closest('[contenteditable]');if(!el)return;saved[el.dataset.nodeId]=el.textContent;try{localStorage.setItem(storageKey,JSON.stringify(saved))}catch{}});
+$('#editToggle').onclick=()=>deck.toggleEdit();
+let editHide;for(const el of [$('.edit-hotzone'),$('#editToggle')]){el.addEventListener('mouseenter',()=>{clearTimeout(editHide);$('#editToggle').classList.add('show')});el.addEventListener('mouseleave',()=>{editHide=setTimeout(()=>{if(!deck.editing)$('#editToggle').classList.remove('show')},400)})}
+$('.edit-hotzone').onclick=()=>deck.toggleEdit();
+$('#exportButton').onclick=()=>{
+ const clone=document.documentElement.cloneNode(true);clone.querySelector('#overviewGrid').replaceChildren();clone.querySelectorAll('[contenteditable]').forEach(el=>el.removeAttribute('contenteditable'));clone.querySelector('body').className='ui-awake';clone.querySelectorAll('dialog').forEach(d=>d.removeAttribute('open'));
+ const blob=new Blob(['<!DOCTYPE html>\n'+clone.outerHTML],{type:'text/html;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='techtalk-edited.html';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);deck.toast('HTML đã tải xuống · đặt cùng thư mục assets');
+};
+/* Warm the next visual assets without temporary external URLs. */
+slides.forEach((s,i)=>s.querySelectorAll('img').forEach(img=>{img.decoding='async';img.loading='eager';if(i===0)img.fetchPriority='high';if(!img.alt){const owner=img.closest('[data-name]');img.alt=owner?.dataset.name||''}}));
+window.deck=deck;
+</script>
+</body>
+</html>
