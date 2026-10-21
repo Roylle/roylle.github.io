@@ -14,4 +14,9 @@ G: mục lục; F: toàn màn hình; L: con trỏ; B: tắt màn hình; ?: hư�
 E: chỉnh chữ; thay đổi chỉ lưu ở trình duyệt đang dùng.
 Xuất HTML đã sửa: đặt file tải xuống cùng thư mục assets.
 
+Thanh tiến trình có 6 chương: bấm tên chương để mở, bấm vào thanh để nhảy slide.
+Slide 7 và 8 đã đổi chỗ theo góp ý.
+Ảnh mở đầu đung đưa nhẹ; hình minh họa và mũi tên có chuyển động.
+Chế độ giảm chuyển động của thiết bị sẽ tự tắt các animation này.
+
 Nguồn: https://www.figma.com/design/Nef5uw6lnOujRDHzkNLHDV/TECH-TALK---AI-UI-UX?node-id=170-4

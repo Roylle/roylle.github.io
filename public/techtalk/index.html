@@ -161,8 +161,19 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-off
 .slide.active .visual-motion{animation:visualReveal .95s cubic-bezier(.16,1,.3,1) both;animation-delay:var(--delay,80ms)}
 @keyframes reveal{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
 @keyframes visualReveal{from{opacity:0;transform:translateX(28px) scale(.98)}to{opacity:1;transform:translateX(0) scale(1)}}
+/* === AMBIENT MOTION: SMALL SWAYS, WITH THE ORIGINAL IMAGE CROP INTACT === */
+.drift-inner{position:absolute;inset:0;transform-origin:50% 50%}
+.ambient-visual{--float-distance:6px;--sway:.22deg}
+.hero-visual{--float-distance:13px;--sway:.55deg}
+.slide.active .drift-inner{animation:ambientFloat 9s ease-in-out .9s infinite both;will-change:transform}
+.slide.active .hero-visual .drift-inner{animation-duration:7.8s}
+@keyframes ambientFloat{0%,100%{transform:translate3d(0,0,0) rotate(calc(-1 * var(--sway)))}50%{transform:translate3d(3px,calc(-1 * var(--float-distance)),0) rotate(var(--sway))}}
+.flow-mark{display:inline-block}
+.slide.active .flow-mark{animation:flowNudge 2.6s ease-in-out .8s infinite}
+@keyframes flowNudge{0%,100%{transform:translateX(0);opacity:.65}50%{transform:translateX(6px);opacity:1}}
+body.editing .drift-inner,body.editing .flow-mark{animation-play-state:paused!important}
 /* === PRESENTATION CONTROLS, OUTSIDE THE DESIGN === */
-.deck-controls{display:flex;align-items:center;gap:3px;padding:5px;border:1px solid #363d2a;border-radius:15px;background:#191d13f5;box-shadow:0 8px 35px #0005;bottom:max(12px,env(safe-area-inset-bottom));transition:opacity .22s,transform .22s;white-space:nowrap}
+.deck-controls{display:flex;align-items:center;gap:3px;padding:5px;border:1px solid #363d2a;border-radius:15px;background:#191d13f5;box-shadow:0 8px 35px #0005;bottom:calc(58px + env(safe-area-inset-bottom));transition:opacity .22s,transform .22s;white-space:nowrap}
 .deck-controls button{display:grid;place-items:center;width:36px;height:34px;border-radius:9px;color:#b9bfac;transition:background .15s,color .15s}
 .deck-controls button:hover{background:#303724;color:var(--accent)}
 .deck-controls button[aria-pressed=true]{background:#3b4720;color:var(--accent)}
@@ -172,13 +183,35 @@ button:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-off
 .page-button strong{color:var(--accent);font-weight:600}
 .page-button span{color:#8c947b}
 .separator{width:1px;height:17px;background:#3a422d;margin:0 4px}
-.progress{position:fixed;bottom:0;left:0;width:100%;height:2px;background:#323a24;z-index:900}
-.progress span{display:block;height:100%;background:var(--accent);transform-origin:0 50%;transition:transform .5s cubic-bezier(.16,1,.3,1);box-shadow:0 0 10px #c7f64670}
+/* === SIX CHAPTERS, LIKE A VIDEO TIMELINE === */
+.chapter-timeline{position:fixed;left:20px;right:20px;bottom:calc(10px + env(safe-area-inset-bottom));z-index:1000}
+.chapter-track{display:flex;gap:7px;align-items:end}
+.chapter-button{position:relative;flex:var(--chapter-size) 1 0;min-width:0;display:flex;flex-direction:column;gap:10px;padding:6px 0;touch-action:manipulation;text-align:left;color:#727d64}
+.chapter-label{display:flex;gap:7px;align-items:baseline;overflow:hidden;padding-right:5px;font-size:10px;font-weight:500;line-height:1.2;white-space:nowrap;transition:color .2s}
+.chapter-number{font-size:9px;font-variant-numeric:tabular-nums;opacity:.65}
+.chapter-name{overflow:hidden;text-overflow:ellipsis}
+.chapter-short{display:none}
+.chapter-rail{position:relative;display:block;width:100%;height:4px;border-radius:2px;background:#323a29;transition:height .18s,background .18s;transform-origin:bottom;overflow:visible}
+.chapter-fill{display:block;width:100%;height:100%;border-radius:inherit;background:#819a4e;transform:scaleX(var(--fill,0));transform-origin:left center;transition:transform .48s cubic-bezier(.16,1,.3,1),background .2s}
+.chapter-button[data-state=active]{color:var(--accent)}
+.chapter-button[data-state=active] .chapter-fill{background:var(--accent);box-shadow:0 0 12px #c7f64135}
+.chapter-button[data-state=active] .chapter-rail:after{content:"";position:absolute;width:8px;height:8px;top:50%;left:clamp(4px,calc(var(--fill,0) * 100%),calc(100% - 4px));transform:translate(-50%,-50%);border-radius:50%;background:#e9ffbd;box-shadow:0 0 0 3px #c7f64116;transition:left .48s cubic-bezier(.16,1,.3,1)}
+.chapter-button[data-state=past]{color:#a2af8b}
+.chapter-button:hover,.chapter-button:focus-visible{color:#f0f7e4}
+.chapter-button:hover .chapter-rail,.chapter-button:focus-visible .chapter-rail{height:7px;background:#465536}
+.chapter-tooltip{position:absolute;left:50%;bottom:calc(100% + 8px);transform:translate(-50%,5px);opacity:0;pointer-events:none;padding:10px 13px;background:#222a1b;border:1px solid #53663a;border-radius:9px;box-shadow:0 8px 24px #0005;color:#edf5e2;font-size:11px;white-space:nowrap;line-height:1.7;transition:opacity .15s,transform .15s}
+.chapter-tooltip small{display:block;font-size:10px;font-weight:400;color:#9da98b}
+.chapter-button:first-child .chapter-tooltip{left:0;transform:translate(0,5px)}
+.chapter-button:last-child .chapter-tooltip{left:auto;right:0;transform:translate(0,5px)}
+.chapter-button:hover .chapter-tooltip,.chapter-button:focus-visible .chapter-tooltip{opacity:1;transform:translate(-50%,0)}
+.chapter-button:first-child:hover .chapter-tooltip,.chapter-button:first-child:focus-visible .chapter-tooltip,.chapter-button:last-child:hover .chapter-tooltip,.chapter-button:last-child:focus-visible .chapter-tooltip{transform:translate(0,0)}
+.chapter-current{display:none;color:var(--accent);font-size:10px;font-weight:500;letter-spacing:.025em;margin-bottom:8px}
+body.ui-asleep .chapter-button:not([data-state=active]) .chapter-label{opacity:.65}
 .slide-status{display:none}
 body.ui-awake .slide-status{opacity:1}
 body.ui-asleep .deck-controls{opacity:0;transform:translate(-50%,8px);pointer-events:none}
 body.ui-asleep{cursor:none}
-.controls-zone{position:fixed;bottom:0;left:0;right:0;height:70px;z-index:999}
+.controls-zone{position:fixed;bottom:48px;left:0;right:0;height:70px;z-index:999}
 .controls-zone:has(.deck-controls:hover){pointer-events:auto}
 .controls-zone{pointer-events:none}
 .deck-controls{pointer-events:auto}
@@ -220,9 +253,10 @@ body.blacked-out .blackout{visibility:visible;opacity:1}
 .editing [contenteditable]{outline:1px dashed #c7f64165;cursor:text}
 .edit-save{position:fixed;top:14px;right:16px;z-index:1002;border-radius:9px;background:var(--accent);color:#17210b;padding:10px 14px;font-size:11px;display:none}
 .editing .edit-save{display:block}
-@media(max-width:600px){dialog{padding:20px 16px}.overview-grid{grid-template-columns:1fr 1fr;gap:12px}.overview-title{font-size:10px;gap:7px}.deck-controls{gap:0;bottom:max(10px,env(safe-area-inset-bottom))}.deck-controls button{width:32px}.deck-controls .page-button{min-width:70px;padding:0 8px}.slide-status{font-size:10px;top:14px;left:14px}.dialog-top h2{font-size:18px}.edit-hotzone{width:45px;height:45px}}
-@media(prefers-reduced-motion:reduce){.slide.active .motion,.slide.active .visual-motion{animation:none}.slide{transition:none}.progress span{transition:none}}
-@media print{.source-canvas{left:.465px!important;transform:scale(1.1416490486)!important}.motion,.visual-motion{animation:none!important;opacity:1!important;transform:none!important}dialog,.controls-zone,.progress,.slide-status,.edit-hotzone,.edit-toggle,.edit-save,.toast,.laser,.blackout{display:none!important}@page{size:1920px 1080px;margin:0}}
+@media(max-width:1000px){.chapter-name{display:none}.chapter-short{display:inline}}
+@media(max-width:600px){dialog{padding:20px 16px}.overview-grid{grid-template-columns:1fr 1fr;gap:12px}.overview-title{font-size:10px;gap:7px}.deck-controls{gap:0}.deck-controls button{width:32px}.deck-controls .page-button{min-width:70px;padding:0 8px}.dialog-top h2{font-size:18px}.edit-hotzone{width:45px;height:45px}.chapter-timeline{left:14px;right:14px;bottom:calc(8px + env(safe-area-inset-bottom))}.chapter-current{display:block}.chapter-track{gap:5px}.chapter-button{gap:6px;padding-top:0}.chapter-label{font-size:9px;gap:3px}.chapter-short{display:none}.chapter-number{font-size:9px}.chapter-tooltip{display:none}.chapter-rail{height:4px}}
+@media(prefers-reduced-motion:reduce){.slide.active .motion,.slide.active .visual-motion,.slide.active .drift-inner,.slide.active .flow-mark{animation:none!important}.slide{transition:none}.chapter-fill,.chapter-rail:after{transition:none!important}}
+@media print{.source-canvas{left:.465px!important;transform:scale(1.1416490486)!important}.motion,.visual-motion,.drift-inner,.flow-mark{animation:none!important;opacity:1!important;transform:none!important}dialog,.controls-zone,.chapter-timeline,.progress,.slide-status,.edit-hotzone,.edit-toggle,.edit-save,.toast,.laser,.blackout{display:none!important}@page{size:1920px 1080px;margin:0}}
 </style>
 </head>
 <body class="ui-awake">
@@ -581,34 +615,7 @@ Weekly"
       <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:63">FROM FIGMA TO FRONTEND  /  01 / IDEA &amp; BRIEF</p>
       <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:64">06 / 16</p>
     </div></div></section>
-<section class="slide" id="slide-7" data-title="07.1 · Intro Moodboard định hướng thị giác" role="group" aria-roledescription="slide" aria-label="7 / 17 — 07.1 · Intro Moodboard định hướng thị giác" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:214" data-name="07.1 · Intro Moodboard định hướng thị giác">
-      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;font-family:'Inter',sans-serif;font-weight:700;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:750px" data-node-id="172:65" data-name="Header">
-        <p style="line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:750px" data-node-id="172:66">02 / VISUAL EXPLORATION</p>
-        <div style="line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:54px;width:750px" data-node-id="172:67">
-          <p style="line-height:1.28;margin-bottom:0">Dùng moodboard để AI</p>
-          <p style="line-height:1.28">hiểu đúng tinh thần thiết kế</p>
-        </div>
-      </div>
-      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:80">FROM FIGMA TO FRONTEND  /  02 / VISUAL EXPLORATION</p>
-      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:81">07 / 16</p>
-      <div style="position:absolute;height:252px;left:103px;top:289px;width:489px" data-node-id="170:475" data-name="Screenshot 2026-10-22 at 02.04.20 1">
-        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:cover;pointer-events:none;width:100%;height:100%" src="assets/03-screenshot20261022-at0204201.png" />
-      </div>
-      <div style="position:absolute;height:328px;left:428px;top:497px;width:426px" data-node-id="170:495" data-name="Screenshot 2026-10-22 at 02.06.06 1">
-        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
-          <img alt="" style="position:absolute;height:100%;left:-25.2%;max-width:none;top:0;width:150.4%" src="assets/04-screenshot20261022-at0206061.png" />
-        </div>
-      </div>
-      <div style="position:absolute;height:730px;left:1254px;top:108px;width:377px" data-node-id="170:514" data-name="35% in-stock 1">
-        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
-          <img alt="" style="position:absolute;height:194.61%;left:0;max-width:none;top:-0.05%;width:100%" src="assets/05-35-in-stock1.png" />
-        </div>
-      </div>
-      <div style="position:absolute;height:730px;left:864px;top:108px;width:351px" data-node-id="170:516" data-name="1 7">
-        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:cover;pointer-events:none;width:100%;height:100%" src="assets/06-17.png" />
-      </div>
-    </div></div></section>
-<section class="slide" id="slide-8" data-title="07.2 · Moodboard định hướng thị giác" role="group" aria-roledescription="slide" aria-label="8 / 17 — 07.2 · Moodboard định hướng thị giác" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:496" data-name="07.2 · Moodboard định hướng thị giác">
+<section class="slide" id="slide-7" data-title="07.2 · Moodboard định hướng thị giác" role="group" aria-roledescription="slide" aria-label="7 / 17 — 07.2 · Moodboard định hướng thị giác" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:496" data-name="07.2 · Moodboard định hướng thị giác">
       <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:750px" data-node-id="170:497" data-name="Header">
         <p style="font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:750px" data-node-id="170:498">02 / VISUAL EXPLORATION</p>
         <div style="font-family:'Inter',sans-serif;font-weight:700;line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:54px;width:750px" data-node-id="170:499">
@@ -635,6 +642,33 @@ Weekly"
       <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#f3f3e9;font-size:24px;top:850px;width:1510px" data-node-id="170:511">Cùng một hướng thẩm mỹ trước khi tạo phương án UI.</p>
       <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="170:512">FROM FIGMA TO FRONTEND  /  02 / VISUAL EXPLORATION</p>
       <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="170:513">07 / 16</p>
+    </div></div></section>
+<section class="slide" id="slide-8" data-title="07.1 · Intro Moodboard định hướng thị giác" role="group" aria-roledescription="slide" aria-label="8 / 17 — 07.1 · Intro Moodboard định hướng thị giác" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:214" data-name="07.1 · Intro Moodboard định hướng thị giác">
+      <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;font-family:'Inter',sans-serif;font-weight:700;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:750px" data-node-id="172:65" data-name="Header">
+        <p style="line-height:1.28;position:relative;flex-shrink:0;color:#c7f641;font-size:18px;width:750px" data-node-id="172:66">02 / VISUAL EXPLORATION</p>
+        <div style="line-height:0;position:relative;flex-shrink:0;color:#f3f3e9;font-size:54px;width:750px" data-node-id="172:67">
+          <p style="line-height:1.28;margin-bottom:0">Dùng moodboard để AI</p>
+          <p style="line-height:1.28">hiểu đúng tinh thần thiết kế</p>
+        </div>
+      </div>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:400;line-height:1.28;left:76px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:1400px;white-space:pre-wrap" data-node-id="172:80">FROM FIGMA TO FRONTEND  /  02 / VISUAL EXPLORATION</p>
+      <p style="overflow-wrap:break-word;position:absolute;font-family:'Inter',sans-serif;font-weight:700;line-height:1.28;left:1510px;font-style:normal;color:#adb2a3;font-size:15px;top:900px;width:95px" data-node-id="172:81">07 / 16</p>
+      <div style="position:absolute;height:252px;left:103px;top:289px;width:489px" data-node-id="170:475" data-name="Screenshot 2026-10-22 at 02.04.20 1">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:cover;pointer-events:none;width:100%;height:100%" src="assets/03-screenshot20261022-at0204201.png" />
+      </div>
+      <div style="position:absolute;height:328px;left:428px;top:497px;width:426px" data-node-id="170:495" data-name="Screenshot 2026-10-22 at 02.06.06 1">
+        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+          <img alt="" style="position:absolute;height:100%;left:-25.2%;max-width:none;top:0;width:150.4%" src="assets/04-screenshot20261022-at0206061.png" />
+        </div>
+      </div>
+      <div style="position:absolute;height:730px;left:1254px;top:108px;width:377px" data-node-id="170:514" data-name="35% in-stock 1">
+        <div style="position:absolute;inset:0;overflow:hidden;pointer-events:none">
+          <img alt="" style="position:absolute;height:194.61%;left:0;max-width:none;top:-0.05%;width:100%" src="assets/05-35-in-stock1.png" />
+        </div>
+      </div>
+      <div style="position:absolute;height:730px;left:864px;top:108px;width:351px" data-node-id="170:516" data-name="1 7">
+        <img alt="" style="position:absolute;inset:0;max-width:none;object-fit:cover;pointer-events:none;width:100%;height:100%" src="assets/06-17.png" />
+      </div>
     </div></div></section>
 <section class="slide" id="slide-9" data-title="08 · Từ một reference thành nhiều phương án" role="group" aria-roledescription="slide" aria-label="9 / 17 — 08 · Từ một reference thành nhiều phương án" aria-hidden="true"><div class="source-canvas"><div style="background-color:#0a0b08;position:relative;width:100%;height:100%" data-node-id="170:404" data-name="08 · Từ một reference thành nhiều phương án">
       <div style="overflow-wrap:break-word;position:absolute;align-content:stretch;display:flex;flex-direction:column;gap:18px;align-items:flex-start;left:76px;font-style:normal;top:64px;width:780px" data-node-id="172:82" data-name="Header">
@@ -961,7 +995,8 @@ Weekly"
 <button id="fullscreenButton" aria-label="Toàn màn hình (F)" aria-pressed="false" title="Toàn màn hình (F)"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
 <button id="helpButton" aria-label="Hướng dẫn phím tắt (?)" title="Phím tắt (?)"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 .5c0 2-2.5 2-2.5 4m0 3h.01"/></svg></button>
 </nav></div>
-<div class="progress" role="progressbar" aria-label="Tiến trình trình chiếu" aria-valuemin="1" aria-valuemax="17" aria-valuenow="1"><span id="progressFill"></span></div>
+<nav class="chapter-timeline" aria-label="6 giai đoạn của hành trình"><div class="chapter-current" id="chapterCurrent" aria-hidden="true"></div><div class="chapter-track" id="chapterTrack"></div></nav>
+<div class="progress screen-reader" role="progressbar" aria-label="Tiến trình trình chiếu" aria-valuemin="1" aria-valuemax="17" aria-valuenow="1"></div>
 <p id="announcement" class="screen-reader" aria-live="polite" aria-atomic="true"></p>
 <dialog id="overview" aria-labelledby="overviewTitle"><header class="dialog-top"><div><h2 id="overviewTitle">From Figma to Frontend</h2><p>17 slide · Chọn một slide để bắt đầu</p></div><button class="close-button" data-close="overview" aria-label="Đóng mục lục">×</button></header><div class="overview-grid" id="overviewGrid"></div></dialog>
 <dialog id="help" class="help-dialog" aria-labelledby="helpTitle"><header class="dialog-top"><h2 id="helpTitle">Điều khiển trình chiếu</h2><button class="close-button" data-close="help" aria-label="Đóng hướng dẫn">×</button></header><div class="shortcut-list"><span>Slide tiếp theo / trước</span><span><kbd>→</kbd> <kbd>←</kbd></span><span>Slide tiếp theo</span><kbd>Space</kbd><span>Slide đầu / cuối</span><span><kbd>Home</kbd> <kbd>End</kbd></span><span>Mục lục 17 slide</span><kbd>G</kbd><span>Toàn màn hình</span><kbd>F</kbd><span>Con trỏ trình chiếu</span><kbd>L</kbd><span>Tạm tắt màn hình</span><kbd>B</kbd><span>Chỉnh chữ trên máy này</span><kbd>E</kbd><span>Đóng cửa sổ</span><kbd>Esc</kbd></div><p class="help-foot">Vuốt ngang trên điện thoại hoặc cuộn chuột để chuyển slide.<br><a href="https://www.figma.com/design/Nef5uw6lnOujRDHzkNLHDV/TECH-TALK---AI-UI-UX?node-id=170-4" target="_blank" rel="noopener">Mở thiết kế Figma gốc ↗</a></p></dialog>
@@ -973,6 +1008,14 @@ Weekly"
 /* === SOURCE MOTION: PRESERVE ALL FIGMA POSITIONS AND IMAGE CROPS === */
 const $=s=>document.querySelector(s);
 const slides=[...document.querySelectorAll('#deckStage > .slide')];
+const chapters=Object.freeze([
+ {name:'Idea & Brief',short:'Brief',start:0,end:5},
+ {name:'Visual Exploration',short:'Moodboard',start:6,end:7},
+ {name:'Design Direction',short:'Direction',start:8,end:9},
+ {name:'UI Design',short:'UI Design',start:10,end:11},
+ {name:'UX Architecture',short:'UX',start:12,end:13},
+ {name:'Frontend Development',short:'Frontend',start:14,end:16}
+]);
 slides.forEach(s=>s.classList.remove('active','visible','leaving'));
 slides.forEach(slide=>{
  let order=0;
@@ -981,6 +1024,12 @@ slides.forEach(slide=>{
   if(top>=890)return;
   el.classList.add(el.querySelector('img')?'visual-motion':'motion');
   el.style.setProperty('--delay',Math.min(order++*45,240)+'ms');
+  if(/^(Illustration|ChatGPT Image)/.test(el.dataset.name||'')&&el.querySelector('img')){
+   el.classList.add('ambient-visual');
+   if(el.dataset.nodeId==='170:9')el.classList.add('hero-visual');
+   if(!el.querySelector(':scope > .drift-inner')){const drift=document.createElement('div');drift.className='drift-inner';while(el.firstChild)drift.append(el.firstChild);el.append(drift)}
+  }
+  if(el.textContent.trim()==='→'&&!el.querySelector('.flow-mark')){const arrow=document.createElement('span');arrow.className='flow-mark';arrow.textContent='→';el.replaceChildren(arrow)}
  });
 });
 /* === PRESENTATION CONTROLLER === */
@@ -988,14 +1037,15 @@ class SlidePresentation{
  constructor(){
   this.index=-1;this.editing=false;this.wheelTime=0;this.wheelSum=0;this.lastWheel=0;
   this.stage=$('#deckStage');this.overview=$('#overview');this.help=$('#help');
+  this.buildChapters();
   this.scale();addEventListener('resize',()=>this.scale());
   addEventListener('hashchange',()=>this.go(this.fromHash(),false));
   this.go(this.fromHash(),false);this.bind();this.wake();
  }
  fromHash(){const m=location.hash.match(/^#(?:slide-)?(\d+)$/);return m?Math.min(16,Math.max(0,Number(m[1])-1)):0}
  scale(){
-  const w=innerWidth,h=innerHeight,s=Math.min(w/1920,Math.max(1,h-72)/1080);
-  this.stage.style.transform=`translate(${(w-1920*s)/2}px,${Math.max(0,(h-64-1080*s)/2)}px) scale(${s})`;
+  const w=innerWidth,h=innerHeight,s=Math.min(w/1920,Math.max(1,h-124)/1080);
+  this.stage.style.transform=`translate(${(w-1920*s)/2}px,${Math.max(0,(h-112-1080*s)/2)}px) scale(${s})`;
   if(this.overview.open)this.scaleThumbnails();
  }
  go(index,hash=true){
@@ -1008,8 +1058,8 @@ class SlidePresentation{
   $('#pageNumber').textContent=String(index+1).padStart(2,'0');
   $('#pageButton').setAttribute('aria-label',`Slide ${index+1} / 17. Mở mục lục`);
   $('#prev').disabled=index===0;$('#next').disabled=index===16;
-  $('#progressFill').style.transform=`scaleX(${(index+1)/17})`;
   $('.progress').setAttribute('aria-valuenow',String(index+1));
+  this.updateChapters();
   $('#announcement').textContent=`Slide ${index+1} / 17. ${slides[index].dataset.title}`;
   document.title=`${String(index+1).padStart(2,'0')} · ${slides[index].dataset.title.replace(/^[^·]+· /,'')} — Tech Talk`;
   if(hash)history.replaceState(null,'',`#slide-${index+1}`);
@@ -1020,6 +1070,30 @@ class SlidePresentation{
   this.idleTimer=setTimeout(()=>{if(this.editing||this.overview.open||this.help.open||$('.deck-controls').matches(':hover')||$('.deck-controls').contains(document.activeElement))return;document.body.classList.add('ui-asleep');document.body.classList.remove('ui-awake')},3200);
  }
  toast(text){$('#toast').textContent=text;$('#toast').classList.add('show');clearTimeout(this.toastTimer);this.toastTimer=setTimeout(()=>$('#toast').classList.remove('show'),2200)}
+ /* === CHAPTER SCRUBBING: CHAPTER NAMES, LOCAL PROGRESS AND CLICK TO SEEK === */
+ buildChapters(){
+  const track=$('#chapterTrack');track.replaceChildren();
+  chapters.forEach((chapter,i)=>{
+   const button=document.createElement('button');button.className='chapter-button';button.dataset.chapter=i;
+   button.style.setProperty('--chapter-size',chapter.end-chapter.start+1);
+   const n=String(i+1).padStart(2,'0');
+   button.innerHTML=`<span class="chapter-label"><span class="chapter-number">${n}</span><span class="chapter-name">${chapter.name}</span><span class="chapter-short">${chapter.short}</span></span><span class="chapter-rail"><span class="chapter-fill"></span></span><span class="chapter-tooltip" aria-hidden="true">${n} · ${chapter.name}<small>Slide ${chapter.start+1}–${chapter.end+1}</small></span>`;
+   button.setAttribute('aria-label',`${n}. ${chapter.name}. Slide ${chapter.start+1} đến ${chapter.end+1}`);
+   button.addEventListener('click',e=>{
+    let index=chapter.start;
+    if(e.detail&&e.target.closest('.chapter-rail')){const r=button.querySelector('.chapter-rail').getBoundingClientRect();const fraction=Math.max(0,Math.min(.999,(e.clientX-r.left)/r.width));index+=Math.floor(fraction*(chapter.end-chapter.start+1))}
+    this.go(index);button.blur();
+   });
+   button.addEventListener('keydown',e=>{if(!['ArrowLeft','ArrowRight'].includes(e.key))return;e.preventDefault();e.stopPropagation();track.children[Math.max(0,Math.min(5,i+(e.key==='ArrowRight'?1:-1)))].focus()});
+   track.append(button);
+  });
+ }
+ updateChapters(){
+  const current=chapters.findIndex(c=>this.index>=c.start&&this.index<=c.end);
+  chapters.forEach((c,i)=>{const b=$('#chapterTrack').children[i];b.dataset.state=i<current?'past':i===current?'active':'future';b.style.setProperty('--fill',i<current?1:i===current?(this.index-c.start+1)/(c.end-c.start+1):0);if(i===current)b.setAttribute('aria-current','step');else b.removeAttribute('aria-current')});
+  $('#chapterCurrent').textContent=`${String(current+1).padStart(2,'0')} · ${chapters[current].name}`;
+  $('.progress').setAttribute('aria-valuetext',`Chương ${current+1}: ${chapters[current].name}. Slide ${this.index+1} trên 17`);
+ }
  toggleOverview(){
   if(this.overview.open){this.overview.close();return}
   if(!$('#overviewGrid').children.length){
