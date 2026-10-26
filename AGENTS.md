@@ -13,3 +13,7 @@ Theo yêu cầu trực tiếp của người dùng ngày 27-09-2026:
 ## Ngoại lệ được người dùng cho phép — 27-09-2026
 
 Người dùng yêu cầu “cho lên website roylle nhé”: được phép đăng Roy Fintech trên website Roylle hiện có, https://roylle.github.io/fintech-roy/, qua GitHub Pages. Quy định CẤM Sites vẫn giữ nguyên. Không tự đăng sang nền tảng khác.
+
+## Ngoại lệ được người dùng cho phép — 27-10-2026
+
+Người dùng yêu cầu đưa Đi chơi Hạ Long và website JobsGO lên mục Work của Roylle. Được phép cập nhật portfolio hiện có qua GitHub Pages: ảnh bìa và liên kết tới https://dichoihalong.com/ và demo https://roylle.github.io/Jobsgo/. Không thay đổi hoặc đăng lại backend/dữ liệu của hai dự án. Quy định CẤM Sites vẫn giữ nguyên.
