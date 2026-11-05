@@ -104,3 +104,7 @@ The CrypRoy page now opens directly into the playable app, followed by three con
 ## Roy Fintech
 
 Open `/fintech-roy/` or select Roy Fintech in the portfolio. Independent personal finance demo with simulated data stored in browser localStorage; no banking integration or real payments. Published via existing GitHub Pages only; Sites is prohibited. Static app source is in `public/fintech-roy/`.
+
+## Wedding invitation — Viết Trung & Bùi Anh
+
+Published at https://roylle.github.io/damcuoi/. The standalone invitation and optimized photos, local fonts, calendar download and animation scripts are in `public/damcuoi/`. The countdown targets 18:00 on 28 November 2026 in Vietnam (UTC+7). Guest names can be personalized with `?k=Name`; the page respects reduced-motion preferences.
