@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#0b0908">
+<title>A Tale Of Two Christmas 2026 | OrcheStars</title>
+<meta name="description" content="A Tale Of Two Christmas: đêm nhạc giao hưởng và Broadway của OrcheStars, 19 và 20.12.2026, 18:00 và 20:30 tại Renaissance Riverside Sài Gòn.">
+<meta name="robots" content="noindex">
+<meta property="og:title" content="A Tale Of Two Christmas 2026">
+<meta property="og:description" content="Giáng Sinh đẹp nhất, khi ta ở bên nhau. 19 và 20.12.2026 tại Renaissance Riverside Sài Gòn.">
+<meta property="og:image" content="assets/img/ttc2026-poster.webp">
+<link rel="icon" href="favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;700;800&family=Cormorant+Upright:wght@500;600&display=swap&subset=vietnamese" rel="stylesheet">
+<link rel="preload" as="image" href="assets/img/hero-plate.webp">
+<script>document.documentElement.classList.add('js')</script>
+<link rel="stylesheet" href="css/stage.css">
+<link rel="stylesheet" href="css/style.css">
+<style>html:not(.unlocked) body>:not(.gate){display:none!important}</style>
+</head>
+<body>
+<div class="gate" id="gate">
+  <svg class="gate-star" viewBox="0 0 40 40" aria-hidden="true"><path d="m20 0 3.2 16.8L40 20l-16.8 3.2L20 40l-3.2-16.8L0 20l16.8-3.2Z"/></svg>
+  <h1 class="gate-title">A Tale Of<br>Two Christmas</h1>
+  <p>Trang đang được bảo vệ. Vui lòng nhập mật khẩu để xem.</p>
+  <form class="gate-form" id="gateForm" hidden>
+    <label for="gateInput">Mật khẩu</label>
+    <div class="gate-row">
+      <input id="gateInput" type="password" autocomplete="off" autocapitalize="off" spellcheck="false" required aria-describedby="gateError">
+      <button class="gate-btn" type="submit">Mở trang</button>
+    </div>
+    <p class="gate-error" id="gateError" role="alert"></p>
+  </form>
+  <noscript><p>Cần bật JavaScript để nhập mật khẩu.</p></noscript>
+</div>
+<a class="skip" href="#main">Đến nội dung chính</a>
+
+<div class="loader" id="loader" aria-hidden="true">
+  <div class="loader-line"><span class="loader-fill" id="loaderFill"></span></div>
+  <div class="loader-row"><span data-scramble-loop>Dàn nhạc đang lên dây</span><span id="loaderPct">0%</span></div>
+  <svg class="loader-star" viewBox="0 0 40 40"><path d="m20 2 3.6 14.4L38 20l-14.4 3.6L20 38l-3.6-14.4L2 20l14.4-3.6Z"/></svg>
+</div>
+
+<canvas id="gl" class="gl" aria-hidden="true"></canvas>
+
+<header class="hud" id="hud">
+  <a class="hud-logo" href="#top" aria-label="OrcheStars, về đầu trang"><svg aria-hidden="true" width="234.661" height="32" viewBox="0 0 234.661 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g>
+<path  d="M24.0526 8.73998C22.0932 6.75318 19.6527 5.74609 16.7937 5.74609C13.9348 5.74609 11.4943 6.75318 9.53487 8.73998C7.56958 10.7092 6.57031 13.1516 6.57031 15.9988C6.57031 18.8461 7.54025 21.2318 9.53487 23.2558C11.4943 25.2425 13.9348 26.2496 16.7937 26.2496C19.6527 26.2496 22.0932 25.2425 24.0526 23.2558C26.0668 21.2416 27.0445 18.8676 27.0445 15.9988C27.0445 13.1301 26.0374 10.6975 24.0526 8.73998ZM16.7937 23.4415C14.6759 23.4415 12.9472 22.7434 11.5138 21.31C10.0961 19.8356 9.40581 18.0991 9.40581 16.0008C9.40581 13.9025 10.1157 12.1152 11.5138 10.6877C12.9394 9.23473 14.6661 8.52879 16.7937 8.52879C18.9213 8.52879 20.6676 9.25428 22.0462 10.6877H22.0482C23.462 12.1054 24.1797 13.8928 24.1797 16.0008C24.1797 18.1088 23.4816 19.8473 22.0443 21.31C20.6578 22.7239 18.8881 23.4415 16.7918 23.4415H16.7937Z" fill="currentColor"/>
+<path d="M45.6452 18.0243C46.7638 17.598 47.6848 16.8803 48.4514 15.8302C49.2258 14.7684 49.6208 13.5775 49.6208 12.2947C49.6208 10.5836 49.0068 9.11695 47.7963 7.93387C46.5702 6.70776 45.1348 6.10938 43.4081 6.10938H35.4688V25.8894H38.3316V18.4232H42.7159L47.0904 25.8894H50.2798L45.6433 18.0243H45.6452ZM38.3336 8.80798H43.4081C44.3331 8.80798 45.1036 9.14042 45.7645 9.8268C46.4216 10.4839 46.756 11.3149 46.756 12.2947C46.756 13.2744 46.4314 14.0957 45.7626 14.7918C45.1055 15.4743 44.335 15.8068 43.4101 15.8068H38.3355V8.80603L38.3336 8.80798Z" fill="currentColor"/>
+<path d="M73.396 19.8786L75.8932 21.2983L75.8268 21.4156C75.0054 22.8842 73.8165 24.0751 72.2912 24.9512C70.7874 25.8136 69.1057 26.2516 67.289 26.2516C64.3029 26.2516 61.8038 25.2523 59.8639 23.2831C58.8998 22.3034 58.1704 21.2025 57.6855 19.9861C57.1985 18.7678 56.9541 17.4381 56.9541 16.0008C56.9541 13.1242 57.9338 10.672 59.8639 8.71456C61.8057 6.74536 64.3029 5.74609 67.289 5.74609C70.8441 5.74609 74.1137 7.58819 75.8228 10.5527L75.8913 10.6701L73.3941 12.1191L73.3276 11.99C72.2169 9.85267 69.9015 8.52488 67.289 8.52488C65.0812 8.52488 63.2567 9.24255 61.8703 10.6564C60.4916 12.0624 59.7896 13.8595 59.7896 15.9969C59.7896 18.1343 60.4916 19.9001 61.8703 21.3061C63.2567 22.7199 65.0812 23.4376 67.289 23.4376C69.8585 23.4376 72.2286 22.0883 73.3276 19.9998L73.3941 19.8747L73.396 19.8786Z" fill="currentColor"/>
+<path d="M98.9762 6.10938V25.8874H96.1407V17.1111H86.9361V25.8874H84.0732V6.10938H86.9361V14.3851H96.1407V6.10938H98.9762Z" fill="currentColor"/>
+<path d="M120.379 23.1634V25.8874H108.458V6.10938H120.24V8.8334H111.321V14.5533H119.542V17.2499H111.321V23.1634H120.379Z" fill="currentColor"/>
+<path d="M142.116 20.5122C142.116 22.2545 141.473 23.6684 140.2 24.7146C138.925 25.7353 137.257 26.2516 135.237 26.2516C131.59 26.2516 128.78 24.4251 127.724 21.3667L127.685 21.2611L130.158 19.8356L130.211 19.9998C130.937 22.2858 132.646 23.4415 135.292 23.4415C137.789 23.4415 139.281 22.3679 139.281 20.5689C139.281 19.7065 138.944 19.0436 138.281 18.5919C137.648 18.1597 136.537 17.6962 134.775 17.1311L132.908 16.5171C132.493 16.3508 131.93 16.0986 131.275 15.7857C130.62 15.4435 130.129 15.0974 129.812 14.7512C129.433 14.3386 128.551 13.1868 128.551 11.3995C128.551 9.61214 129.169 8.27262 130.385 7.28313C131.6 6.2643 133.094 5.74609 134.818 5.74609C137.818 5.74609 140.333 7.37112 141.545 10.0932L141.598 10.2047L139.181 11.597L139.124 11.4542C138.303 9.48503 136.893 8.52683 134.818 8.52683C132.743 8.52683 131.414 9.61019 131.414 11.29C131.414 12.1035 131.697 12.7077 132.28 13.1301C132.9 13.5799 133.956 14.0414 135.417 14.5029L136.559 14.8666C136.627 14.892 136.692 14.9135 136.77 14.9409C136.975 15.0152 137.253 15.115 137.603 15.2597C138.51 15.596 138.772 15.7427 139.404 16.0947L139.568 16.1846C140.352 16.6051 140.628 16.9277 141.08 17.4616L141.109 17.4968C141.784 18.1714 142.116 19.1629 142.116 20.5102V20.5122Z" fill="currentColor"/>
+<path d="M162.542 6.10938V8.8334H156.775V25.8874H153.938V8.8334H148.198V6.10938H162.542Z" fill="currentColor"/>
+<path d="M202.655 18.0243C203.777 17.598 204.697 16.8803 205.461 15.8302C206.239 14.7684 206.633 13.5775 206.633 12.2947C206.633 10.5836 206.018 9.11695 204.808 7.93387C203.58 6.70776 202.147 6.10938 200.418 6.10938H192.479V25.8894H195.345V18.4232H199.728L204.104 25.8894H207.29L202.653 18.0243H202.655ZM195.347 8.80798H200.42C201.349 8.80798 202.117 9.14042 202.776 9.8268C203.433 10.4839 203.768 11.3149 203.768 12.2947C203.768 13.2744 203.443 14.0957 202.776 14.7918C202.119 15.4743 201.349 15.8068 200.42 15.8068H195.347V8.80603V8.80798Z" fill="currentColor"/>
+<path d="M228.091 20.5122C228.091 22.2545 227.447 23.6684 226.174 24.7146C224.899 25.7353 223.231 26.2516 221.211 26.2516C217.564 26.2516 214.754 24.4251 213.698 21.3667L213.659 21.2611L216.133 19.8356L216.186 19.9998C216.911 22.2858 218.62 23.4415 221.266 23.4415C223.763 23.4415 225.255 22.3679 225.255 20.5689C225.255 19.7065 224.919 19.0436 224.256 18.5919C223.626 18.1597 222.512 17.6962 220.75 17.1311L218.882 16.5171C218.462 16.3469 217.916 16.1044 217.249 15.7857C216.594 15.4435 216.104 15.0974 215.787 14.7512C215.407 14.3386 214.525 13.1868 214.525 11.3995C214.525 9.61214 215.143 8.27262 216.36 7.28313C217.574 6.2643 219.068 5.74609 220.793 5.74609C223.793 5.74609 226.307 7.37112 227.522 10.0932L227.571 10.2047L225.154 11.597L225.097 11.4542C224.276 9.48503 222.866 8.52683 220.791 8.52683C218.716 8.52683 217.386 9.61019 217.386 11.29C217.386 12.1054 217.67 12.7077 218.253 13.1301C218.873 13.5799 219.929 14.0414 221.389 14.5029L222.531 14.8666C222.6 14.892 222.664 14.9135 222.743 14.9409C222.948 15.0152 223.226 15.115 223.576 15.2597C224.483 15.596 224.745 15.7427 225.377 16.0947L225.541 16.1846C226.325 16.6051 226.597 16.9277 227.052 17.4616L227.082 17.4968C227.756 18.1714 228.089 19.1629 228.089 20.5102L228.091 20.5122Z" fill="currentColor"/>
+<path d="M184.921 25.8913H181.873L175.979 9.73881L172.619 19.0001L171.729 21.4269L170.108 25.8913H167.06L174.432 6.10938H177.547L177.582 6.19933L184.921 25.8913Z" fill="currentColor"/>
+</g>
+</svg></a>
+  <span class="hud-progress" aria-hidden="true"><i id="hudProgress"></i></span>
+  <nav class="hud-nav" id="nav" aria-label="Điều hướng sự kiện">
+    <a href="#su-kien" data-scramble>Sự kiện</a>
+    <a href="#khoanh-khac" data-scramble>Khoảnh khắc</a>
+    <a href="#hang-ve" data-scramble>Hạng vé</a>
+    <a href="#dia-diem" data-scramble>Địa điểm</a>
+    <a href="#hoi-dap" data-scramble>Hỏi đáp</a>
+  </nav>
+  <a class="btn btn-buy hud-buy" data-stub="btn" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener">Mua vé</a>
+  <button class="hud-menu" id="menuBtn" aria-expanded="false" aria-controls="nav" aria-label="Mở menu"><span></span><span></span></button>
+</header>
+<aside class="rail" aria-hidden="false">
+  <svg class="rail-star" id="railStar" viewBox="0 0 40 40" aria-hidden="true"><path d="m20 0 3.2 16.8L40 20l-16.8 3.2L20 40l-3.2-16.8L0 20l16.8-3.2Z"/></svg>
+  <button class="rail-sound" id="soundBtn" aria-pressed="false" aria-label="Bật nhạc nền hộp nhạc"><i></i><i></i><i></i></button>
+</aside>
+
+<main id="main">
+
+<!-- Mở màn: cuộn để bước vào quả cầu tuyết -->
+<section class="scene hero" id="top" data-theme="dark" aria-labelledby="event-title">
+  <div class="scene-stage">
+    <div class="hero-art" id="heroArt"><img src="assets/img/hero-plate.webp" width="1672" height="941" alt="Ông già Noel nâng quả cầu tuyết, trong quả cầu là dàn nhạc và dàn hợp xướng" fetchpriority="high"></div>
+    <div class="hero-photo" id="heroPhoto" aria-hidden="true"><img src="assets/photos/christmas-2025-06-large.webp" width="1800" height="1200" alt=""></div>
+    <div class="hero-scrim" aria-hidden="true"></div>
+    <div class="hero-dim" aria-hidden="true"></div>
+    <p class="hero-statement" id="heroStatement">Giáng Sinh đẹp nhất,<br>khi ta ở bên nhau.</p>
+    <div class="hero-front">
+      <div class="hero-info" id="heroInfo">
+        <p class="hero-when">19 &amp; 20.12.2026<br>18:00 và 20:30</p>
+        <p class="hero-sub">Đêm nhạc giao hưởng và Broadway của OrcheStars, tại Renaissance Riverside Sài Gòn.</p>
+        <a class="btn btn-buy" data-stub="btn" data-magnet href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener">Mua vé ngay</a>
+      </div>
+      <h1 class="hero-title" id="event-title"><span class="hero-line">A Tale Of</span> <span class="hero-line">Two Christmas</span></h1>
+    </div>
+  </div>
+  <span class="anchor" id="su-kien"></span>
+</section>
+
+<section class="about" id="about" data-theme="light" data-bar="#f5f4f0" aria-labelledby="about-title">
+  <div class="about-text">
+    <h2 id="about-title" class="d2" data-about>Một mùa lễ,<br>hai sắc màu.</h2>
+    <p class="serif-lead" data-about>Từ niềm háo hức chờ quà thời thơ bé đến những cảm xúc khi trưởng thành.</p>
+    <div class="about-body" data-about>
+      <p>Hãy cùng OrcheStars bước vào A Tale Of Two Christmas, một hành trình âm nhạc qua những mùa Giáng Sinh.</p>
+      <p>Giao hưởng truyền thống và nhạc kịch Broadway kể hai sắc màu của cùng một mùa lễ hội. Những giai điệu kinh điển gặp nhịp điệu đương đại sôi nổi, cùng những giọng ca trong trẻo.</p>
+    </div>
+    <figure class="stub about-float about-float-a" data-stub="card" data-speed="-.5" data-tilt><img src="assets/photos/christmas-2025-16-thumb.webp" width="600" height="400" alt="Các nghệ sĩ dàn nhạc trong ánh đèn ấm" loading="lazy"></figure>
+  </div>
+  <figure class="stub about-card" id="aboutCard" data-stub="card"><img src="assets/photos/christmas-2025-06-large.webp" width="1800" height="1200" alt="Dàn nhạc trên sân khấu đỏ rực trong đêm Christmas 2025" loading="lazy"></figure>
+</section>
+
+<!-- Hai câu chuyện -->
+<section class="scene flight" id="hai-cau-chuyen" data-theme="dark" aria-labelledby="flight-title">
+  <div class="scene-stage">
+    <div class="fl-layer fl-a"><img src="assets/photos/christmas-2025-02-large.webp" width="1800" height="1200" alt="Các em nhỏ ôm gấu bông hát trên sân khấu" loading="lazy"></div>
+    <div class="fl-layer fl-b"><img src="assets/photos/christmas-2025-13-large.webp" width="1800" height="1200" alt="Ca sĩ biểu diễn trong ánh đèn xanh trước dàn nhạc" loading="lazy"></div>
+    <div class="fl-scrim" aria-hidden="true"></div>
+    <div class="fl-text fl-text-a">
+      <p class="fl-tag" data-scramble-in>Câu chuyện thứ nhất: giao hưởng</p>
+      <h2 id="flight-title" class="d3 fl-words">Thuở bé, Giáng Sinh là háo hức chờ quà.</h2>
+    </div>
+    <div class="fl-text fl-text-b">
+      <p class="fl-tag" data-scramble-in>Câu chuyện thứ hai: Broadway</p>
+      <h3 class="d3 fl-words">Lớn lên, Giáng Sinh là người ta muốn ở bên.</h3>
+    </div>
+  </div>
+</section>
+
+<!-- Số ngày chạy tới đêm diễn -->
+<section class="scene counter" id="lich-dien" data-theme="light" data-bar="#f5f4f0" aria-labelledby="counter-title">
+  <div class="scene-stage">
+    <div class="counter-number" aria-hidden="true">
+      <span class="counter-roll"><span class="roll" data-roll="tens"><span><b data-d="1"></b></span></span><span class="roll" data-roll="ones"><span><b data-d="9"></b></span></span><span class="counter-static"></span></span>
+    </div>
+    <figure class="stub counter-photo" data-stub="card" data-tilt><img src="assets/photos/christmas-2025-07-large.webp" width="1800" height="1200" alt="Các nghệ sĩ chào khán giả sau đêm nhạc" loading="lazy"></figure>
+    <div class="counter-side">
+      <h2 id="counter-title" class="d3">Hẹn nhau hai đêm cuối tuần.</h2>
+      <p class="counter-live">Còn <strong id="daysLeft">45</strong> ngày đến suất đầu tiên, thứ Bảy 19.12.2026.</p>
+      <dl class="check">
+        <div><dt>Suất 18:00</dt><dd>Check-in từ 17:15, ngừng nhận lúc 18:15</dd></div>
+        <div><dt>Suất 20:30</dt><dd>Check-in từ 19:45, ngừng nhận lúc 20:45</dd></div>
+      </dl>
+      <figure class="stub counter-small" data-stub="card"><img src="assets/photos/christmas-2025-15-thumb.webp" width="600" height="400" alt="Khán giả thưởng thức đêm nhạc từ các tầng khán phòng" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- Vòng ảnh -->
+<section class="scene arc" id="khoanh-khac" data-theme="dark" data-bar="#68171d" aria-labelledby="arc-title">
+  <div class="scene-stage">
+    <div class="arc-head">
+      <h2 id="arc-title" class="d3">Qua những khung hình.</h2>
+      <p>Những nụ cười, những tràng vỗ tay. 17 khoảnh khắc từ đêm nhạc Christmas 2025, kéo để xoay, chạm để xem lớn.</p>
+    </div>
+    <div class="arc-view" id="arcView">
+      <div class="arc-ring" id="arcRing">
+        <a class="arc-card" href="assets/photos/christmas-2025-group-large.webp" data-cap="Cùng lưu kỷ niệm" aria-label="Phóng to: Nghệ sĩ và khán giả cùng lưu lại kỷ niệm sau đêm nhạc Christmas 2025"><img src="assets/photos/christmas-2025-group-thumb.webp" alt="Nghệ sĩ và khán giả cùng lưu lại kỷ niệm sau đêm nhạc Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-13-large.webp" data-cap="Trên sân khấu" aria-label="Phóng to: Nghệ sĩ biểu diễn trên sân khấu Christmas 2025"><img src="assets/photos/christmas-2025-13-thumb.webp" alt="Nghệ sĩ biểu diễn trên sân khấu Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-01-large.webp" data-cap="Cả khán phòng" aria-label="Phóng to: Toàn cảnh khán phòng và sân khấu Christmas 2025"><img src="assets/photos/christmas-2025-01-thumb.webp" alt="Toàn cảnh khán phòng và sân khấu Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-02-large.webp" data-cap="Những giọng ca nhỏ" aria-label="Phóng to: Các nghệ sĩ và hợp xướng thiếu nhi trên sân khấu Christmas 2025"><img src="assets/photos/christmas-2025-02-thumb.webp" alt="Các nghệ sĩ và hợp xướng thiếu nhi trên sân khấu Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-16-large.webp" data-cap="Trong ánh đèn ấm" aria-label="Phóng to: Các nghệ sĩ dàn nhạc trong không gian ánh sáng ấm"><img src="assets/photos/christmas-2025-16-thumb.webp" alt="Các nghệ sĩ dàn nhạc trong không gian ánh sáng ấm" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-03-large.webp" data-cap="Những tràng vỗ tay" aria-label="Phóng to: Khán giả vỗ tay trong đêm nhạc Christmas 2025"><img src="assets/photos/christmas-2025-03-thumb.webp" alt="Khán giả vỗ tay trong đêm nhạc Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-04-large.webp" data-cap="Thanh âm giao hưởng" aria-label="Phóng to: Các nghệ sĩ dàn nhạc biểu diễn tại Christmas 2025"><img src="assets/photos/christmas-2025-04-thumb.webp" alt="Các nghệ sĩ dàn nhạc biểu diễn tại Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-05-large.webp" data-cap="Mùa lễ hội" aria-label="Phóng to: Gia đình chụp ảnh bên khu vực Giáng Sinh OrcheStars"><img src="assets/photos/christmas-2025-05-thumb.webp" alt="Gia đình chụp ảnh bên khu vực Giáng Sinh OrcheStars" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-06-large.webp" data-cap="Sân khấu rực rỡ" aria-label="Phóng to: Dàn nhạc và sân khấu đỏ rực trong Christmas 2025"><img src="assets/photos/christmas-2025-06-thumb.webp" alt="Dàn nhạc và sân khấu đỏ rực trong Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-07-large.webp" data-cap="Lời chào sau đêm nhạc" aria-label="Phóng to: Các nghệ sĩ chào khán giả tại Christmas 2025"><img src="assets/photos/christmas-2025-07-thumb.webp" alt="Các nghệ sĩ chào khán giả tại Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-08-large.webp" data-cap="Hợp xướng thiếu nhi" aria-label="Phóng to: Hợp xướng thiếu nhi biểu diễn trước khán giả"><img src="assets/photos/christmas-2025-08-thumb.webp" alt="Hợp xướng thiếu nhi biểu diễn trước khán giả" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-09-large.webp" data-cap="Dưới ánh đèn" aria-label="Phóng to: Dàn nhạc dưới ánh đèn sân khấu Christmas 2025"><img src="assets/photos/christmas-2025-09-thumb.webp" alt="Dàn nhạc dưới ánh đèn sân khấu Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-10-large.webp" data-cap="Khoảnh khắc bên nhau" aria-label="Phóng to: Nghệ sĩ và khán giả cùng lưu lại kỷ niệm Christmas 2025"><img src="assets/photos/christmas-2025-10-thumb.webp" alt="Nghệ sĩ và khán giả cùng lưu lại kỷ niệm Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-11-large.webp" data-cap="Đêm nhạc của chúng ta" aria-label="Phóng to: Khán giả chụp ảnh cùng nhau tại khu vực sự kiện"><img src="assets/photos/christmas-2025-11-thumb.webp" alt="Khán giả chụp ảnh cùng nhau tại khu vực sự kiện" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-12-large.webp" data-cap="Kỷ niệm gia đình" aria-label="Phóng to: Gia đình lưu lại kỷ niệm bên phông nền Christmas 2025"><img src="assets/photos/christmas-2025-12-thumb.webp" alt="Gia đình lưu lại kỷ niệm bên phông nền Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-14-large.webp" data-cap="Chào đón Giáng Sinh" aria-label="Phóng to: Khoảnh khắc tại khu vực đón khách Christmas 2025"><img src="assets/photos/christmas-2025-14-thumb.webp" alt="Khoảnh khắc tại khu vực đón khách Christmas 2025" loading="lazy" width="600" height="800"></a>
+        <a class="arc-card" href="assets/photos/christmas-2025-15-large.webp" data-cap="Thưởng thức âm nhạc" aria-label="Phóng to: Khán giả thưởng thức đêm nhạc từ các tầng khán phòng"><img src="assets/photos/christmas-2025-15-thumb.webp" alt="Khán giả thưởng thức đêm nhạc từ các tầng khán phòng" loading="lazy" width="600" height="800"></a>
+      </div>
+    </div>
+    <p class="arc-caption" id="arcCaption" aria-live="off">Cùng lưu kỷ niệm</p>
+  </div>
+</section>
+
+<!-- Chọn vé -->
+<section class="tickets" id="hang-ve" data-theme="light" data-bar="#f5f4f0" aria-labelledby="tickets-title">
+  <div class="tickets-head">
+    <h2 id="tickets-title" class="d2" data-rise>Chọn một suất,<br>giữ một chỗ.</h2>
+    <p data-rise>Chọn ngày, giờ và hạng vé để xem giá, giờ check-in và khu ghế trên sơ đồ. Vị trí cụ thể được chọn ở bước đặt vé.</p>
+  </div>
+  <div class="tickets-grid">
+    <div class="seatmap" id="seatmap" data-tier="premium" data-rise><svg class="seat-svg" viewBox="-715 -25 1430 1050" role="img" aria-label="Sơ đồ khán phòng: sân khấu phía trên, First Class và Premium ở giữa, Eco và Standing ở các tầng xa hơn"><path class="stage-shape" d="M-290 0H290V52Q0 118 -290 52Z"/><text class="stage-label" x="0" y="52" text-anchor="middle">Sân khấu</text><polyline class="floor" points="-420,60 -320,700 320,700 420,60"/><polyline class="floor" points="-510,140 -400,800 400,800 510,140"/><polyline class="floor" points="-600,240 -490,900 490,900 600,240"/><polyline class="floor" points="-690,340 -580,1000 580,1000 690,340"/><text class="floor-label" x="-390" y="105" text-anchor="middle">Tầng 5</text><text class="floor-label" x="-490" y="145" text-anchor="middle">Tầng 6</text><text class="floor-label" x="-580" y="225" text-anchor="middle">Tầng 7</text><text class="floor-label" x="-665" y="310" text-anchor="middle">Tầng 8</text><g class="tier tier-first" data-tier="first"><rect x="120" y="200" width="28" height="28" rx="4"/><rect x="90" y="200" width="28" height="28" rx="4"/><rect x="60" y="200" width="28" height="28" rx="4"/><rect x="30" y="200" width="28" height="28" rx="4"/><rect x="0" y="200" width="28" height="28" rx="4"/><rect x="-30" y="200" width="28" height="28" rx="4"/><rect x="-60" y="200" width="28" height="28" rx="4"/><rect x="-90" y="200" width="28" height="28" rx="4"/><rect x="-120" y="200" width="28" height="28" rx="4"/><rect x="-150" y="200" width="28" height="28" rx="4"/><rect x="120" y="240" width="28" height="28" rx="4"/><rect x="90" y="240" width="28" height="28" rx="4"/><rect x="60" y="240" width="28" height="28" rx="4"/><rect x="30" y="240" width="28" height="28" rx="4"/><rect x="0" y="240" width="28" height="28" rx="4"/><rect x="-30" y="240" width="28" height="28" rx="4"/><rect x="-60" y="240" width="28" height="28" rx="4"/><rect x="-90" y="240" width="28" height="28" rx="4"/><rect x="-120" y="240" width="28" height="28" rx="4"/><rect x="-150" y="240" width="28" height="28" rx="4"/><rect x="120" y="280" width="28" height="28" rx="4"/><rect x="90" y="280" width="28" height="28" rx="4"/><rect x="60" y="280" width="28" height="28" rx="4"/><rect x="30" y="280" width="28" height="28" rx="4"/><rect x="0" y="280" width="28" height="28" rx="4"/><rect x="-30" y="280" width="28" height="28" rx="4"/><rect x="-60" y="280" width="28" height="28" rx="4"/><rect x="-90" y="280" width="28" height="28" rx="4"/><rect x="-120" y="280" width="28" height="28" rx="4"/><rect x="-150" y="280" width="28" height="28" rx="4"/><rect x="120" y="320" width="28" height="28" rx="4"/><rect x="90" y="320" width="28" height="28" rx="4"/><rect x="60" y="320" width="28" height="28" rx="4"/><rect x="30" y="320" width="28" height="28" rx="4"/><rect x="0" y="320" width="28" height="28" rx="4"/><rect x="-30" y="320" width="28" height="28" rx="4"/><rect x="-60" y="320" width="28" height="28" rx="4"/><rect x="-90" y="320" width="28" height="28" rx="4"/><rect x="-120" y="320" width="28" height="28" rx="4"/><rect x="-150" y="320" width="28" height="28" rx="4"/><rect x="120" y="360" width="28" height="28" rx="4"/><rect x="90" y="360" width="28" height="28" rx="4"/><rect x="60" y="360" width="28" height="28" rx="4"/><rect x="30" y="360" width="28" height="28" rx="4"/><rect x="0" y="360" width="28" height="28" rx="4"/><rect x="-30" y="360" width="28" height="28" rx="4"/><rect x="-60" y="360" width="28" height="28" rx="4"/><rect x="-90" y="360" width="28" height="28" rx="4"/><rect x="-120" y="360" width="28" height="28" rx="4"/><rect x="-150" y="360" width="28" height="28" rx="4"/><rect x="120" y="400" width="28" height="28" rx="4"/><rect x="90" y="400" width="28" height="28" rx="4"/><rect x="60" y="400" width="28" height="28" rx="4"/><rect x="30" y="400" width="28" height="28" rx="4"/><rect x="0" y="400" width="28" height="28" rx="4"/><rect x="-30" y="400" width="28" height="28" rx="4"/><rect x="-60" y="400" width="28" height="28" rx="4"/><rect x="-90" y="400" width="28" height="28" rx="4"/><rect x="-120" y="400" width="28" height="28" rx="4"/><rect x="-150" y="400" width="28" height="28" rx="4"/><rect x="0" y="730" width="28" height="28" rx="4"/><rect x="-30" y="730" width="28" height="28" rx="4"/><rect x="30" y="730" width="28" height="28" rx="4"/><rect x="-60" y="730" width="28" height="28" rx="4"/><rect x="60" y="730" width="28" height="28" rx="4"/><rect x="-90" y="730" width="28" height="28" rx="4"/><rect x="150" y="730" width="28" height="28" rx="4"/><rect x="180" y="730" width="28" height="28" rx="4"/><rect x="210" y="730" width="28" height="28" rx="4"/><rect x="240" y="730" width="28" height="28" rx="4"/><rect x="-180" y="730" width="28" height="28" rx="4"/><rect x="-210" y="730" width="28" height="28" rx="4"/><rect x="-240" y="730" width="28" height="28" rx="4"/><rect x="-270" y="730" width="28" height="28" rx="4"/></g><g class="tier tier-premium" data-tier="premium"><rect x="280" y="200" width="28" height="28" rx="4"/><rect x="250" y="200" width="28" height="28" rx="4"/><rect x="220" y="200" width="28" height="28" rx="4"/><rect x="190" y="200" width="28" height="28" rx="4"/><rect x="-220" y="200" width="28" height="28" rx="4"/><rect x="-250" y="200" width="28" height="28" rx="4"/><rect x="-280" y="200" width="28" height="28" rx="4"/><rect x="-310" y="200" width="28" height="28" rx="4"/><rect x="280" y="240" width="28" height="28" rx="4"/><rect x="250" y="240" width="28" height="28" rx="4"/><rect x="220" y="240" width="28" height="28" rx="4"/><rect x="190" y="240" width="28" height="28" rx="4"/><rect x="-220" y="240" width="28" height="28" rx="4"/><rect x="-250" y="240" width="28" height="28" rx="4"/><rect x="-280" y="240" width="28" height="28" rx="4"/><rect x="-310" y="240" width="28" height="28" rx="4"/><rect x="280" y="280" width="28" height="28" rx="4"/><rect x="250" y="280" width="28" height="28" rx="4"/><rect x="220" y="280" width="28" height="28" rx="4"/><rect x="190" y="280" width="28" height="28" rx="4"/><rect x="-220" y="280" width="28" height="28" rx="4"/><rect x="-250" y="280" width="28" height="28" rx="4"/><rect x="-280" y="280" width="28" height="28" rx="4"/><rect x="-310" y="280" width="28" height="28" rx="4"/><rect x="280" y="320" width="28" height="28" rx="4"/><rect x="250" y="320" width="28" height="28" rx="4"/><rect x="220" y="320" width="28" height="28" rx="4"/><rect x="190" y="320" width="28" height="28" rx="4"/><rect x="-220" y="320" width="28" height="28" rx="4"/><rect x="-250" y="320" width="28" height="28" rx="4"/><rect x="-280" y="320" width="28" height="28" rx="4"/><rect x="-310" y="320" width="28" height="28" rx="4"/><rect x="280" y="360" width="28" height="28" rx="4"/><rect x="250" y="360" width="28" height="28" rx="4"/><rect x="220" y="360" width="28" height="28" rx="4"/><rect x="190" y="360" width="28" height="28" rx="4"/><rect x="-220" y="360" width="28" height="28" rx="4"/><rect x="-250" y="360" width="28" height="28" rx="4"/><rect x="-280" y="360" width="28" height="28" rx="4"/><rect x="-310" y="360" width="28" height="28" rx="4"/><rect x="280" y="400" width="28" height="28" rx="4"/><rect x="250" y="400" width="28" height="28" rx="4"/><rect x="220" y="400" width="28" height="28" rx="4"/><rect x="190" y="400" width="28" height="28" rx="4"/><rect x="-220" y="400" width="28" height="28" rx="4"/><rect x="-250" y="400" width="28" height="28" rx="4"/><rect x="-280" y="400" width="28" height="28" rx="4"/><rect x="-310" y="400" width="28" height="28" rx="4"/><rect x="-80" y="470" width="28" height="28" rx="4"/><rect x="50" y="470" width="28" height="28" rx="4"/><rect x="-110" y="470" width="28" height="28" rx="4"/><rect x="80" y="470" width="28" height="28" rx="4"/><rect x="-140" y="470" width="28" height="28" rx="4"/><rect x="110" y="470" width="28" height="28" rx="4"/><rect x="-170" y="470" width="28" height="28" rx="4"/><rect x="140" y="470" width="28" height="28" rx="4"/><rect x="-200" y="470" width="28" height="28" rx="4"/><rect x="170" y="470" width="28" height="28" rx="4"/><rect x="-230" y="470" width="28" height="28" rx="4"/><rect x="200" y="470" width="28" height="28" rx="4"/><rect x="-260" y="470" width="28" height="28" rx="4"/><rect x="230" y="470" width="28" height="28" rx="4"/><rect x="-290" y="470" width="28" height="28" rx="4"/><rect x="260" y="470" width="28" height="28" rx="4"/><rect x="-320" y="470" width="28" height="28" rx="4"/><rect x="290" y="470" width="28" height="28" rx="4"/><rect x="-80" y="510" width="28" height="28" rx="4"/><rect x="50" y="510" width="28" height="28" rx="4"/><rect x="-110" y="510" width="28" height="28" rx="4"/><rect x="80" y="510" width="28" height="28" rx="4"/><rect x="-140" y="510" width="28" height="28" rx="4"/><rect x="110" y="510" width="28" height="28" rx="4"/><rect x="-170" y="510" width="28" height="28" rx="4"/><rect x="140" y="510" width="28" height="28" rx="4"/><rect x="-200" y="510" width="28" height="28" rx="4"/><rect x="170" y="510" width="28" height="28" rx="4"/><rect x="-230" y="510" width="28" height="28" rx="4"/><rect x="200" y="510" width="28" height="28" rx="4"/><rect x="-260" y="510" width="28" height="28" rx="4"/><rect x="230" y="510" width="28" height="28" rx="4"/><rect x="-290" y="510" width="28" height="28" rx="4"/><rect x="260" y="510" width="28" height="28" rx="4"/><rect x="-80" y="550" width="28" height="28" rx="4"/><rect x="50" y="550" width="28" height="28" rx="4"/><rect x="-110" y="550" width="28" height="28" rx="4"/><rect x="80" y="550" width="28" height="28" rx="4"/><rect x="-140" y="550" width="28" height="28" rx="4"/><rect x="110" y="550" width="28" height="28" rx="4"/><rect x="-170" y="550" width="28" height="28" rx="4"/><rect x="140" y="550" width="28" height="28" rx="4"/><rect x="-200" y="550" width="28" height="28" rx="4"/><rect x="170" y="550" width="28" height="28" rx="4"/><rect x="-230" y="550" width="28" height="28" rx="4"/><rect x="200" y="550" width="28" height="28" rx="4"/><rect x="-260" y="550" width="28" height="28" rx="4"/><rect x="230" y="550" width="28" height="28" rx="4"/><rect x="-290" y="550" width="28" height="28" rx="4"/><rect x="260" y="550" width="28" height="28" rx="4"/><rect x="-80" y="590" width="28" height="28" rx="4"/><rect x="50" y="590" width="28" height="28" rx="4"/><rect x="-110" y="590" width="28" height="28" rx="4"/><rect x="80" y="590" width="28" height="28" rx="4"/><rect x="-140" y="590" width="28" height="28" rx="4"/><rect x="110" y="590" width="28" height="28" rx="4"/><rect x="-170" y="590" width="28" height="28" rx="4"/><rect x="140" y="590" width="28" height="28" rx="4"/><rect x="-200" y="590" width="28" height="28" rx="4"/><rect x="170" y="590" width="28" height="28" rx="4"/><rect x="-230" y="590" width="28" height="28" rx="4"/><rect x="200" y="590" width="28" height="28" rx="4"/><rect x="-260" y="590" width="28" height="28" rx="4"/><rect x="230" y="590" width="28" height="28" rx="4"/><rect x="-290" y="590" width="28" height="28" rx="4"/><rect x="260" y="590" width="28" height="28" rx="4"/><rect x="-80" y="630" width="28" height="28" rx="4"/><rect x="50" y="630" width="28" height="28" rx="4"/><rect x="-110" y="630" width="28" height="28" rx="4"/><rect x="80" y="630" width="28" height="28" rx="4"/><rect x="-140" y="630" width="28" height="28" rx="4"/><rect x="110" y="630" width="28" height="28" rx="4"/><rect x="-170" y="630" width="28" height="28" rx="4"/><rect x="140" y="630" width="28" height="28" rx="4"/><rect x="-200" y="630" width="28" height="28" rx="4"/><rect x="170" y="630" width="28" height="28" rx="4"/><rect x="-230" y="630" width="28" height="28" rx="4"/><rect x="200" y="630" width="28" height="28" rx="4"/><rect x="-260" y="630" width="28" height="28" rx="4"/><rect x="230" y="630" width="28" height="28" rx="4"/><rect x="-290" y="630" width="28" height="28" rx="4"/><rect x="260" y="630" width="28" height="28" rx="4"/><rect x="-378" y="700" width="28" height="28" rx="4"/><rect x="-384" y="665" width="28" height="28" rx="4"/><rect x="-390" y="630" width="28" height="28" rx="4"/><rect x="-396" y="595" width="28" height="28" rx="4"/><rect x="-402" y="560" width="28" height="28" rx="4"/><rect x="-408" y="525" width="28" height="28" rx="4"/><rect x="-414" y="490" width="28" height="28" rx="4"/><rect x="-420" y="455" width="28" height="28" rx="4"/><rect x="-426" y="420" width="28" height="28" rx="4"/><rect x="-432" y="385" width="28" height="28" rx="4"/><rect x="-438" y="350" width="28" height="28" rx="4"/><rect x="-444" y="315" width="28" height="28" rx="4"/><rect x="-450" y="280" width="28" height="28" rx="4"/><rect x="-456" y="245" width="28" height="28" rx="4"/><rect x="-462" y="210" width="28" height="28" rx="4"/><rect x="-468" y="175" width="28" height="28" rx="4"/><rect x="348" y="700" width="28" height="28" rx="4"/><rect x="354" y="665" width="28" height="28" rx="4"/><rect x="360" y="630" width="28" height="28" rx="4"/><rect x="366" y="595" width="28" height="28" rx="4"/><rect x="372" y="560" width="28" height="28" rx="4"/><rect x="378" y="525" width="28" height="28" rx="4"/><rect x="384" y="490" width="28" height="28" rx="4"/><rect x="390" y="455" width="28" height="28" rx="4"/><rect x="396" y="420" width="28" height="28" rx="4"/><rect x="402" y="385" width="28" height="28" rx="4"/><rect x="408" y="350" width="28" height="28" rx="4"/><rect x="414" y="315" width="28" height="28" rx="4"/><rect x="420" y="280" width="28" height="28" rx="4"/><rect x="426" y="245" width="28" height="28" rx="4"/><rect x="432" y="210" width="28" height="28" rx="4"/><rect x="438" y="175" width="28" height="28" rx="4"/><rect x="240" y="830" width="28" height="28" rx="4"/><rect x="210" y="830" width="28" height="28" rx="4"/><rect x="180" y="830" width="28" height="28" rx="4"/><rect x="150" y="830" width="28" height="28" rx="4"/><rect x="60" y="830" width="28" height="28" rx="4"/><rect x="30" y="830" width="28" height="28" rx="4"/><rect x="0" y="830" width="28" height="28" rx="4"/><rect x="-30" y="830" width="28" height="28" rx="4"/><rect x="-60" y="830" width="28" height="28" rx="4"/><rect x="-90" y="830" width="28" height="28" rx="4"/><rect x="-180" y="830" width="28" height="28" rx="4"/><rect x="-210" y="830" width="28" height="28" rx="4"/><rect x="-240" y="830" width="28" height="28" rx="4"/><rect x="-270" y="830" width="28" height="28" rx="4"/><rect x="-80" y="666" width="28" height="28" rx="4"/><rect x="50" y="666" width="28" height="28" rx="4"/><rect x="-110" y="666" width="28" height="28" rx="4"/><rect x="80" y="666" width="28" height="28" rx="4"/><rect x="-140" y="666" width="28" height="28" rx="4"/><rect x="110" y="666" width="28" height="28" rx="4"/><rect x="-170" y="666" width="28" height="28" rx="4"/><rect x="140" y="666" width="28" height="28" rx="4"/><rect x="-200" y="666" width="28" height="28" rx="4"/><rect x="170" y="666" width="28" height="28" rx="4"/><rect x="-230" y="666" width="28" height="28" rx="4"/><rect x="200" y="666" width="28" height="28" rx="4"/></g><g class="tier tier-eco" data-tier="eco"><rect x="-468" y="800" width="28" height="28" rx="4"/><rect x="-474" y="765" width="28" height="28" rx="4"/><rect x="-480" y="730" width="28" height="28" rx="4"/><rect x="-486" y="695" width="28" height="28" rx="4"/><rect x="-492" y="660" width="28" height="28" rx="4"/><rect x="-498" y="625" width="28" height="28" rx="4"/><rect x="-504" y="590" width="28" height="28" rx="4"/><rect x="-510" y="555" width="28" height="28" rx="4"/><rect x="-516" y="520" width="28" height="28" rx="4"/><rect x="-522" y="485" width="28" height="28" rx="4"/><rect x="-528" y="450" width="28" height="28" rx="4"/><rect x="-534" y="415" width="28" height="28" rx="4"/><rect x="-540" y="380" width="28" height="28" rx="4"/><rect x="-546" y="345" width="28" height="28" rx="4"/><rect x="-552" y="310" width="28" height="28" rx="4"/><rect x="-558" y="275" width="28" height="28" rx="4"/><rect x="438" y="800" width="28" height="28" rx="4"/><rect x="444" y="765" width="28" height="28" rx="4"/><rect x="450" y="730" width="28" height="28" rx="4"/><rect x="456" y="695" width="28" height="28" rx="4"/><rect x="462" y="660" width="28" height="28" rx="4"/><rect x="468" y="625" width="28" height="28" rx="4"/><rect x="474" y="590" width="28" height="28" rx="4"/><rect x="480" y="555" width="28" height="28" rx="4"/><rect x="486" y="520" width="28" height="28" rx="4"/><rect x="492" y="485" width="28" height="28" rx="4"/><rect x="498" y="450" width="28" height="28" rx="4"/><rect x="504" y="415" width="28" height="28" rx="4"/><rect x="510" y="380" width="28" height="28" rx="4"/><rect x="516" y="345" width="28" height="28" rx="4"/><rect x="522" y="310" width="28" height="28" rx="4"/><rect x="528" y="275" width="28" height="28" rx="4"/></g><g class="tier tier-standing" data-tier="standing"><rect x="240" y="930" width="28" height="28" rx="4"/><rect x="210" y="930" width="28" height="28" rx="4"/><rect x="180" y="930" width="28" height="28" rx="4"/><rect x="150" y="930" width="28" height="28" rx="4"/><rect x="60" y="930" width="28" height="28" rx="4"/><rect x="30" y="930" width="28" height="28" rx="4"/><rect x="0" y="930" width="28" height="28" rx="4"/><rect x="-30" y="930" width="28" height="28" rx="4"/><rect x="-60" y="930" width="28" height="28" rx="4"/><rect x="-90" y="930" width="28" height="28" rx="4"/><rect x="-180" y="930" width="28" height="28" rx="4"/><rect x="-210" y="930" width="28" height="28" rx="4"/><rect x="-240" y="930" width="28" height="28" rx="4"/><rect x="-270" y="930" width="28" height="28" rx="4"/><rect x="-558" y="900" width="28" height="28" rx="4"/><rect x="528" y="900" width="28" height="28" rx="4"/><rect x="-563.294" y="869.118" width="28" height="28" rx="4"/><rect x="533.294" y="869.118" width="28" height="28" rx="4"/><rect x="-568.588" y="838.235" width="28" height="28" rx="4"/><rect x="538.588" y="838.235" width="28" height="28" rx="4"/><rect x="-573.882" y="807.353" width="28" height="28" rx="4"/><rect x="543.882" y="807.353" width="28" height="28" rx="4"/><rect x="-579.176" y="776.471" width="28" height="28" rx="4"/><rect x="549.176" y="776.471" width="28" height="28" rx="4"/><rect x="-584.471" y="745.588" width="28" height="28" rx="4"/><rect x="554.471" y="745.588" width="28" height="28" rx="4"/><rect x="-589.765" y="714.706" width="28" height="28" rx="4"/><rect x="559.765" y="714.706" width="28" height="28" rx="4"/><rect x="-595.059" y="683.824" width="28" height="28" rx="4"/><rect x="565.059" y="683.824" width="28" height="28" rx="4"/><rect x="-600.353" y="652.941" width="28" height="28" rx="4"/><rect x="570.353" y="652.941" width="28" height="28" rx="4"/><rect x="-605.647" y="622.059" width="28" height="28" rx="4"/><rect x="575.647" y="622.059" width="28" height="28" rx="4"/><rect x="-610.941" y="591.176" width="28" height="28" rx="4"/><rect x="580.941" y="591.176" width="28" height="28" rx="4"/><rect x="-616.235" y="560.294" width="28" height="28" rx="4"/><rect x="586.235" y="560.294" width="28" height="28" rx="4"/><rect x="-621.529" y="529.412" width="28" height="28" rx="4"/><rect x="591.529" y="529.412" width="28" height="28" rx="4"/><rect x="-626.824" y="498.529" width="28" height="28" rx="4"/><rect x="596.824" y="498.529" width="28" height="28" rx="4"/><rect x="-632.118" y="467.647" width="28" height="28" rx="4"/><rect x="602.118" y="467.647" width="28" height="28" rx="4"/><rect x="-637.412" y="436.765" width="28" height="28" rx="4"/><rect x="607.412" y="436.765" width="28" height="28" rx="4"/><rect x="-642.706" y="405.882" width="28" height="28" rx="4"/><rect x="612.706" y="405.882" width="28" height="28" rx="4"/><rect x="-648" y="375" width="28" height="28" rx="4"/><rect x="618" y="375" width="28" height="28" rx="4"/></g></svg></div>
+    <form class="picker" id="picker" onsubmit="return false" data-rise>
+      <fieldset><legend>Ngày</legend>
+        <label class="opt"><input type="radio" name="day" value="19" checked><span>Thứ Bảy 19.12</span></label>
+        <label class="opt"><input type="radio" name="day" value="20"><span>Chủ Nhật 20.12</span></label>
+      </fieldset>
+      <fieldset><legend>Suất diễn</legend>
+        <label class="opt"><input type="radio" name="show" value="18:00" checked><span>18:00</span></label>
+        <label class="opt"><input type="radio" name="show" value="20:30"><span>20:30</span></label>
+      </fieldset>
+      <fieldset class="tier-set"><legend>Hạng vé</legend>
+        <label class="opt opt-tier" style="--tier:#e8432f"><input type="radio" name="tier" value="first"><span><i></i>First Class<b>1.800.000đ</b></span></label>
+        <label class="opt opt-tier" style="--tier:#fac41e"><input type="radio" name="tier" value="premium" checked><span><i></i>Premium<b>1.200.000đ</b></span></label>
+        <label class="opt opt-tier" style="--tier:#3d8bf4"><input type="radio" name="tier" value="eco"><span><i></i>Eco<b>800.000đ</b></span></label>
+        <label class="opt opt-tier" style="--tier:#85b35b"><input type="radio" name="tier" value="standing"><span><i></i>Standing<b>200.000đ</b></span></label>
+      </fieldset>
+    </form>
+    <article class="ticket" id="ticket" data-stub="ticket" data-tilt aria-live="polite" data-rise>
+      <div class="ticket-main">
+        <p class="ticket-name">A Tale Of<br>Two Christmas</p>
+        <dl>
+          <div><dt>Ngày</dt><dd id="tDay">Thứ Bảy 19.12.2026</dd></div>
+          <div><dt>Suất</dt><dd id="tShow">18:00</dd></div>
+          <div><dt>Check-in từ</dt><dd id="tCheck">17:15</dd></div>
+          <div><dt>Hạng</dt><dd id="tTier">Premium</dd></div>
+        </dl>
+      </div>
+      <div class="ticket-stub">
+        <p class="ticket-price" id="tPrice">1.200.000đ</p>
+        <p class="ticket-note">Một vé, giá niêm yết</p>
+        <a class="btn btn-buy" data-stub="btn" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener">Đặt vé này</a>
+      </div>
+    </article>
+  </div>
+  <p class="tickets-note">Xem sơ đồ để tham khảo vị trí các khu vực. Tình trạng ghế được cập nhật tại trang đặt vé.</p>
+</section>
+
+<!-- Những câu chuyện -->
+<section class="scene worlds" id="cau-chuyen" data-theme="dark" data-bar="#0b0908" aria-labelledby="worlds-title">
+  <div class="scene-stage">
+    <div class="worlds-head">
+      <h2 id="worlds-title" class="d3">Những câu chuyện đã kể.</h2>
+      <p>Thế giới âm nhạc OrcheStars qua những mùa diễn trước.</p>
+    </div>
+    <div class="worlds-track" id="worldsTrack">
+      <figure class="stub world" data-stub="card" style="--r:2.134"><img src="assets/img/ttc-2025.webp" width="1800" height="843" alt="Banner A Tale Of Two Christmas 2025" loading="lazy"><figcaption>A Tale Of Two Christmas, 2025</figcaption></figure>
+      <figure class="stub world" data-stub="card" style="--r:2.425"><img src="assets/img/disney-25.webp" width="1800" height="742" alt="Banner Once Upon a Time" loading="lazy"><figcaption>Once Upon a Time, 2025</figcaption></figure>
+      <figure class="stub world" data-stub="card" style="--r:2.716"><img src="assets/img/aot-25.webp" width="1800" height="663" alt="Banner Attack on Titan" loading="lazy"><figcaption>Attack on Titan, 2025</figcaption></figure>
+      <figure class="stub world" data-stub="card" style="--r:.707"><img src="assets/img/ghibli.webp" width="1000" height="1414" alt="Banner Dear Ghibli, My Friend" loading="lazy"><figcaption>Dear Ghibli, My Friend</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- Địa điểm -->
+<section class="scene venue" id="dia-diem" data-theme="light" data-bar="#e4c68c" aria-labelledby="venue-title">
+  <div class="scene-stage">
+    <h2 id="venue-title" class="venue-title"><span>Giữa lòng</span> <span>Sài Gòn</span></h2>
+    <div class="venue-grid">
+      <figure class="venue-slices" role="img" aria-label="Khách sạn Renaissance Riverside bên sông Sài Gòn lúc chạng vạng">
+        <span class="slice" style="--i:0"></span><span class="slice" style="--i:1"></span><span class="slice" style="--i:2"></span><span class="slice" style="--i:3"></span>
+        <figcaption>Renaissance Riverside. Ảnh: Marriott</figcaption>
+      </figure>
+      <div class="venue-text">
+        <p class="serif-lead">Renaissance Riverside Sài Gòn</p>
+        <p>8–15 Tôn Đức Thắng, Phường Sài Gòn, TP. Hồ Chí Minh.</p>
+        <p>Check-in mở 45 phút trước giờ biểu diễn. Bạn nên có mặt ít nhất 30 phút trước khi chương trình bắt đầu.</p>
+        <a class="btn btn-ink" data-stub="btn" data-magnet href="https://www.google.com/maps/dir/?api=1&amp;destination=Renaissance+Riverside+Hotel+Saigon+8-15+Ton+Duc+Thang" target="_blank" rel="noopener">Mở chỉ đường</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hỏi đáp -->
+<section class="faq" id="hoi-dap" data-theme="light" data-bar="#f5f4f0" aria-labelledby="faq-title">
+  <div class="faq-head">
+    <h2 id="faq-title" class="d2" data-rise>Câu hỏi<br>thường gặp.</h2>
+    <p data-rise>Thông tin để cả nhà yên tâm tận hưởng đêm nhạc.</p>
+    <p class="faq-phone" data-rise>Cần thêm hỗ trợ? <a href="tel:+84906502925">0906 502 925</a></p>
+    <figure class="stub faq-photo" data-stub="card" data-tilt data-rise><img src="assets/photos/christmas-2025-05-thumb.webp" width="600" height="400" alt="Gia đình chụp ảnh bên khu vực Giáng Sinh OrcheStars" loading="lazy"></figure>
+  </div>
+  <div class="faq-list" data-rise>
+    <details open><summary>Chương trình có phù hợp với trẻ em không?</summary><div><p>Chương trình chào đón gia đình và trẻ nhỏ. Trẻ từ 3 tuổi trở lên cần có vé riêng. Trẻ dưới 3 tuổi được ngồi trên lòng người lớn.</p></div></details>
+    <details><summary>Tôi mua vé và chọn vị trí như thế nào?</summary><div><p>Xem các hạng vé và sơ đồ khán phòng tại đây, sau đó mở trang đặt vé để chọn suất diễn, vị trí và hoàn tất đặt vé trên hệ thống OrcheStars.</p></div></details>
+    <details><summary>Tôi cần đến lúc mấy giờ?</summary><div><p>Check-in từ 17:15 cho suất 18:00; từ 19:45 cho suất 20:30. Bạn nên đến trước giờ diễn ít nhất 30 phút. Ban tổ chức ngừng nhận check-in lúc 18:15 hoặc 20:45, tương ứng từng suất.</p></div></details>
+    <details><summary>Tôi cần mang gì để check-in?</summary><div><p>Vui lòng xuất trình email kèm vé điện tử chính thức do OrcheStars gửi. Ban tổ chức không chấp nhận ảnh chụp màn hình hoặc ảnh chụp vé.</p></div></details>
+    <details><summary>Vé có được đổi hoặc hoàn tiền không?</summary><div><p>Theo điều khoản của chương trình, vé đã mua không được đổi, trả, chuyển nhượng hoặc hoàn tiền. Vui lòng kiểm tra kỹ ngày và suất diễn trước khi thanh toán.</p></div></details>
+    <details><summary>Tôi có thể chụp ảnh hoặc quay phim không?</summary><div><p>Không sử dụng máy quay chuyên dụng, livestream hoặc chụp ảnh có đèn flash trong buổi diễn. Vui lòng làm theo hướng dẫn của ban tổ chức và giữ không gian thưởng thức chung.</p></div></details>
+    <a class="faq-policy" href="https://orchestars.vn/events/ttc2026#ed-info" target="_blank" rel="noopener">Xem đầy đủ thông tin và điều khoản sự kiện</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer" id="footer" data-theme="dark" data-bar="#0b0908">
+  <div class="footer-grid">
+    <div>
+      <h2 class="footer-h">Liên hệ</h2>
+      <a href="tel:+84906502925">0906 502 925</a>
+      <a href="mailto:info@orchestars.vn">info@orchestars.vn</a>
+      <a href="https://www.google.com/maps/search/?api=1&amp;query=675-677+Dien+Bien+Phu+Binh+Thanh+Ho+Chi+Minh" target="_blank" rel="noopener">675-677 Điện Biên Phủ, Phường 25, Bình Thạnh, TP.HCM</a>
+    </div>
+    <div>
+      <h2 class="footer-h">Kết nối</h2>
+      <a href="https://www.facebook.com/ochchildrenschoir" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.instagram.com/orchestars.vn/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.youtube.com/@orchestars_vn" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://www.tiktok.com/@orchestars" target="_blank" rel="noopener">TikTok</a>
+    </div>
+    <div>
+      <h2 class="footer-h">Về công ty</h2>
+      <a href="https://www.orchestars.vn/" target="_blank" rel="noopener">Công ty Cổ phần Orchestars</a>
+      <a href="https://www.orchestars.vn/terms-policies" target="_blank" rel="noopener">Điều khoản và chính sách</a>
+      <p>Giấy chứng nhận đăng ký doanh nghiệp số 0318788336, cấp lần đầu ngày 23.12.2024 bởi Sở Kế Hoạch và Đầu Tư TP. Hồ Chí Minh.</p>
+    </div>
+    <div class="footer-cta">
+      <a class="btn btn-buy" data-stub="btn" data-magnet href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener">Mua vé</a>
+      <p>© 2026 Công ty Cổ phần Orchestars.</p>
+    </div>
+  </div>
+  <p class="footer-mark" aria-hidden="true"><span class="footer-mark-in">Two Christmas</span></p>
+</footer>
+
+<dialog class="lightbox" id="lightbox" aria-label="Xem ảnh lớn">
+  <button class="lb-close" id="lbClose" aria-label="Đóng ảnh">Đóng</button>
+  <img id="lbImg" alt="">
+  <div class="lb-bar">
+    <button id="lbPrev" aria-label="Ảnh trước">Trước</button>
+    <p id="lbCap"></p>
+    <button id="lbNext" aria-label="Ảnh tiếp theo">Sau</button>
+  </div>
+</dialog>
+
+<script src="js/gate.js"></script>
+</body>
+</html>
