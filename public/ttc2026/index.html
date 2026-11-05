@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="vi" data-season="child">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>A Tale Of Two Christmas 2026 | OrcheStars</title>
+  <meta name="description" content="Một buổi tối của giao hưởng, nhạc kịch Broadway và những giọng ca trong trẻo. 19–20.12.2026 tại Renaissance Riverside Sài Gòn, suất 18:00 và 20:30." />
+  <meta property="og:title" content="A Tale Of Two Christmas 2026" />
+  <meta property="og:description" content="Giáng Sinh đẹp nhất, khi ta ở bên nhau. 19–20.12.2026 tại Renaissance Riverside Sài Gòn." />
+  <meta property="og:image" content="./assets/ttc2026-poster.webp" />
+  <meta name="theme-color" content="#8c1015" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='14' r='12' fill='%238c1015'/%3E%3Crect x='7' y='24' width='18' height='6' rx='2' fill='%23f0b94d'/%3E%3C/svg%3E" />
+  <script>document.documentElement.classList.add('js')</script>
+  <script type="module" crossorigin src="./bundle/index-m80GjDCI.js"></script>
+  <link rel="stylesheet" crossorigin href="./bundle/index-BXO9BSuN.css">
+</head>
+<body>
+  <a class="skip" href="#main">Đến nội dung chính</a>
+
+  <div class="loader" id="loader" aria-hidden="true">
+    <svg class="loader__globe" viewBox="0 0 120 130">
+      <circle cx="60" cy="54" r="48" fill="#fff8ec" />
+      <path class="loader__fill" d="M12 54a48 48 0 0 0 96 0c-12-7-22 7-34 0s-22-7-34 0-18 7-28 0Z" fill="#c8161d" />
+      <circle cx="60" cy="54" r="48" fill="none" stroke="#2a0a0b" stroke-width="5" />
+      <path d="M24 96h72l8 24a4 4 0 0 1-4 5H20a4 4 0 0 1-4-5Z" fill="#f0b94d" stroke="#2a0a0b" stroke-width="5" />
+      <path d="M60 104l3 6 6 2-6 2-3 6-3-6-6-2 6-2Z" fill="#2a0a0b" />
+      <circle cx="42" cy="34" r="4" fill="#2a0a0b" /><circle cx="72" cy="26" r="3" fill="#2a0a0b" /><circle cx="84" cy="44" r="3.5" fill="#2a0a0b" /><circle cx="56" cy="46" r="2.5" fill="#2a0a0b" />
+    </svg>
+    <p class="loader__line">Đang lắc quả cầu tuyết</p>
+    <div class="loader__bar"><span id="loader-bar"></span></div>
+  </div>
+
+  <div class="wipe" id="wipe" aria-hidden="true">
+    <svg class="wipe__art" viewBox="0 0 400 440" fill="none" stroke="currentColor" stroke-width="3">
+      <circle cx="200" cy="180" r="160" /><path d="M72 276c40 26 216 26 256 0M90 340h220l22 74a10 10 0 0 1-10 12H78a10 10 0 0 1-10-12Z" />
+      <path d="M200 120v120M160 150l40 26 40-26M150 240h100M120 90a110 110 0 0 1 60-30" />
+    </svg>
+    <p class="wipe__small">Cảnh tiếp theo đang mở</p>
+    <p class="wipe__title" id="wipe-title">Về đêm nhạc</p>
+  </div>
+
+  <header class="bar" id="bar">
+    <nav class="bar__links bar__links--l" aria-label="Điều hướng chính">
+      <a href="#su-kien" data-chapter="Về đêm nhạc">Đêm nhạc</a>
+      <a href="#khoanh-khac" data-chapter="Khoảnh khắc">Khoảnh khắc</a>
+      <a href="#the-gioi" data-chapter="Những câu chuyện">Câu chuyện</a>
+    </nav>
+    <a class="mark" href="#top" data-chapter="A Tale Of Two Christmas" aria-label="A Tale Of Two Christmas, về đầu trang">
+      <span class="mark__top" aria-hidden="true">A Tale Of</span>
+      <span class="mark__main" id="mark-main" aria-hidden="true">Two Christmas</span>
+    </a>
+    <nav class="bar__links bar__links--r" aria-label="Điều hướng phụ">
+      <a href="#chon-ve" data-chapter="Hạng vé">Hạng vé</a>
+      <a href="#dia-diem" data-chapter="Điểm hẹn">Địa điểm</a>
+      <a href="#hoi-dap" data-chapter="Trước buổi hẹn">Hỏi đáp</a>
+    </nav>
+    <a class="pill pill--small bar__buy" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener"><span>Mua vé</span></a>
+    <button class="bar__menu" id="menu-btn" type="button" aria-expanded="false" aria-controls="menu"><span>Menu</span></button>
+  </header>
+
+  <div class="menu" id="menu" hidden>
+    <a href="#su-kien" data-chapter="Về đêm nhạc">Đêm nhạc</a>
+    <a href="#khoanh-khac" data-chapter="Khoảnh khắc">Khoảnh khắc</a>
+    <a href="#the-gioi" data-chapter="Những câu chuyện">Câu chuyện</a>
+    <a href="#chon-ve" data-chapter="Hạng vé">Hạng vé</a>
+    <a href="#dia-diem" data-chapter="Điểm hẹn">Địa điểm</a>
+    <a href="#hoi-dap" data-chapter="Trước buổi hẹn">Hỏi đáp</a>
+  </div>
+
+  <div class="dock" id="dock">
+    <button class="dock__btn dock__season" id="season-btn" type="button" aria-pressed="false" title="Đổi mùa Giáng Sinh">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M12 3a9 9 0 0 1 0 18Z" fill="currentColor"/></svg>
+      <span id="season-label">Mùa thơ bé</span>
+    </button>
+    <button class="dock__btn dock__music" id="music-btn" type="button" aria-pressed="false" title="Bật hộp nhạc">
+      <span class="eq" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span id="music-label">Hộp nhạc</span>
+    </button>
+  </div>
+
+  <nav class="rail" id="rail" aria-label="Các chương">
+    <a href="#top" data-chapter="A Tale Of Two Christmas" aria-label="Đầu trang"></a>
+    <a href="#su-kien" data-chapter="Về đêm nhạc" aria-label="Về đêm nhạc"></a>
+    <a href="#khoanh-khac" data-chapter="Khoảnh khắc" aria-label="Khoảnh khắc"></a>
+    <a href="#the-gioi" data-chapter="Những câu chuyện" aria-label="Những câu chuyện"></a>
+    <a href="#chon-ve" data-chapter="Hạng vé" aria-label="Hạng vé"></a>
+    <a href="#dia-diem" data-chapter="Điểm hẹn" aria-label="Điểm hẹn"></a>
+    <a href="#hoi-dap" data-chapter="Trước buổi hẹn" aria-label="Hỏi đáp"></a>
+  </nav>
+
+  <main id="main">
+    <!-- Hero: poster chính thức trong khung vòm, cuộn để bay vào quả cầu -->
+    <section class="hero" id="top" data-bar="light" data-rail="0">
+      <canvas class="hero__gl" id="hero-gl" aria-hidden="true"></canvas>
+      <img class="hero__fallback" src="./assets/hero-poster.webp" width="1086" height="1215" alt="Ông già Noel ôm quả cầu tuyết có dàn nhạc và hợp xướng bên trong, cùng dòng chữ A Tale Of Two Christmas" />
+      <div class="hero__baubles" id="baubles" aria-hidden="true"></div>
+      <div class="drift" id="drift" aria-hidden="true"></div>
+
+      <div class="hero__flank hero__flank--l" data-hero-out>
+        <h1 class="hero__title"><span class="sr">A Tale Of Two Christmas 2026. </span>Giáng Sinh bên nhau.</h1>
+        <p class="hero__lead">Một buổi tối của giao hưởng, nhạc kịch Broadway và những giọng ca trong trẻo.</p>
+      </div>
+      <div class="hero__flank hero__flank--r" data-hero-out>
+        <p class="hero__date">19—20.12 <br />2026</p>
+        <p class="hero__where">Renaissance Riverside Sài Gòn<br />Suất 18:00 và 20:30 mỗi ngày</p>
+      </div>
+      <div class="hero__cta" data-hero-out>
+        <a class="pill pill--big" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener"><span>Mua vé</span></a>
+      </div>
+      <button class="hero__shake" id="shake-btn" type="button" data-hero-out>Chạm để lắc tuyết</button>
+      <p class="hero__caption" id="hero-caption">Toàn cảnh khán phòng và sân khấu, Christmas 2025</p>
+    </section>
+
+    <!-- Về đêm nhạc -->
+    <section class="about" id="su-kien" data-bar="dark" data-rail="1">
+      <svg class="edge edge--top" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V40c60-40 120-40 180 0 60-44 130-44 190 0 60-38 120-38 180 0 66-46 136-46 200 0 56-36 118-36 176 0 62-44 130-44 190 0 58-36 118-36 176 0 50-30 100-30 148 0v30Z" /></svg>
+      <div class="about__head">
+        <h2 class="display" data-words>Giáng Sinh đẹp nhất, khi ta ở bên nhau.</h2>
+        <p class="statement" data-words>Hãy cùng OrcheStars bước vào một hành trình âm nhạc qua những mùa Giáng Sinh, từ niềm háo hức chờ quà thời thơ bé đến những cảm xúc khi trưởng thành.</p>
+      </div>
+
+      <div class="roll" aria-hidden="true">
+        <div class="marquee" data-marquee><div class="marquee__row">
+          <span>OrcheStars</span><b></b><span>Giao hưởng</span><b></b><span>Broadway</span><b></b><span>Giáng Sinh</span><b></b><span>Bên nhau</span><b></b>
+          <span>OrcheStars</span><b></b><span>Giao hưởng</span><b></b><span>Broadway</span><b></b><span>Giáng Sinh</span><b></b><span>Bên nhau</span><b></b>
+        </div></div>
+        <div class="roll__globe" id="roll-globe"><img src="./assets/globe-disc.webp" alt="" width="640" height="640" loading="lazy" /></div>
+      </div>
+
+      <div class="two">
+        <article class="two__side" data-season-card="child">
+          <div class="two__pic"><img src="./assets/moments/m-08.webp" alt="Hợp xướng thiếu nhi biểu diễn trước khán giả" width="1000" height="667" loading="lazy" /></div>
+          <h3>Mùa thơ bé</h3>
+          <p>Niềm háo hức chờ quà, sắc đỏ rộn ràng và những giọng ca trong trẻo.</p>
+          <button class="pill" type="button" data-set-season="child"><span>Mở mùa này</span></button>
+        </article>
+        <article class="two__side" data-season-card="adult">
+          <div class="two__pic"><img src="./assets/moments/m-09.webp" alt="Dàn nhạc dưới ánh đèn sân khấu Christmas 2025" width="1000" height="667" loading="lazy" /></div>
+          <h3>Mùa trưởng thành</h3>
+          <p>Những cảm xúc khi đã lớn, khi giai điệu kinh điển gặp nhịp điệu đương đại.</p>
+          <button class="pill" type="button" data-set-season="adult"><span>Mở mùa này</span></button>
+        </article>
+      </div>
+
+      <p class="statement about__tail" data-words>Giao hưởng truyền thống và nhạc kịch Broadway kể hai sắc màu của cùng một mùa lễ hội.</p>
+    </section>
+
+    <!-- Khoảnh khắc: truyện tranh cuộn ngang -->
+    <section class="comic" id="khoanh-khac" data-bar="dark" data-rail="2">
+      <canvas class="comic__gl" id="comic-gl" aria-hidden="true"></canvas>
+      <div class="comic__track" id="comic-track">
+        <div class="comic__intro">
+          <h2 class="display">Qua những khung hình.</h2>
+          <p class="statement">Những nụ cười, những tràng vỗ tay. Những khoảnh khắc từ đêm nhạc Christmas 2025 của OrcheStars.</p>
+          <p class="comic__hint" aria-hidden="true">Cuộn để lật trang <span>→</span></p>
+        </div>
+
+        <article class="page page--a">
+          <h3>Trước giờ diễn</h3>
+          <div class="panels">
+            <figure class="panel p-wide"><button data-zoom="14" type="button" aria-label="Phóng to: Khoảnh khắc tại khu vực đón khách"><img src="./assets/moments/m-14.webp" alt="Khoảnh khắc tại khu vực đón khách Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--tl">Chào đón Giáng Sinh</figcaption></figure>
+            <figure class="panel"><button data-zoom="05" type="button" aria-label="Phóng to: Gia đình chụp ảnh"><img src="./assets/moments/m-05.webp" alt="Gia đình chụp ảnh bên khu vực Giáng Sinh OrcheStars" loading="lazy" /></button><figcaption class="bubble bubble--br">Mùa lễ hội</figcaption></figure>
+            <figure class="panel"><button data-zoom="12" type="button" aria-label="Phóng to: Gia đình lưu lại kỷ niệm"><img src="./assets/moments/m-12.webp" alt="Gia đình lưu lại kỷ niệm bên phông nền Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--bl">Kỷ niệm gia đình</figcaption></figure>
+            <figure class="panel p-wide"><button data-zoom="11" type="button" aria-label="Phóng to: Khán giả chụp ảnh cùng nhau"><img src="./assets/moments/m-11.webp" alt="Khán giả chụp ảnh cùng nhau tại khu vực sự kiện" loading="lazy" /></button><figcaption class="bubble bubble--tr">Đêm nhạc của chúng ta</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="page page--b">
+          <h3>Đèn lên</h3>
+          <div class="panels">
+            <figure class="panel p-tall"><button data-zoom="13" type="button" aria-label="Phóng to: Nghệ sĩ biểu diễn"><img src="./assets/moments/m-13.webp" alt="Nghệ sĩ biểu diễn trên sân khấu Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--bl">Trên sân khấu</figcaption></figure>
+            <figure class="panel p-span2"><button data-zoom="01" type="button" aria-label="Phóng to: Toàn cảnh khán phòng"><img src="./assets/moments/m-01.webp" alt="Toàn cảnh khán phòng và sân khấu Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--tr">Cả khán phòng</figcaption></figure>
+            <figure class="panel"><button data-zoom="06" type="button" aria-label="Phóng to: Sân khấu đỏ rực"><img src="./assets/moments/m-06.webp" alt="Dàn nhạc và sân khấu đỏ rực trong Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--tl">Sân khấu rực rỡ</figcaption></figure>
+            <figure class="panel"><button data-zoom="04" type="button" aria-label="Phóng to: Các nghệ sĩ dàn nhạc"><img src="./assets/moments/m-04.webp" alt="Các nghệ sĩ dàn nhạc biểu diễn tại Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--br">Thanh âm giao hưởng</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="page page--c">
+          <h3>Những giọng ca nhỏ</h3>
+          <div class="panels">
+            <figure class="panel p-wide"><button data-zoom="02" type="button" aria-label="Phóng to: Hợp xướng thiếu nhi trên sân khấu"><img src="./assets/moments/m-02.webp" alt="Các nghệ sĩ và hợp xướng thiếu nhi trên sân khấu Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--tl">Những giọng ca nhỏ</figcaption></figure>
+            <figure class="panel"><button data-zoom="03" type="button" aria-label="Phóng to: Khán giả vỗ tay"><img src="./assets/moments/m-03.webp" alt="Khán giả vỗ tay trong đêm nhạc Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--bl">Những tràng vỗ tay</figcaption></figure>
+            <figure class="panel"><button data-zoom="15" type="button" aria-label="Phóng to: Khán giả từ các tầng khán phòng"><img src="./assets/moments/m-15.webp" alt="Khán giả thưởng thức đêm nhạc từ các tầng khán phòng" loading="lazy" /></button><figcaption class="bubble bubble--br">Thưởng thức âm nhạc</figcaption></figure>
+            <figure class="panel p-wide"><button data-zoom="08" type="button" aria-label="Phóng to: Hợp xướng thiếu nhi biểu diễn"><img src="./assets/moments/m-08.webp" alt="Hợp xướng thiếu nhi biểu diễn trước khán giả" loading="lazy" /></button><figcaption class="bubble bubble--tr">Hợp xướng thiếu nhi</figcaption></figure>
+          </div>
+        </article>
+
+        <article class="page page--d">
+          <h3>Lời chào</h3>
+          <div class="panels">
+            <figure class="panel p-span2"><button data-zoom="07" type="button" aria-label="Phóng to: Các nghệ sĩ chào khán giả"><img src="./assets/moments/m-07.webp" alt="Các nghệ sĩ chào khán giả tại Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--tl">Lời chào sau đêm nhạc</figcaption></figure>
+            <figure class="panel p-tall"><button data-zoom="16" type="button" aria-label="Phóng to: Dàn nhạc trong ánh sáng ấm"><img src="./assets/moments/m-16.webp" alt="Các nghệ sĩ dàn nhạc trong không gian ánh sáng ấm" loading="lazy" /></button><figcaption class="bubble bubble--br">Trong ánh đèn ấm</figcaption></figure>
+            <figure class="panel"><button data-zoom="group" type="button" aria-label="Phóng to: Nghệ sĩ và khán giả"><img src="./assets/moments/m-group.webp" alt="Nghệ sĩ và khán giả cùng lưu lại kỷ niệm sau đêm nhạc Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--bl">Cùng lưu kỷ niệm</figcaption></figure>
+            <figure class="panel"><button data-zoom="10" type="button" aria-label="Phóng to: Khoảnh khắc bên nhau"><img src="./assets/moments/m-10.webp" alt="Nghệ sĩ và khán giả cùng lưu lại kỷ niệm Christmas 2025" loading="lazy" /></button><figcaption class="bubble bubble--tr">Khoảnh khắc bên nhau</figcaption></figure>
+          </div>
+        </article>
+
+        <div class="comic__outro">
+          <h2 class="display">Khung hình tiếp theo có bạn.</h2>
+          <a class="pill pill--big" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener"><span>Mua vé</span></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Thế giới âm nhạc: carousel bìa album -->
+    <section class="albums" id="the-gioi" data-bar="light" data-rail="3">
+      <canvas class="albums__gl" id="albums-gl" aria-hidden="true"></canvas>
+      <div class="albums__head">
+        <h2 class="display">Những câu chuyện.</h2>
+        <p>Những sắc màu trong thế giới âm nhạc OrcheStars.</p>
+      </div>
+      <ol class="albums__stage" id="album-stage">
+        <li class="album" data-title="A Tale Of Two Christmas" data-meta="Christmas, 20.12.2025" data-colors="#a30f18,#f5d9a8,#f7b267">
+          <div class="album__disc" aria-hidden="true"><img src="./assets/album-ttc.webp" alt="" loading="lazy" /></div>
+          <img class="album__cover" src="./assets/album-ttc.webp" alt="Sân khấu Giáng Sinh với ông già Noel, cây thông và dàn nhạc, chương trình năm 2025" width="1000" height="1000" loading="lazy" />
+        </li>
+        <li class="album" data-title="Once Upon a Time" data-meta="Disney, 19–20.07.2025" data-colors="#1533a8,#ff7aa8,#f2a74b">
+          <div class="album__disc" aria-hidden="true"><img src="./assets/album-disney.webp" alt="" loading="lazy" /></div>
+          <img class="album__cover" src="./assets/album-disney.webp" alt="Chiếc vali phép thuật và nhạc trưởng trên nền trời sao" width="1000" height="1000" loading="lazy" />
+        </li>
+        <li class="album" data-title="Attack on Titan" data-meta="Devotion, 25–26.04.2025" data-colors="#1d2a22,#7fbf8e,#9c6a3a">
+          <div class="album__disc" aria-hidden="true"><img src="./assets/album-aot.webp" alt="" loading="lazy" /></div>
+          <img class="album__cover" src="./assets/album-aot.webp" alt="Đôi mắt khổng lồ nhìn xuống nhạc trưởng và dàn nhạc trong khói" width="1000" height="1000" loading="lazy" />
+        </li>
+        <li class="album" data-title="Dear Ghibli, My Friend" data-meta="The Dream Express, 26.10.2024" data-colors="#0d6f7a,#ffd166,#9e2a3a">
+          <div class="album__disc" aria-hidden="true"><img src="./assets/album-ghibli.webp" alt="" loading="lazy" /></div>
+          <img class="album__cover" src="./assets/album-ghibli.webp" alt="Các nhân vật ngồi trên toa tàu dưới dòng chữ Dear Ghibli" width="1000" height="1000" loading="lazy" />
+        </li>
+      </ol>
+      <div class="player">
+        <button type="button" id="album-prev" aria-label="Chương trình trước">
+          <svg viewBox="0 0 24 24"><path d="M18 5v14L8 12Z M5 5h3v14H5Z" fill="currentColor"/></svg>
+        </button>
+        <div class="player__text" aria-live="polite">
+          <strong id="album-title">A Tale Of Two Christmas</strong>
+          <span id="album-meta">Christmas, 20.12.2025</span>
+        </div>
+        <button type="button" id="album-next" aria-label="Chương trình tiếp theo">
+          <svg viewBox="0 0 24 24"><path d="M6 5v14l10-7Z M16 5h3v14h-3Z" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- Hạng vé -->
+    <section class="tickets" id="chon-ve" data-bar="light" data-rail="4">
+      <svg class="edge edge--top" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V40c60-40 120-40 180 0 60-44 130-44 190 0 60-38 120-38 180 0 66-46 136-46 200 0 56-36 118-36 176 0 62-44 130-44 190 0 58-36 118-36 176 0 50-30 100-30 148 0v30Z" /></svg>
+      <h2 class="display" data-rise>Một góc nhìn. Một buổi hẹn.</h2>
+      <div class="tickets__grid">
+        <div class="seatmap" data-rise>
+          <div class="seatmap__svg" id="seatmap" data-active="">
+            <img src="./assets/seating-map.svg" alt="Sơ đồ khán phòng với các khu Standing, Eco, Premium và First Class" loading="lazy" />
+          </div>
+          <p class="seatmap__note">Giá niêm yết cho một vé. Sơ đồ để tham khảo vị trí các khu vực; tình trạng ghế được cập nhật tại trang đặt vé.</p>
+        </div>
+        <div class="ticket-list" id="ticket-list">
+          <article class="ticket" data-zone="first" style="--tier:#e8432f">
+            <div class="ticket__stub"><span>Ngồi</span></div>
+            <div class="ticket__body">
+              <h3>First Class</h3>
+              <p class="ticket__show">A Tale Of Two Christmas, 19—20.12.2026</p>
+              <p class="ticket__price">1.800.000đ</p>
+            </div>
+            <a class="pill pill--small" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener" aria-label="Mua vé First Class"><span>Mua vé</span></a>
+          </article>
+          <article class="ticket" data-zone="premium" style="--tier:#fac41e">
+            <div class="ticket__stub"><span>Ngồi</span></div>
+            <div class="ticket__body">
+              <h3>Premium</h3>
+              <p class="ticket__show">A Tale Of Two Christmas, 19—20.12.2026</p>
+              <p class="ticket__price">1.200.000đ</p>
+            </div>
+            <a class="pill pill--small" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener" aria-label="Mua vé Premium"><span>Mua vé</span></a>
+          </article>
+          <article class="ticket" data-zone="eco" style="--tier:#3d8bf4">
+            <div class="ticket__stub"><span>Ngồi</span></div>
+            <div class="ticket__body">
+              <h3>Eco</h3>
+              <p class="ticket__show">A Tale Of Two Christmas, 19—20.12.2026</p>
+              <p class="ticket__price">800.000đ</p>
+            </div>
+            <a class="pill pill--small" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener" aria-label="Mua vé Eco"><span>Mua vé</span></a>
+          </article>
+          <article class="ticket" data-zone="standing" style="--tier:#85b35b">
+            <div class="ticket__stub"><span>Đứng</span></div>
+            <div class="ticket__body">
+              <h3>Standing</h3>
+              <p class="ticket__show">A Tale Of Two Christmas, 19—20.12.2026</p>
+              <p class="ticket__price">200.000đ</p>
+            </div>
+            <a class="pill pill--small" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener" aria-label="Mua vé Standing"><span>Mua vé</span></a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Điểm hẹn -->
+    <section class="venue" id="dia-diem" data-bar="dark" data-rail="5">
+      <div class="venue__pic" id="venue-pic">
+        <img src="./assets/renaissance-exterior.jpg" alt="Khách sạn Renaissance Riverside Sài Gòn nhìn từ bên ngoài" width="1400" height="787" loading="lazy" />
+      </div>
+      <div class="venue__text">
+        <h2 class="display" data-rise>Giữa lòng Sài Gòn.</h2>
+        <p class="statement" data-rise>Renaissance Riverside Sài Gòn, 8–15 Tôn Đức Thắng, Phường Sài Gòn, TP. Hồ Chí Minh.</p>
+        <div class="checkin" data-rise>
+          <div><strong>17:15</strong><span>Bắt đầu check-in cho suất 18:00</span></div>
+          <div><strong>19:45</strong><span>Bắt đầu check-in cho suất 20:30</span></div>
+        </div>
+        <p data-rise>Áp dụng cho cả hai ngày 19 và 20.12.2026. Bạn nên có mặt trước giờ diễn ít nhất 30 phút.</p>
+        <div class="venue__actions" data-rise>
+          <a class="pill" href="https://www.google.com/maps/dir/?api=1&amp;destination=Renaissance+Riverside+Hotel+Saigon+8-15+Ton+Duc+Thang" target="_blank" rel="noopener"><span>Mở chỉ đường</span></a>
+          <small>Ảnh: Marriott</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Hỏi đáp -->
+    <section class="faq" id="hoi-dap" data-bar="light" data-rail="6">
+      <svg class="edge edge--top" viewBox="0 0 1440 70" preserveAspectRatio="none" aria-hidden="true"><path d="M0 70V40c60-40 120-40 180 0 60-44 130-44 190 0 60-38 120-38 180 0 66-46 136-46 200 0 56-36 118-36 176 0 62-44 130-44 190 0 58-36 118-36 176 0 50-30 100-30 148 0v30Z" /></svg>
+      <div class="faq__side">
+        <h2 class="display" data-rise>Câu hỏi thường gặp.</h2>
+        <p data-rise>Thông tin để cả nhà yên tâm tận hưởng đêm nhạc.</p>
+        <p class="faq__help" data-rise>Cần thêm hỗ trợ?<br /><a href="tel:+84906502925">0906 502 925</a></p>
+      </div>
+      <div class="faq__list" id="faq-list">
+        <details open>
+          <summary>Chương trình có phù hợp với trẻ em không?</summary>
+          <div><p>Chương trình chào đón gia đình và trẻ nhỏ. Trẻ từ 3 tuổi trở lên cần có vé riêng. Trẻ dưới 3 tuổi được ngồi trên lòng người lớn.</p></div>
+        </details>
+        <details>
+          <summary>Tôi mua vé và chọn vị trí như thế nào?</summary>
+          <div><p>Xem các hạng vé và sơ đồ khán phòng tại đây, sau đó mở “Mua vé” để chọn suất diễn, vị trí và hoàn tất đặt vé trên hệ thống OrcheStars.</p></div>
+        </details>
+        <details>
+          <summary>Tôi cần đến lúc mấy giờ?</summary>
+          <div><p>Check-in từ 17:15 cho suất 18:00; từ 19:45 cho suất 20:30. Bạn nên đến trước giờ diễn ít nhất 30 phút. Ban tổ chức ngừng nhận check-in lúc 18:15 hoặc 20:45, tương ứng từng suất.</p></div>
+        </details>
+        <details>
+          <summary>Tôi cần mang gì để check-in?</summary>
+          <div><p>Vui lòng xuất trình email kèm vé điện tử chính thức do OrcheStars gửi. Ban tổ chức không chấp nhận ảnh chụp màn hình hoặc ảnh chụp vé.</p></div>
+        </details>
+        <details>
+          <summary>Vé có được đổi hoặc hoàn tiền không?</summary>
+          <div><p>Theo điều khoản của chương trình, vé đã mua không được đổi, trả, chuyển nhượng hoặc hoàn tiền. Vui lòng kiểm tra kỹ ngày và suất diễn trước khi thanh toán.</p></div>
+        </details>
+        <details>
+          <summary>Tôi có thể chụp ảnh hoặc quay phim không?</summary>
+          <div><p>Không sử dụng máy quay chuyên dụng, livestream hoặc chụp ảnh có đèn flash trong buổi diễn. Vui lòng làm theo hướng dẫn của ban tổ chức và giữ không gian thưởng thức chung.</p></div>
+        </details>
+        <a class="faq__more" href="https://orchestars.vn/events/ttc2026#ed-info" target="_blank" rel="noopener">Xem đầy đủ thông tin và điều khoản sự kiện ↗</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot" data-bar="light">
+    <div class="foot__logo"><img id="foot-logo" src="./assets/logotype-gold.webp" alt="A Tale Of Two Christmas" loading="lazy" /></div>
+    <div class="foot__action">
+      <p class="statement">19—20.12.2026, Renaissance Riverside Sài Gòn.</p>
+      <a class="pill pill--big pill--gold" href="https://orchestars.vn/events/ttc2026" target="_blank" rel="noopener"><span>Mua vé</span></a>
+    </div>
+    <div class="foot__grid">
+      <div>
+        <img class="foot__brand" src="./assets/logo-light.svg" alt="OrcheStars" width="188" height="26" loading="lazy" />
+        <p>Công ty Cổ phần Orchestars<br />675-677 Đường Điện Biên Phủ, Phường 25, Quận Bình Thạnh, TP.HCM</p>
+        <p>Giấy chứng nhận đăng ký doanh nghiệp số 0318788336, cấp lần đầu ngày 23.12.2024 bởi Sở Kế Hoạch và Đầu Tư TP. Hồ Chí Minh.</p>
+      </div>
+      <div class="foot__links">
+        <a href="tel:+84906502925">0906 502 925</a>
+        <a href="mailto:info@orchestars.vn">info@orchestars.vn</a>
+        <a href="https://www.orchestars.vn/terms-policies" target="_blank" rel="noopener">Điều khoản và Chính sách</a>
+      </div>
+      <div class="foot__links">
+        <a href="https://www.facebook.com/ochchildrenschoir" target="_blank" rel="noopener">Facebook</a>
+        <a href="https://www.instagram.com/orchestars.vn/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://www.tiktok.com/@orchestars" target="_blank" rel="noopener">TikTok</a>
+        <a href="https://www.youtube.com/@orchestars_vn" target="_blank" rel="noopener">YouTube</a>
+      </div>
+    </div>
+    <p class="foot__copy">© 2025 Công ty Cổ phần Orchestars. All rights reserved.</p>
+  </footer>
+
+  <dialog class="zoom" id="zoom">
+    <button type="button" class="zoom__close" id="zoom-close" aria-label="Đóng ảnh">×</button>
+    <img id="zoom-img" alt="" />
+    <p id="zoom-cap"></p>
+  </dialog>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><clipPath id="deckle" clipPathUnits="objectBoundingBox"><path id="deckle-path" d="M0 0H1V1H0Z" /></clipPath></defs></svg>
+</body>
+</html>
