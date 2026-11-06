@@ -1,0 +1,376 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, viewport-fit=cover">
+<title>Viết Trung &amp; Bùi Anh</title>
+<meta name="description" content="Trân trọng kính mời bạn dự lễ thành hôn của Viết Trung và Bùi Anh, 18 giờ 00, Thứ Bảy 28.11.2026 tại W. Jardin, Hải Phòng.">
+<meta name="theme-color" content="#0F2C27">
+<meta property="og:title" content="Viết Trung &amp; Bùi Anh, 28.11.2026">
+<meta property="og:description" content="18 giờ 00, Thứ Bảy 28.11.2026 tại W. Jardin, Hải Phòng.">
+<meta property="og:image" content="https://roylle.github.io/trunganhweddingv3/assets/img/og.jpg">
+<meta property="og:url" content="https://roylle.github.io/trunganhweddingv3/">
+<link rel="canonical" href="https://roylle.github.io/trunganhweddingv3/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23E98F7E' d='M16 28S3 20 3 11a7 7 0 0 1 13-3.6A7 7 0 0 1 29 11c0 9-13 17-13 17z'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@300;400;500&family=Imperial+Script&family=Noto+Serif+Display:wdth,wght@62.5..100,300..700&display=swap&subset=vietnamese">
+<link rel="preload" as="image" href="assets/img/hero-2400.webp" imagesrcset="assets/img/hero-1300.webp 1300w, assets/img/hero-2400.webp 2400w" imagesizes="(max-aspect-ratio: 85/100) 150vh, 100vw" fetchpriority="high">
+<link rel="stylesheet" href="assets/css/app.css">
+<script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<!-- Màn mở đầu: một ô vòm mở ra, đi xuyên qua vòm là vào thiệp -->
+<div class="pre" id="pre" aria-hidden="true">
+  <div class="pre-bg" id="preHole"></div>
+  <div class="pre-copy" id="preCopy">
+    <svg class="pre-mark" viewBox="0 0 120 120"><use href="#wreath"/><text x="60" y="73" text-anchor="middle" class="mono">T&amp;A</text></svg>
+    <p class="pre-names" data-pre="h">Viết Trung &amp; Bùi Anh</p>
+    <p class="pre-date" data-pre="p">Một lời mời đang mở ra</p>
+    <div class="pre-track"><i id="preBar"></i></div>
+    <p class="pre-count" id="preCount">0</p>
+  </div>
+</div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <g id="wreath"></g>
+    <path id="logoCircle" d="M60 60m-49 0a49 49 0 1 1 98 0a49 49 0 1 1-98 0"/>
+  </defs>
+</svg>
+
+<a class="skip" href="#loi-moi">Đến lời mời</a>
+
+<!-- Khung cố định: logo xoay, thanh cuộn phần trăm, các đường dẫn -->
+<header class="hud">
+  <a class="logo hud-t" href="#dau-thiep" aria-label="Về đầu thiệp" data-magnetic data-strength="18">
+    <svg viewBox="0 0 120 120" aria-hidden="true">
+      <g class="logo-ring"><text class="ring-t"><textPath href="#logoCircle">Viết Trung &amp; Bùi Anh · 28.11.2026 ·</textPath></text></g>
+      <text x="60" y="71" text-anchor="middle" class="mono">T&amp;A</text>
+    </svg>
+  </a>
+  <nav class="hud-nav hud-t" aria-label="Lối tắt">
+    <a class="big" href="assets/viet-trung-bui-anh.ics" download data-flip>Thêm vào lịch</a>
+    <a href="#dia-diem" data-flip>Địa điểm</a>
+    <button type="button" class="menu-open" id="menuOpen" aria-expanded="false" aria-controls="menu" data-flip>Mục lục</button>
+  </nav>
+</header>
+
+<aside class="sbar hud-t" id="sbar" aria-label="Tiến độ xem thiệp">
+  <div class="sbar-track" id="sbarTrack">
+    <i class="sbar-fill" id="sbarFill"></i>
+    <nav class="sbar-ticks" id="sbarTicks" aria-label="Các phần của thiệp"></nav>
+    <i class="sbar-thumb" id="sbarThumb" aria-hidden="true"><b id="sbarLabel">00</b></i>
+  </div>
+  <span class="sbar-word">Cuộn</span>
+</aside>
+
+<div class="menu" id="menu" hidden>
+  <div class="menu-arch" id="menuArch"></div>
+  <button type="button" class="menu-close" id="menuClose" data-flip>Đóng</button>
+  <nav class="menu-list" aria-label="Mục lục">
+    <a href="#dau-thiep">Đầu thiệp</a>
+    <a href="#loi-moi">Lời mời</a>
+    <a href="#ngay-cuoi">Ngày cưới</a>
+    <a href="#album">Album ảnh</a>
+    <a href="#dia-diem">Địa điểm</a>
+  </nav>
+  <p class="menu-foot">18 giờ 00, Thứ Bảy 28.11.2026<br>W. Jardin, 307 Nguyễn Văn Linh, Hải Phòng</p>
+</div>
+
+<div class="tip" id="tip" role="status"></div>
+<div class="drag-cursor" id="dragCursor" aria-hidden="true"><span>Kéo</span></div>
+
+<main>
+
+  <!-- 1. Mở màn -->
+  <section class="hero-area" id="dau-thiep" data-bg="cream" data-hero>
+    <div class="hero-stage" id="heroStage" data-mode="doi">
+      <div class="hero-bg" id="heroBg">
+        <img class="hero-img" id="heroImg" src="assets/img/hero-2400.webp" srcset="assets/img/hero-1300.webp 1300w, assets/img/hero-2400.webp 2400w" sizes="(max-aspect-ratio: 85/100) 150vh, 100vw" width="2400" height="3600" fetchpriority="high" alt="Bùi Anh và Viết Trung cười rạng rỡ trước vòm hoa kem và hồng">
+        <button type="button" class="pin" style="--x:11.7%;--y:35.7%" data-tip="Hoa ly hồng trên vòm hoa cưới" aria-label="Về hoa ly"><i></i><i></i><b></b></button>
+        <button type="button" class="pin" style="--x:47.7%;--y:46.7%" data-tip="Bùi Anh, út nữ của ông Bùi Xuân Thái và bà Phạm Thị Sự" aria-label="Về cô dâu Bùi Anh"><i></i><i></i><b></b></button>
+        <button type="button" class="pin" style="--x:73%;--y:39.7%" data-tip="Viết Trung, út nam của ông Lê Viết Cảnh và bà Nguyễn Thị Cúc" aria-label="Về chú rể Viết Trung"><i></i><i></i><b></b></button>
+      </div>
+      <div class="hero-venue" id="heroVenue" aria-hidden="true"><img src="assets/img/w1.webp" width="2000" height="1333" alt=""></div>
+
+      <div class="hero-copy" id="heroCopy">
+        <h1 class="hero-title">
+          <span class="hero-line" data-hero-r>Viết Trung</span>
+          <span class="hero-amp" data-hero-r>&amp;</span>
+          <span class="hero-line" data-hero-r>Bùi Anh</span>
+        </h1>
+        <p class="hero-script">Lễ thành hôn</p>
+        <div class="hero-row">
+          <p class="hero-side" data-hero-a>Thứ Bảy 28.11.2026</p>
+          <div class="hero-switch" role="group" aria-label="Đổi ảnh nền">
+            <button type="button" class="on" data-show="doi" aria-pressed="true">Đôi mình</button>
+            <span class="hero-switch-line" aria-hidden="true"><i id="switchDot"></i></span>
+            <button type="button" data-show="noi" aria-pressed="false">Nơi hẹn</button>
+          </div>
+          <p class="hero-side" data-hero-a>18 giờ, W. Jardin</p>
+        </div>
+      </div>
+
+      <a class="round-btn hero-cta" href="#loi-moi" data-magnetic data-arcs>
+        <svg viewBox="0 0 220 220" aria-hidden="true"><circle class="arc" cx="110" cy="110" r="103.5"/><circle class="arc arc2" cx="110" cy="110" r="103.5"/></svg>
+        <span data-magnetic-inner>Mở lời mời</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- 2. Vòm dâng lên + lời mời -->
+  <section class="invite" id="loi-moi" data-bg="sage" data-arched>
+    <div class="arch-top" id="archTop">
+      <svg class="arc-text" viewBox="0 0 1020 530" aria-hidden="true">
+        <path id="arcPath" d="M36 526A474 474 0 0 1 984 526" fill="none"/>
+        <text id="arcWords"><textPath href="#arcPath" startOffset="50%" text-anchor="middle">Một lời mời Hai gia đình Một đời bên nhau</textPath></text>
+      </svg>
+      <div class="arch-mid">
+        <div class="arch-mark-row">
+          <span>Hải Phòng</span>
+          <svg class="arch-mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#wreath"/><text x="60" y="73" text-anchor="middle" class="mono">T&amp;A</text></svg>
+          <span>Tháng Mười Một</span>
+        </div>
+        <i class="arch-line" data-draw></i>
+        <p class="arch-sub" data-r="p">Hai người con út của hai gia đình sắp về chung một mái.<br>Chúng mình muốn bạn có mặt trong tối hôm ấy.</p>
+      </div>
+    </div>
+
+    <div class="inv-area" id="invArea">
+      <div class="inv-stage">
+        <h2 class="inv-title" aria-live="polite"><span id="invTitle" data-fit data-fit-text="Trân trọng kính mời">Trân trọng kính mời</span></h2>
+        <div class="inv-mid">
+          <div class="inv-frame" id="invFrame">
+            <img class="on" src="assets/img/doi-tay.webp" srcset="assets/img/doi-tay-800.webp 800w, assets/img/doi-tay.webp 1600w" sizes="(max-width: 991px) 88vw, 38vw" data-focus=".41,.235,.70,.385" width="1600" height="2400" alt="Hai bạn nắm tay nhau, mỉm cười trước vòm hoa">
+            <img src="assets/img/can-doi.webp" srcset="assets/img/can-doi-800.webp 800w, assets/img/can-doi.webp 1600w" sizes="(max-width: 991px) 88vw, 38vw" data-focus=".14,.09,.76,.60" width="1600" height="1262" alt="Khung cận Viết Trung và Bùi Anh trên nền xám">
+            <img src="assets/img/co-dau.webp" srcset="assets/img/co-dau-800.webp 800w, assets/img/co-dau.webp 1600w" sizes="100vw" data-focus=".47,.21,.62,.34" width="1600" height="2400" alt="Bùi Anh nhìn nghiêng, tà voan trải dài">
+          </div>
+          <div class="inv-ctrl">
+            <button type="button" id="invPrev" aria-label="Phần trước">‹</button>
+            <span id="invNow">1</span>
+            <span class="inv-progress"><i id="invBar"></i></span>
+            <span>3</span>
+            <button type="button" id="invNext" aria-label="Phần sau">›</button>
+          </div>
+        </div>
+        <div class="inv-copy">
+          <div class="inv-slide on">
+            <p>Kính mời <label class="guest"><span class="sr">Tên khách mời</span><input id="guest" type="text" maxlength="40" placeholder="tên của bạn" autocomplete="off" spellcheck="false"></label> tới dự bữa cơm thân mật mừng lễ thành hôn của hai chúng tôi.</p>
+          </div>
+          <div class="inv-slide">
+            <p class="fam-who">Viết Trung, út nam</p>
+            <p>Bố Lê Viết Cảnh, mẹ Nguyễn Thị Cúc</p>
+          </div>
+          <div class="inv-slide">
+            <p class="fam-who">Bùi Anh, út nữ</p>
+            <p>Bố Bùi Xuân Thái, mẹ Phạm Thị Sự</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. Một câu trên nền ảnh lớn -->
+  <section class="quote" data-bg="cream" data-frame>
+    <img class="quote-img" src="assets/img/doi-xam.webp" srcset="assets/img/doi-xam-800.webp 800w, assets/img/doi-xam.webp 1600w" sizes="(max-aspect-ratio: 85/100) 80vh, 100vw" data-focus=".38,.21,.70,.35" data-fy=".42" data-zoom width="1600" height="2400" alt="Hai bạn ngoắc ngón út, cười với nhau trên nền xám">
+    <p class="quote-text" data-r="p">Có những ngày mình muốn giữ thật lâu. Tối 28 tháng 11 là một ngày như thế.</p>
+    <img class="flower f-quote" src="assets/img/f-hyd.webp" width="680" height="650" alt="" data-drift="-14">
+  </section>
+
+  <!-- 4. Trượt ngang -->
+  <section class="track-area" id="ngay-cuoi" data-bg="cream">
+    <div class="track-stage">
+      <div class="track" id="track">
+
+        <article class="panel p-note">
+          <img class="flower f-a" src="assets/img/f-lily.webp" width="900" height="1117" alt="" data-driftx="-16">
+          <img class="flower f-b" src="assets/img/f-ball.webp" width="800" height="813" alt="" data-driftx="14">
+          <p class="note-big" data-r="p">Một bữa cơm thân mật, những người thương nhau ngồi lại cùng một bàn, và một lời hứa nói trước mặt tất cả.</p>
+          <p class="note-sm" data-r="p">Không cần cầu kỳ. Chúng mình chỉ mong được thấy bạn ở đó.</p>
+        </article>
+
+        <article class="panel p-steps">
+          <p class="step-word" data-r="a">Hải Phòng</p>
+          <h2 class="steps" aria-label="Ngày về chung một nhà">
+            <span class="step" data-step>Ngày</span>
+            <span class="step" data-step>về chung</span>
+            <span class="step" data-step>một nhà</span>
+          </h2>
+          <figure class="steps-photo" data-frame>
+            <img src="assets/img/doi-kem.webp" srcset="assets/img/doi-kem-800.webp 800w, assets/img/doi-kem.webp 1600w" sizes="(max-aspect-ratio: 85/100) 100vw, 44vw" data-focus=".38,.21,.71,.38" data-fy=".3" width="1600" height="2400" alt="Bùi Anh khoác tay Viết Trung trước vòm hoa">
+          </figure>
+        </article>
+
+        <article class="panel p-date">
+          <div class="date-left">
+            <p class="date-kicker" data-r="a">Thứ Bảy</p>
+            <p class="date-num">28</p>
+            <p class="date-kicker" data-r="a">11 2026</p>
+          </div>
+          <div class="date-mid">
+            <p class="date-lead" data-r="p">Đón bạn lúc 18 giờ 00, tức ngày 20 tháng 10 năm Bính Ngọ.</p>
+            <a class="pill" href="assets/viet-trung-bui-anh.ics" download data-magnetic data-strength="14"><span data-magnetic-inner>Thêm vào lịch của bạn</span></a>
+          </div>
+          <div class="cal" id="cal">
+            <p class="cal-head">Tháng 11, 2026</p>
+            <div class="cal-grid" id="calGrid" aria-label="Lịch tháng 11 năm 2026, ngày 28 được đánh dấu là ngày cưới"></div>
+          </div>
+        </article>
+
+        <article class="panel p-path">
+          <img class="flower f-c" src="assets/img/f-lily2.webp" width="800" height="1120" alt="" data-driftx="12">
+          <h2 class="path-title">
+            <span data-r="h">Hẹn bạn</span>
+            <em>tối ấy</em>
+            <span data-r="h">ở W. Jardin</span>
+          </h2>
+          <div class="path" id="path">
+            <svg viewBox="0 0 1200 170" aria-hidden="true">
+              <path class="path-ln" d="M10 128C70 88 130 148 196 116S320 66 372 104 498 146 600 66"/>
+              <path class="path-ln" d="M1190 128C1130 88 1070 148 1004 116S880 66 828 104 702 146 600 66"/>
+              <path class="path-heart" id="pathHeart" transform="translate(586 40) scale(.9)" d="M16 28S2 19 2 10a7 7 0 0 1 14-2.2A7 7 0 0 1 30 10c0 9-14 18-14 18z"/>
+            </svg>
+            <p style="--x:0%;--y:88%"><b>Nhà trai</b>Viết Trung</p>
+            <p style="--x:24%;--y:2%"><b>Thứ Bảy</b>28.11.2026</p>
+            <p class="path-mid" style="--x:50%;--y:18%"><b>Về chung một nhà</b></p>
+            <p style="--x:68%;--y:2%"><b>18 giờ 00</b>W. Jardin</p>
+            <p style="--x:92%;--y:88%"><b>Nhà gái</b>Bùi Anh</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Album kéo được -->
+  <section class="album" id="album" data-bg="sage">
+    <h2 class="album-title"><span data-fit>Những tấm ảnh chúng mình thích</span></h2>
+    <div class="album-rail" id="rail" tabindex="0" aria-label="Album ảnh, kéo ngang để xem thêm">
+      <button type="button" class="card tall" data-full="assets/img/co-dau.webp"><img src="assets/img/co-dau.webp" srcset="assets/img/co-dau-800.webp 800w, assets/img/co-dau.webp 1600w" sizes="(max-aspect-ratio: 85/100) 60vw, 46vh" width="1600" height="2400" alt="Bùi Anh nhìn nghiêng, tà voan trải dài"></button>
+      <button type="button" class="card" data-full="assets/img/hoa-tulip.webp"><img src="assets/img/hoa-tulip.webp" width="1000" height="929" alt="Bó tulip trắng trong tay Bùi Anh"></button>
+      <button type="button" class="card tall" data-full="assets/img/doi-tay.webp"><img src="assets/img/doi-tay.webp" srcset="assets/img/doi-tay-800.webp 800w, assets/img/doi-tay.webp 1600w" sizes="(max-aspect-ratio: 85/100) 60vw, 46vh" width="1600" height="2400" alt="Hai bạn nắm tay nhau trước vòm hoa"></button>
+      <button type="button" class="card wide" data-full="assets/img/can-doi.webp"><img src="assets/img/can-doi.webp" srcset="assets/img/can-doi-800.webp 800w, assets/img/can-doi.webp 1600w" sizes="(max-aspect-ratio: 85/100) 60vw, 46vh" width="1600" height="1262" alt="Khung cận hai bạn trên nền xám"></button>
+      <button type="button" class="card" data-full="assets/img/hoa-ly.webp"><img src="assets/img/hoa-ly.webp" width="1000" height="1496" alt="Chùm hoa ly hồng"></button>
+      <button type="button" class="card tall" data-full="assets/img/hero-2400.webp"><img src="assets/img/hero-1300.webp" width="1300" height="1950" alt="Hai bạn đứng trước vòm hoa kem và hồng"></button>
+      <button type="button" class="card" data-full="assets/img/tay-nam.webp"><img src="assets/img/tay-nam.webp" width="1000" height="861" alt="Tay Viết Trung nắm tay Bùi Anh"></button>
+      <button type="button" class="card tall" data-full="assets/img/doi-xam.webp"><img src="assets/img/doi-xam.webp" srcset="assets/img/doi-xam-800.webp 800w, assets/img/doi-xam.webp 1600w" sizes="(max-aspect-ratio: 85/100) 60vw, 46vh" width="1600" height="2400" alt="Hai bạn ngoắc ngón út trên nền xám"></button>
+      <button type="button" class="card" data-full="assets/img/hoa-hong.webp"><img src="assets/img/hoa-hong.webp" width="1000" height="1011" alt="Bó hoa hồng của Bùi Anh"></button>
+    </div>
+    <div class="album-foot">
+      <span>Kéo để xem thêm, chạm vào ảnh để phóng to</span>
+      <span class="album-progress"><i id="railBar"></i></span>
+    </div>
+  </section>
+
+  <!-- 6. Đôi nhẫn: cảnh cao, xoay theo cuộn -->
+  <section class="rings-area" id="doi-nhan" data-bg="deep">
+    <div class="rings-stage" id="ringsStage">
+      <ul class="rings-words" id="ringWords">
+        <li>Một lời hẹn</li>
+        <li>Một mái nhà</li>
+        <li>Một đời bên nhau</li>
+      </ul>
+      <canvas id="rings" aria-label="Hai chiếc nhẫn xoay lại gần rồi lồng vào nhau" role="img"></canvas>
+      <svg class="rings-flat" viewBox="0 0 300 200" aria-hidden="true"><circle cx="118" cy="100" r="62"/><circle cx="182" cy="100" r="62"/></svg>
+    </div>
+  </section>
+
+  <!-- 7. Đếm ngày -->
+  <section class="days" data-bg="cream" data-arched>
+    <img class="flower f-d" src="assets/img/f-lily.webp" width="900" height="1117" alt="" data-drift="-16">
+    <h2 class="days-title">
+      <span class="days-line" data-r="h">Chỉ còn</span>
+      <span class="days-num" id="cdDays">22</span>
+      <em id="cdUnit">ngày nữa</em>
+    </h2>
+    <div class="clock" id="clock" aria-label="Đếm ngược đến 18 giờ ngày 28.11.2026">
+      <p><b id="cdH">00</b>giờ</p><p><b id="cdM">00</b>phút</p><p><b id="cdS">00</b>giây</p>
+    </div>
+    <div class="days-grid">
+      <figure class="dk-left" data-frame>
+        <img src="assets/img/hoa-tulip.webp" width="1000" height="929" alt="Bó tulip trắng trong tay Bùi Anh" data-par>
+      </figure>
+      <figure class="dk-right" data-frame>
+        <img src="assets/img/can-doi.webp" srcset="assets/img/can-doi-800.webp 800w, assets/img/can-doi.webp 1600w" sizes="(max-aspect-ratio: 85/100) 100vw, 62vw" data-focus=".14,.09,.76,.60" width="1600" height="1262" alt="Viết Trung và Bùi Anh cười rạng rỡ">
+      </figure>
+      <p class="dk-text" data-r="p">Niềm vui này sẽ đẹp hơn khi được sẻ chia cùng những người thân thương. Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi.</p>
+    </div>
+  </section>
+
+  <!-- 8. Hai ô cửa mở ra thành sảnh tiệc -->
+  <section class="win-area" id="dia-diem" data-bg="cream" data-win>
+    <div class="win-stage" id="winStage">
+      <div class="win win-l" id="winL"><img src="assets/img/w6.webp" srcset="assets/img/w6-1000.webp 1000w, assets/img/w6.webp 2000w" sizes="(max-aspect-ratio: 85/100) 150vh, 100vw" width="2000" height="1333" alt="Sảnh tiệc W. Jardin với những vòm trần cong"></div>
+      <div class="win win-r" id="winR"><img src="assets/img/w6.webp" srcset="assets/img/w6-1000.webp 1000w, assets/img/w6.webp 2000w" sizes="(max-aspect-ratio: 85/100) 150vh, 100vw" width="2000" height="1333" alt=""></div>
+      <img class="flower f-wl" id="fWL" src="assets/img/f-ball.webp" width="800" height="813" alt="">
+      <img class="flower f-wr" id="fWR" src="assets/img/f-lily.webp" width="900" height="1117" alt="">
+      <div class="win-copy" id="winCopy">
+        <em>Nơi hẹn</em>
+        <h2 data-fit>W. Jardin</h2>
+        <p>Trung tâm tiệc cưới ở số 307 Nguyễn Văn Linh, phường Kênh Dương, thành phố Hải Phòng.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="venue" data-bg="cream">
+    <div class="venue-grid">
+      <div class="venue-text">
+        <h2 class="venue-title"><span data-r="h">Tìm đường</span><em>đến với</em><span data-r="h">chúng mình</span></h2>
+        <address data-r="p">Số 307 Nguyễn Văn Linh, phường Kênh Dương, thành phố Hải Phòng</address>
+        <div class="venue-btns">
+          <a class="pill" href="https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x314a7b900f6e0d17:0x526fde7e0ed121fb!3e0?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF" target="_blank" rel="noopener" data-magnetic data-strength="14"><span data-magnetic-inner>Chỉ đường đến W. Jardin</span></a>
+          <a class="pill ghost" href="https://wjardin.com/sanh-tiec-cuoi/" target="_blank" rel="noopener" data-magnetic data-strength="14"><span data-magnetic-inner>Xem sảnh tiệc</span></a>
+        </div>
+      </div>
+      <div class="venue-map">
+        <iframe title="Bản đồ đến W. Jardin, 307 Nguyễn Văn Linh, Hải Phòng" id="mapFrame" referrerpolicy="no-referrer-when-downgrade" data-src="https://www.google.com/maps?cid=5940211066520805883&amp;output=embed&amp;hl=vi"></iframe>
+      </div>
+    </div>
+    <div class="venue-strip">
+      <figure data-frame><img src="assets/img/w2.webp" srcset="assets/img/w2-800.webp 800w, assets/img/w2.webp 1365w" sizes="(max-aspect-ratio: 85/100) 60vw, 40vw" width="1365" height="2048" alt="Bánh cưới trắng trước tường xanh ngọc" data-par></figure>
+      <figure data-frame><img src="assets/img/w3.webp" srcset="assets/img/w3-1000.webp 1000w, assets/img/w3.webp 2000w" sizes="(max-aspect-ratio: 85/100) 60vw, 40vw" width="2000" height="1333" alt="Tháp ly trước phông W. Jardin" data-par></figure>
+      <figure data-frame><img src="assets/img/w4.webp" srcset="assets/img/w4-800.webp 800w, assets/img/w4.webp 1365w" sizes="(max-aspect-ratio: 85/100) 60vw, 40vw" width="1365" height="2048" alt="Cẩm tú cầu trắng và chùm hoa treo" data-par></figure>
+    </div>
+  </section>
+
+  <!-- 9. Kết -->
+  <section class="final" data-bg="cream" data-frame>
+    <img class="final-img" src="assets/img/doi-tay.webp" srcset="assets/img/doi-tay-800.webp 800w, assets/img/doi-tay.webp 1600w" sizes="(max-aspect-ratio: 85/100) 80vh, 100vw" data-focus=".41,.235,.70,.385" data-fy=".66" data-zoom width="1600" height="2400" alt="Hai bạn nắm tay nhau, cười trước vòm hoa">
+    <div class="final-copy">
+      <h2 data-fit-max><span data-r="h">Hẹn gặp bạn</span></h2>
+      <em>tối 28 tháng 11</em>
+    </div>
+  </section>
+</main>
+
+<footer class="foot" data-bg="deep">
+  <svg class="foot-mark" viewBox="0 0 120 120" aria-hidden="true"><use href="#wreath"/><text x="60" y="73" text-anchor="middle" class="mono">T&amp;A</text></svg>
+  <p class="foot-big"><span data-fit>28.11.2026</span></p>
+  <p class="foot-addr">Rất hân hạnh được đón tiếp!</p>
+  <div class="foot-row">
+    <p>Viết Trung &amp; Bùi Anh<br>18 giờ 00, Thứ Bảy</p>
+    <p class="foot-links">
+      <a href="assets/viet-trung-bui-anh.ics" download data-flip>Thêm vào lịch</a>
+      <a href="#dia-diem" data-flip>Địa điểm</a>
+      <a href="#dau-thiep" data-flip>Về đầu thiệp</a>
+    </p>
+    <p>W. Jardin, 307 Nguyễn Văn Linh<br>Kênh Dương, Hải Phòng</p>
+  </div>
+</footer>
+
+<div class="lb" id="lb" hidden role="dialog" aria-modal="true" aria-label="Xem ảnh lớn">
+  <img id="lbImg" alt="">
+  <button type="button" class="lb-x" id="lbX" data-flip>Đóng</button>
+  <button type="button" class="lb-a" id="lbP" aria-label="Ảnh trước">‹</button>
+  <button type="button" class="lb-a" id="lbN" aria-label="Ảnh sau">›</button>
+  <p class="lb-n"><span id="lbNow">01</span><i><u id="lbBar"></u></i><span id="lbAll">09</span></p>
+</div>
+
+<script defer src="assets/vendor/gsap.min.js"></script>
+<script defer src="assets/vendor/ScrollTrigger.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.20/dist/lenis.min.js"></script>
+<script defer src="assets/js/app.js"></script>
+</body>
+</html>

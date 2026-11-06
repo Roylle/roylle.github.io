@@ -109,4 +109,6 @@ Open `/fintech-roy/` or select Roy Fintech in the portfolio. Independent persona
 
 Published at https://roylle.github.io/trunganhwedding/. The standalone invitation and optimized photos, local fonts, calendar download and animation scripts are in `public/trunganhwedding/`. The countdown targets 18:00 on 28 November 2026 in Vietnam (UTC+7). Guest names can be personalized with `?k=Name`; the page respects reduced-motion preferences. The former `/damcuoi/` address redirects to the new URL and retains query parameters and section anchors.
 
+A scroll-driven edition lives at https://roylle.github.io/trunganhweddingv3/ (`public/trunganhweddingv3/`): GSAP sticky scenes with Lenis, 3D rings, a mirror-finish progress bar, and the same `?k=Name` guest personalization.
+
 The 3D paper-world version is published at https://roylle.github.io/trunganhweddingv2/, with its self-contained files in `public/trunganhweddingv2/` (three.js is vendored, all artwork is drawn at runtime, and guest names work with `?k=Name`). The camera-on-a-curve idea is inspired by the MIT-licensed project "Mr. Panda's Psychologically Safe Portfolio" by Andrew Woan; no assets were copied from it. The earlier invitation at `/trunganhwedding/` is unchanged.

@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Viet Trung and Bui Anh//Wedding Invitation//VI
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:viet-trung-bui-anh-20261128@wedding-invitation.local
+DTSTAMP:20261105T000000Z
+DTSTART:20261128T110000Z
+SUMMARY:Lễ thành hôn Viết Trung & Bùi Anh
+LOCATION:Trung tâm tiệc cưới W. Jardin\, Số 307 Nguyễn Văn Linh\
+ , phường Kênh Dương\, thành phố Hải Phòng
+DESCRIPTION:Trân trọng kính mời quý khách dự lễ thành hôn. 18
+ :00 ngày 28.11.2026 theo giờ Việt Nam.
+END:VEVENT
+END:VCALENDAR
