@@ -49,19 +49,19 @@ export function buildWorld(w) {
   put('wreath', { l: [-5.3, 3.8, -2.66, 0.62], p: [0, 4.35, -2.66, 0.72], hover: 1, anim: { rz: [0.02, 0.5] } });
   put('cloud-a', { l: [6.3, 5.8, -2.2, 0.85], p: [1.9, 12, -2.2, 0.62], hover: 1, anim: { bob: [0.09, 0.6], drift: [0.14, 0.2] } });
   put('cloud-b', { l: [-7.8, 6, -2.3, 0.85], p: [-2.2, 12.2, -2.3, 0.56], anim: { bob: [0.08, 0.5], drift: [0.12, 0.26] } });
-  tree('tree-sage', 8.8, -2.3, 1);
+  tree('tree-sage', 8.3, -2.3, 0.9);
   put('butterfly-a', { l: [4.4, 1.7, -1.9, 0.62], p: [1.7, 3.1, -1.9, 0.62], frames: ['butterfly-a', 'butterfly-b'], fps: 6, anim: { bob: [0.22, 1.1], drift: [0.5, 0.45] } });
   put('daisy', { l: [4.6, 0, -2.2, 1.1], p: [-1.7, 0, -2.2, 1.1], anim: { rz: [0.1, 1.1] }, pop: 1, hover: 1 });
   put('tulip', { l: [5.4, 0, -2.3, 1.1], p: [2.2, 0, -2.3, 1], anim: { rz: [0.09, 1.3] }, pop: 1 });
   scatter(['grass-a', 'grass-b'], -13, 28, 11);
 
   /* ── Letter ── */
-  w.card = put('card-invite', { l: [12.5, 3.7, -2.62, 1.12], p: [11, 6.6, -2.62, 1.1], lit: 1, flip: 'y', hover: 1, onClick: 'name', tip: 'Viết tên bạn lên thiệp' });
+  w.card = put('card-invite', { l: [13.1, 3.7, -2.62, 1.12], p: [11, 6.6, -2.62, 1.1], lit: 1, flip: 'y', hover: 1, onClick: 'name', tip: 'Viết tên bạn lên thiệp' });
   tree('tree-sage', 6, -2.32, 0.92);
-  tree('tree-sage', 16.6, -2.32, 1);
+  tree('tree-sage', 18.1, -2.32, 0.8);
   put('cloud-b', { l: [8, 5.9, -2.25, 0.8], p: [9.6, 11.3, -2.25, 0.62], anim: { bob: [0.09, 0.55], drift: [0.14, 0.18] } });
   put('butterfly-a', { l: [16, 2.4, -1.7, 0.62], p: [12.7, 3, -1.7, 0.62], frames: ['butterfly-a', 'butterfly-b'], fps: 6, anim: { bob: [0.24, 1], drift: [0.6, 0.4] } });
-  put('daisy', { l: [14.4, 0, -2.25, 1], p: [13, 0, -2.25, 1], anim: { rz: [0.1, 1] }, pop: 1 });
+  put('daisy', { l: [15, 0, -2.25, 1], p: [13, 0, -2.25, 1], anim: { rz: [0.1, 1] }, pop: 1 });
 
   /* ── Two families ── */
   put('house-trai', { l: [20.6, 0, -2.36, 0.92], p: [19.6, 0, -2.36, 0.8], pop: 1, hover: 1 });
@@ -131,8 +131,8 @@ export function buildWorld(w) {
   }
   put('moon', { l: [86.8, 22.2, -2.5, 0.95], p: [82.2, 27, -2.5, 0.9], lit: 1, hover: 1, anim: { rz: [0.06, 0.4] } });
   put('cloud-a', { l: [72.3, 13, -2.25, 0.8], p: [78.6, 15.8, -2.25, 0.64], anim: { bob: [0.09, 0.5], drift: [0.15, 0.2] } });
-  put('cloud-b', { l: [84.6, 15.4, -2.25, 0.9], p: [83, 16.4, -2.25, 0.6], anim: { bob: [0.09, 0.55], drift: [0.15, 0.16] } });
-  put('lettering-forever', { l: [82.3, 16.5, -2.62, 0.9], p: [80.5, 20.75, -2.62, 0.84], lit: 1 });
+  put('cloud-b', { l: [87.9, 16.2, -2.25, 0.9], p: [83, 16.4, -2.25, 0.6], anim: { bob: [0.09, 0.55], drift: [0.15, 0.16] } });
+  put('lettering-forever', { l: [82.3, 16.95, -2.62, 0.9], p: [80.5, 20.75, -2.62, 0.84], lit: 1 });
   [[77, 10.1, 79.8, 11.6], [85.6, 11.9, 82.5, 12.9], [85.6, 19.4, 79.2, 27.7], [78.4, 23.4, 81.5, 27.6]].forEach(([lx, ly, px, py], i) => {
     put('lantern', { l: [lx, ly, -2, 0.82], p: [px, py, -2, 0.76], lit: 1, str: 1, swing: 1, anim: { rz: [0.06, 0.8 + i * 0.14] } });
     glowAt(lx, ly - 0.72, -1.98, px, py - 0.66, 1.5);
