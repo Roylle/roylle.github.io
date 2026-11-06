@@ -1,0 +1,165 @@
+:root {
+  --paper: #fdfbf5;
+  --ink: #2f2b33;
+  --sage: #c9d9c3;
+  --fern: #5a8062;
+  --thread: #c8453f;
+  --gold: #d8b25c;
+  --night: #1f2b47;
+  --hand: "Patrick Hand", "Segoe Print", cursive;
+  --script: "Great Vibes", cursive;
+}
+
+* { box-sizing: border-box; }
+html { background: #fbfbf7; overscroll-behavior-y: none; -webkit-text-size-adjust: 100%; }
+body { margin: 0; color: var(--ink); font: 400 20px/1.4 var(--hand); }
+a { color: inherit; }
+
+/* Sân khấu 3D nằm yên, trang vẫn cuộn thật ở phía dưới */
+#stage {
+  position: fixed; left: 0; top: 0; width: 100vw; height: 100vh; height: 100lvh;
+  display: block; touch-action: pan-y; user-select: none; -webkit-user-select: none;
+}
+#track { width: 1px; }
+.over #stage { cursor: pointer; }
+.dragging #stage { cursor: grabbing; }
+
+/* ---- Màn tải ---- */
+#loader {
+  position: fixed; inset: 0; z-index: 20; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 18px; padding: 24px; background: var(--sage); text-align: center; transition: opacity .9s ease;
+}
+.ready #loader { opacity: 0; pointer-events: none; }
+.load-mark { margin: 0; font: 400 clamp(64px, 16vw, 112px)/1 var(--script); color: var(--fern); }
+.load-track { width: min(280px, 70vw); height: 7px; border-radius: 6px; background: rgba(90, 128, 98, .25); overflow: hidden; }
+#loadBar { display: block; height: 100%; background: var(--fern); transform: scaleX(0); transform-origin: 0 50%; transition: transform .2s linear; border-radius: 6px; }
+.load-note { margin: 0; color: #3e5a44; font-size: 21px; }
+
+/* ---- Lớp điều khiển ---- */
+.hud { position: fixed; inset: 0; z-index: 10; pointer-events: none; }
+.hud a, .hud button { pointer-events: auto; }
+
+.tabs {
+  position: absolute; top: max(10px, env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
+  display: flex; gap: 2px; padding: 2px 6px; background: rgba(253, 251, 245, .86);
+  border: 2px solid var(--ink); border-radius: 12px 14px 11px 15px / 14px 11px 15px 12px;
+  box-shadow: 2px 3px 0 rgba(47, 43, 51, .16); max-width: calc(100vw - 16px);
+}
+.tabs a {
+  padding: 7px 9px; min-height: 38px; display: flex; align-items: center; text-decoration: none;
+  font-size: 18px; line-height: 1; white-space: nowrap; border-radius: 8px;
+}
+.tabs a[aria-current] { color: var(--thread); text-decoration: underline wavy 1.5px; text-underline-offset: 4px; }
+.tabs a:hover { background: rgba(201, 217, 195, .55); }
+
+/* Thanh tiến trình tráng gương: ống kính trong, lõi bạc soi màu của cảnh, viên bi đánh bóng ở đầu.
+   Ban ngày phần dưới soi màu cỏ, về đêm soi ánh vàng của dây đèn. */
+.progress {
+  position: absolute; height: 11px; border-radius: 99px;
+  left: max(14px, env(safe-area-inset-left)); right: max(14px, env(safe-area-inset-right));
+  bottom: max(6px, calc(env(safe-area-inset-bottom) - 14px));
+  background: linear-gradient(180deg, rgba(47, 43, 51, .24), rgba(255, 255, 255, .5) 55%, rgba(255, 255, 255, .86));
+  box-shadow: inset 0 1px 2px rgba(30, 30, 40, .45), 0 1px 0 rgba(255, 255, 255, .65), 0 0 0 1px rgba(47, 43, 51, .3);
+  pointer-events: auto; cursor: grab; touch-action: none;
+}
+.progress::before { content: ""; position: absolute; inset: -9px 0 -6px; } /* vùng bắt chuột rộng hơn nét thanh */
+.scrubbing .progress { cursor: grabbing; }
+.progress-tube { position: absolute; inset: 1.5px; border-radius: inherit; overflow: hidden; }
+#progress {
+  position: absolute; inset: 0; display: block; overflow: hidden; border-radius: inherit;
+  transform: translate3d(-100%, 0, 0); will-change: transform;
+  background: linear-gradient(180deg, #fdfefe 0%, #e4e9ee 16%, #aab4be 38%, #5a6470 50%, #7f8b85 57%, #c6d4c6 74%, #f4f7f3 90%, #b4bcc4 100%);
+}
+#progress::before, .progress-bead::before {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; opacity: 0; transition: opacity .9s ease;
+}
+#progress::before {
+  background: linear-gradient(180deg, #dfe6f5 0%, #8f9dc2 20%, #3a4668 44%, #141b33 52%, #3b3a45 60%, #d8b25c 82%, #fbe9b8 92%, #8a7a55 100%);
+}
+.dusk #progress::before, .dusk .progress-bead::before { opacity: 1; }
+/* Vệt phản chiếu trượt ngược chiều khi cuộn, sáng lên khi đi nhanh */
+#progressSheen {
+  position: absolute; left: -30px; top: 0; bottom: 0; width: 300%; opacity: .55; will-change: transform, opacity;
+  background: repeating-linear-gradient(100deg,
+    transparent 0 60px, rgba(255, 255, 255, .78) 66px 72px, transparent 80px 170px,
+    rgba(255, 255, 255, .36) 178px 196px, transparent 210px 320px,
+    rgba(20, 25, 35, .22) 330px 350px, transparent 365px 480px);
+}
+.progress-rail { position: absolute; inset: 0 1.5px; transform: translate3d(0, 0, 0); will-change: transform; pointer-events: none; }
+.progress-bead {
+  position: absolute; left: 0; top: 50%; width: 19px; height: 19px; margin: -9.5px 0 0 -9.5px; border-radius: 50%; overflow: hidden;
+  background:
+    radial-gradient(circle at 34% 27%, #fff 0 9%, rgba(255, 255, 255, .75) 15%, transparent 32%),
+    linear-gradient(180deg, #f7f9fb 0%, #b7c0ca 34%, #59626e 52%, #8f9c94 62%, #dde6dc 84%, #fff 100%);
+  box-shadow: 0 0 0 1px rgba(47, 43, 51, .5), 0 2px 5px rgba(30, 30, 40, .4);
+}
+.progress-bead::before {
+  background:
+    radial-gradient(circle at 34% 27%, #fff 0 9%, rgba(255, 255, 255, .7) 15%, transparent 32%),
+    linear-gradient(180deg, #dfe6f5 0%, #6f7ea6 32%, #141b33 52%, #5a5040 62%, #d8b25c 84%, #fbe9b8 100%);
+}
+
+#hint {
+  position: absolute; left: 50%; bottom: max(26px, env(safe-area-inset-bottom)); transform: translateX(-50%);
+  margin: 0; padding: 7px 16px 8px; background: var(--paper); border: 2px solid var(--ink); white-space: nowrap;
+  border-radius: 14px 11px 15px 12px / 11px 15px 12px 14px; box-shadow: 2px 3px 0 rgba(47, 43, 51, .18);
+  animation: nudge 1.8s ease-in-out infinite; transition: opacity .4s;
+}
+#hint.off { opacity: 0; animation: none; }
+@keyframes nudge { 50% { transform: translate(-50%, 5px); } }
+
+.acts {
+  position: absolute; left: 50%; bottom: max(22px, env(safe-area-inset-bottom)); transform: translate(-50%, 90px);
+  display: flex; gap: 10px; visibility: hidden; transition: transform .35s cubic-bezier(.2, 1.3, .4, 1), visibility 0s .35s;
+  width: max-content; max-width: calc(100vw - 20px);
+}
+.acts.on { transform: translate(-50%, 0); visibility: visible; transition: transform .35s cubic-bezier(.2, 1.3, .4, 1); }
+.tag {
+  appearance: none; display: inline-flex; align-items: center; justify-content: center; min-height: 46px; padding: 8px 18px 9px;
+  background: var(--paper); color: var(--ink); border: 2.5px solid var(--ink); font: inherit; font-size: 21px; line-height: 1;
+  text-decoration: none; cursor: pointer; white-space: nowrap;
+  border-radius: 14px 11px 15px 12px / 11px 15px 12px 14px; box-shadow: 3px 4px 0 rgba(20, 20, 30, .28);
+  transition: transform .12s, box-shadow .12s;
+}
+.tag:hover { transform: translate(-1px, -2px) rotate(-1deg); box-shadow: 4px 6px 0 rgba(20, 20, 30, .28); }
+.tag:active { transform: translate(2px, 3px); box-shadow: 1px 1px 0 rgba(20, 20, 30, .28); }
+.tag-main { background: var(--gold); }
+
+#toast {
+  position: absolute; left: 50%; bottom: 84px; transform: translate(-50%, 8px); margin: 0; padding: 8px 16px;
+  width: max-content; max-width: calc(100vw - 24px); text-align: center;
+  background: var(--ink); color: var(--paper); border-radius: 10px; opacity: 0; transition: opacity .2s, transform .2s;
+}
+#toast.on { opacity: 1; transform: translate(-50%, 0); }
+
+:focus-visible { outline: 3px solid var(--thread); outline-offset: 3px; }
+
+/* Phần chữ cho trình đọc màn hình, không chiếm chỗ khi 3D chạy */
+.gl .page {
+  position: absolute; width: 1px; height: 1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap;
+}
+.gl .page img { display: none; }
+
+/* Khi máy không chạy được 3D: thành thiệp giấy bình thường, ảnh giữ nguyên khung */
+.no-gl #stage, .no-gl #track, .no-gl .hud { display: none; }
+.no-gl body { background: var(--paper); }
+.page { max-width: 620px; margin: 0 auto; padding: 32px 20px 64px; text-align: center; }
+.page section { padding: 28px 0; }
+.page h1 { margin: 16px 0; font: 400 64px/1.1 var(--script); color: var(--fern); }
+.page h2 { margin: 0 0 12px; font: 400 48px/1.15 var(--script); color: var(--fern); }
+.page h3 { margin: 18px 0 4px; font-size: 24px; font-weight: 400; color: var(--thread); }
+.page p { margin: 6px 0; }
+.page img { display: block; width: 100%; height: auto; margin: 18px 0; }
+
+@media (max-width: 460px) {
+  .tabs a { padding: 7px 6px; font-size: 17px; }
+  .tag { font-size: 20px; padding: 8px 14px 9px; }
+  .progress { height: 10px; left: max(12px, env(safe-area-inset-left)); right: max(12px, env(safe-area-inset-right)); }
+  .progress-bead { width: 17px; height: 17px; margin: -8.5px 0 0 -8.5px; }
+}
+/* Trên màn hình cảm ứng thanh chỉ để nhìn, tránh cướp cử chỉ vuốt ở mép dưới */
+@media (pointer: coarse) { .progress { pointer-events: none; } }
+@media (prefers-reduced-motion: reduce) {
+  #hint { animation: none; }
+  .acts, .acts.on, #loader { transition: none; }
+}

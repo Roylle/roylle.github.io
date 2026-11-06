@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="vi" class="gl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Viết Trung &amp; Bùi Anh</title>
+<meta name="description" content="Trân trọng kính mời bạn dự lễ thành hôn của Viết Trung và Bùi Anh, 18 giờ 00 Thứ Bảy 28.11.2026 tại W. Jardin, Hải Phòng.">
+<meta name="theme-color" content="#c9d9c3">
+<meta property="og:title" content="Viết Trung & Bùi Anh, 28.11.2026">
+<meta property="og:description" content="18 giờ 00, Thứ Bảy 28.11.2026 tại W. Jardin, Hải Phòng.">
+<meta property="og:image" content="https://roylle.github.io/trunganhweddingv2/assets/img/og.jpg">
+<meta property="og:url" content="https://roylle.github.io/trunganhweddingv2/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23c8453f' d='M16 28S3 20 3 11a7 7 0 0 1 13-3.6A7 7 0 0 1 29 11c0 9-13 17-13 17z'/%3E%3C/svg%3E">
+<!-- Cách cuộn camera và kiểu thế giới giấy lấy cảm hứng từ dự án mã nguồn mở MIT
+     "Mr. Panda's Psychologically Safe Portfolio" của Andrew Woan. Hình vẽ của thiệp được vẽ mới hoàn toàn. -->
+<link rel="stylesheet" href="assets/css/fonts.css">
+<link rel="stylesheet" href="assets/css/site.css">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>
+<noscript><style>#loader,.hud,#stage,#track{display:none!important}.page{position:static!important;width:auto!important;height:auto!important;clip:auto!important;overflow:visible!important}</style></noscript>
+</head>
+<body>
+
+<div id="loader" aria-hidden="true">
+  <p class="load-mark">T &amp; A</p>
+  <div class="load-track"><span id="loadBar"></span></div>
+  <p class="load-note">Cuộn xuống hoặc vuốt lên để mở thiệp</p>
+</div>
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="track" aria-hidden="true"></div>
+
+<div class="hud">
+  <nav class="tabs" aria-label="Các phần của thiệp">
+    <a href="#loi-moi" data-go="loi-moi">Lời mời</a>
+    <a href="#hai-nha" data-go="hai-nha">Hai nhà</a>
+    <a href="#album" data-go="album">Album</a>
+    <a href="#ngay-cuoi" data-go="ngay-cuoi">Ngày cưới</a>
+    <a href="#dia-diem" data-go="dia-diem">Địa điểm</a>
+  </nav>
+  <div class="progress" id="progressBar" aria-hidden="true">
+    <div class="progress-tube"><span id="progress"><i id="progressSheen"></i></span></div>
+    <div class="progress-rail" id="progressRail"><b class="progress-bead"></b></div>
+  </div>
+  <p id="hint">Cuộn xuống để đi tiếp</p>
+
+  <div class="acts" id="actDate">
+    <a class="tag" href="assets/viet-trung-bui-anh.ics" download>Thêm vào lịch</a>
+  </div>
+  <div class="acts" id="actVenue">
+    <a class="tag tag-main" href="https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x314a7b900f6e0d17:0x526fde7e0ed121fb!3e0?g_mp=CiVnb29nbGUubWFwcy5wbGFjZXMudjEuUGxhY2VzLkdldFBsYWNlEAMYASAF" target="_blank" rel="noopener">Chỉ đường</a>
+    <button class="tag" type="button" id="copyAddr" data-addr="Trung tâm tiệc cưới W. Jardin, Số 307 Nguyễn Văn Linh, phường Kênh Dương, thành phố Hải Phòng">Sao chép địa chỉ</button>
+  </div>
+  <div class="acts" id="actEnd">
+    <a class="tag" href="#loi-moi" data-go="loi-moi">Về đầu thiệp</a>
+    <a class="tag" href="assets/viet-trung-bui-anh.ics" download>Thêm vào lịch</a>
+  </div>
+  <p id="toast" role="status"></p>
+</div>
+
+<!-- Toàn bộ nội dung dạng chữ: dành cho trình đọc màn hình, và hiện ra khi máy không chạy được 3D -->
+<main class="page">
+  <section id="loi-moi">
+    <p>Trân trọng kính mời</p>
+    <p id="guestName">Quý khách</p>
+    <p>tới dự bữa cơm thân mật mừng lễ thành hôn của hai chúng tôi</p>
+    <h1>Viết Trung &amp; Bùi Anh</h1>
+    <img src="assets/img/p3.webp" width="700" height="1050" loading="lazy" alt="Cô dâu chú rể cười tươi trên nền xám">
+  </section>
+  <section id="hai-nha">
+    <h2>Hai nhà</h2>
+    <h3>Nhà trai</h3>
+    <p>Ông Lê Viết Cảnh, Bà Nguyễn Thị Cúc. Viết Trung, út nam.</p>
+    <h3>Nhà gái</h3>
+    <p>Ông Bùi Xuân Thái, Bà Phạm Thị Sự. Bùi Anh, út nữ.</p>
+    <img src="assets/img/hands.webp" width="1400" height="1118" loading="lazy" alt="Bùi Anh và Viết Trung cười rạng rỡ, ngoắc ngón út vào nhau">
+    <p>Hai người con út, một lời ngoắc tay.</p>
+  </section>
+  <section id="album">
+    <h2>Có những ngày mình muốn giữ thật lâu.</h2>
+    <img src="assets/img/p1.webp" width="700" height="1050" loading="lazy" alt="Cô dâu khoác tay chú rể trước vòm hoa kem và hồng">
+    <img src="assets/img/c1.webp" width="900" height="756" loading="lazy" alt="Hai bạn cười bên vòm hoa, cô dâu khoác tay chú rể">
+    <img src="assets/img/p8.webp" width="700" height="1050" loading="lazy" alt="Hai bạn ngồi tựa vào nhau">
+    <img src="assets/img/p4.webp" width="700" height="1050" loading="lazy" alt="Cô dâu đứng giữa hoa, tà voan trải dài">
+  </section>
+  <section id="ngay-cuoi">
+    <h2>Ngày mình về chung một nhà</h2>
+    <p>18 giờ 00, Thứ Bảy, ngày 28 tháng 11 năm 2026.</p>
+    <p>Tức ngày 20 tháng 10 năm Bính Ngọ.</p>
+    <p><a href="assets/viet-trung-bui-anh.ics" download>Thêm vào lịch</a></p>
+  </section>
+  <section id="dia-diem">
+    <h2>W. Jardin</h2>
+    <p>Trung tâm tiệc cưới W. Jardin, Số 307 Nguyễn Văn Linh, phường Kênh Dương, thành phố Hải Phòng.</p>
+    <p><a href="https://www.google.com/maps?cid=5940211066520805883" target="_blank" rel="noopener">Xem bản đồ</a></p>
+    <img src="assets/img/aisle.webp" width="2048" height="1365" loading="lazy" alt="Lối đi giữa các bàn tiệc trắng, trần vòm xòe như tán cây tại W. Jardin">
+  </section>
+  <section id="cam-on">
+    <p>Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi.</p>
+    <p>Rất hân hạnh được đón tiếp!</p>
+    <img src="assets/img/closing.webp" width="1200" height="1800" loading="lazy" alt="Hai bạn ngồi tựa vào nhau, cô dâu ôm bó tulip">
+  </section>
+</main>
+
+<script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
