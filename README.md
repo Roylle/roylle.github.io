@@ -111,4 +111,6 @@ Published at https://roylle.github.io/trunganhwedding/. The standalone invitatio
 
 A scroll-driven edition lives at https://roylle.github.io/trunganhweddingv3/ (`public/trunganhweddingv3/`): GSAP sticky scenes with Lenis, 3D rings, a mirror-finish progress bar, and the same `?k=Name` guest personalization.
 
+A hand-drawn paper-notebook edition is published at https://roylle.github.io/trunganhweddingv4/ (`public/trunganhweddingv4/`): three.js is vendored, the artwork is baked to WebP from new SVG drawings, native page scroll drives the camera, and guest names work with `?k=Name`. It uses the same camera-on-a-curve idea from "Mr. Panda's Psychologically Safe Portfolio" by Andrew Woan (MIT); no assets were copied from it.
+
 The 3D paper-world version is published at https://roylle.github.io/trunganhweddingv2/, with its self-contained files in `public/trunganhweddingv2/` (three.js is vendored, all artwork is drawn at runtime, and guest names work with `?k=Name`). The camera-on-a-curve idea is inspired by the MIT-licensed project "Mr. Panda's Psychologically Safe Portfolio" by Andrew Woan; no assets were copied from it. The earlier invitation at `/trunganhwedding/` is unchanged.

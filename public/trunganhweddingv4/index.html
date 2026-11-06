@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Viết Trung &amp; Bùi Anh · 28.11.2026</title>
+<meta name="description" content="Trân trọng kính mời bạn dự lễ thành hôn của Viết Trung và Bùi Anh, 18 giờ 00, Thứ Bảy 28.11.2026 tại W. Jardin, Hải Phòng.">
+<meta name="theme-color" content="#cfe0c8">
+<meta property="og:title" content="Viết Trung &amp; Bùi Anh · 28.11.2026">
+<meta property="og:description" content="Một cuốn sổ giấy nhỏ mời bạn đến chung vui. 18 giờ 00, Thứ Bảy 28.11.2026 tại W. Jardin, Hải Phòng.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://roylle.github.io/trunganhweddingv4/">
+<link rel="canonical" href="https://roylle.github.io/trunganhweddingv4/">
+<meta property="og:image" content="https://roylle.github.io/trunganhweddingv4/assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath fill='%23d8432f' d='M16 28C2 18 6 6 16 12 26 6 30 18 16 28z'/%3E%3C/svg%3E">
+<link rel="preload" href="assets/fonts/mali-600-vietnamese.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/site.css">
+<script type="importmap">{"imports":{"three":"./assets/vendor/three.module.min.js"}}</script>
+</head>
+<body>
+
+<canvas id="stage" aria-hidden="true"></canvas>
+<div id="scroller" aria-hidden="true"></div>
+
+<div id="loader" role="status" aria-live="polite">
+  <div class="loader-in">
+    <p class="loader-names">Viết Trung &amp; Bùi Anh</p>
+    <div class="bar"><i id="bar"></i></div>
+    <p class="loader-hint">Đang cắt giấy, tô màu…<br>Cuộn hoặc vuốt để đạp xe cùng chúng mình</p>
+  </div>
+</div>
+
+<nav id="tabs" aria-label="Các trang của thiệp"></nav>
+
+<div id="actions" aria-label="Thao tác nhanh">
+  <a class="sticker" data-for="date end" href="assets/viet-trung-bui-anh.ics" download>Thêm vào lịch</a>
+  <a class="sticker" data-for="venue hall end" href="https://www.google.com/maps/dir//''/data=!4m7!4m6!1m1!4e2!1m2!1m1!1s0x314a7b900f6e0d17:0x526fde7e0ed121fb!3e0" target="_blank" rel="noopener">Chỉ đường</a>
+  <button class="sticker" data-for="venue" id="copyAddr" type="button">Sao chép địa chỉ</button>
+  <button class="sticker" data-for="end" id="toTop" type="button">Về đầu</button>
+</div>
+
+<p id="hint" aria-hidden="true">Cuộn xuống để bắt đầu <span>↓</span></p>
+<p id="toast" role="status" aria-live="polite"></p>
+
+<dialog id="lightbox" aria-label="Xem ảnh">
+  <img id="lightImg" alt="">
+  <button id="lightClose" type="button" aria-label="Đóng ảnh">×</button>
+</dialog>
+
+<dialog id="nameBox" aria-label="Viết tên khách mời">
+  <form method="dialog" id="nameForm">
+    <label for="nameInput">Tên của bạn trên thiệp</label>
+    <input id="nameInput" type="text" maxlength="40" autocomplete="off" spellcheck="false" placeholder="Quý khách">
+    <div class="name-row">
+      <button class="sticker" value="cancel" type="submit" formnovalidate>Để sau</button>
+      <button class="sticker on" value="ok" type="submit">Viết lên thiệp</button>
+    </div>
+  </form>
+</dialog>
+
+<!-- Readable invitation: for screen readers, and shown on screen if WebGL is unavailable. -->
+<main id="plain">
+  <header>
+    <p>Trân trọng kính mời</p>
+    <h1>Viết Trung &amp; Bùi Anh</h1>
+    <p>tới dự bữa cơm thân mật mừng lễ thành hôn của hai gia đình.</p>
+  </header>
+  <section>
+    <h2>Hai gia đình</h2>
+    <p><strong>Nhà trai:</strong> Ông Lê Viết Cảnh, Bà Nguyễn Thị Cúc. Út nam: Viết Trung.</p>
+    <p><strong>Nhà gái:</strong> Ông Bùi Xuân Thái, Bà Phạm Thị Sự. Út nữ: Bùi Anh.</p>
+  </section>
+  <section>
+    <h2>Thời gian</h2>
+    <p>18 giờ 00, Thứ Bảy, ngày 28 tháng 11 năm 2026.<br>Tức ngày 20 tháng 10 năm Bính Ngọ.</p>
+  </section>
+  <section>
+    <h2>Địa điểm</h2>
+    <p>Trung tâm tiệc cưới W. Jardin<br>Số 307 Nguyễn Văn Linh, phường Kênh Dương, thành phố Hải Phòng.</p>
+    <p><a href="https://www.google.com/maps?cid=5940211066520805883" target="_blank" rel="noopener">Xem bản đồ</a> · <a href="assets/viet-trung-bui-anh.ics" download>Thêm vào lịch</a></p>
+  </section>
+  <section class="plain-photos">
+    <img src="assets/photos/hero.webp" alt="Viết Trung và Bùi Anh trong trang phục cưới" loading="lazy">
+    <img src="assets/photos/doi-can.webp" alt="Cô dâu và chú rể cười rạng rỡ" loading="lazy">
+    <img src="assets/photos/doi-kem.webp" alt="Đôi uyên ương trước phông hoa" loading="lazy">
+  </section>
+  <p>Sự hiện diện của quý khách là niềm vinh hạnh cho gia đình chúng tôi.</p>
+</main>
+
+<script type="module" src="assets/js/app.js"></script>
+</body>
+</html>

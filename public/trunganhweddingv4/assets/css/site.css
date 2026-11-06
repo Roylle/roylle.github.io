@@ -1,0 +1,93 @@
+@font-face{font-family:Mali;font-weight:400;font-display:swap;src:url(../fonts/mali-400-vietnamese.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
+@font-face{font-family:Mali;font-weight:400;font-display:swap;src:url(../fonts/mali-400-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+1EF2-1EFF,U+2020}
+@font-face{font-family:Mali;font-weight:400;font-display:swap;src:url(../fonts/mali-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:Mali;font-weight:600;font-display:swap;src:url(../fonts/mali-600-vietnamese.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
+@font-face{font-family:Mali;font-weight:600;font-display:swap;src:url(../fonts/mali-600-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+1EF2-1EFF,U+2020}
+@font-face{font-family:Mali;font-weight:600;font-display:swap;src:url(../fonts/mali-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+@font-face{font-family:"Great Vibes";font-display:swap;src:url(../fonts/greatvibes-r-vietnamese.woff2) format("woff2");unicode-range:U+0102-0103,U+0110-0111,U+0128-0129,U+0168-0169,U+01A0-01A1,U+01AF-01B0,U+0300-0301,U+0303-0304,U+0308-0309,U+0323,U+0329,U+1EA0-1EF9,U+20AB}
+@font-face{font-family:"Great Vibes";font-display:swap;src:url(../fonts/greatvibes-r-latin-ext.woff2) format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+1E00-1E9F,U+1EF2-1EFF,U+2020}
+@font-face{font-family:"Great Vibes";font-display:swap;src:url(../fonts/greatvibes-r-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+2000-206F}
+
+:root{
+  --ink:#2b2826;--paper:#fdfbf3;--sage:#cfe0c8;--sage-d:#6f9a6a;--coral:#ef8a73;--line:#a9c4de;
+  --safe-b:env(safe-area-inset-bottom,0px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{background:#f8f6f0;-webkit-text-size-adjust:100%}
+body{margin:0;background:#f8f6f0;color:var(--ink);font-family:Mali,system-ui,sans-serif;overscroll-behavior-y:none}
+#stage{position:fixed;left:0;top:0;width:100vw;height:100vh;height:100lvh;display:block;touch-action:pan-y}
+#scroller{width:1px;height:2400vh}
+a{color:inherit}
+
+/* Loader */
+#loader{position:fixed;inset:0;z-index:30;background:var(--sage);display:grid;place-items:center;text-align:center;padding:24px;transition:opacity .9s ease}
+#loader.out{opacity:0;pointer-events:none}
+.loader-names{font-family:"Great Vibes",cursive;font-size:clamp(40px,9vw,68px);margin:0 0 18px;line-height:1.1}
+.bar{width:min(260px,70vw);height:12px;margin:0 auto;border:2.5px solid var(--ink);border-radius:9px 7px 10px 6px;background:var(--paper);overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--coral);transition:width .25s ease}
+.loader-hint{margin:18px 0 0;font-size:15px;line-height:1.6}
+
+/* Notebook index tabs */
+#tabs{position:fixed;z-index:10;right:0;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:6px;opacity:0;transition:opacity .4s}
+#tabs.on{opacity:1}
+#tabs button{appearance:none;border:2px solid var(--ink);border-right:0;background:var(--paper);color:var(--ink);font:600 13px/1.1 Mali,sans-serif;padding:8px 10px 8px 12px;border-radius:9px 0 0 9px;cursor:pointer;transform:translateX(4px);transition:transform .2s,background .2s;min-height:36px}
+#tabs button:hover{transform:translateX(0)}
+#tabs button[aria-current=true]{background:var(--coral);color:#fff;transform:translateX(0)}
+#tabs button:focus-visible,.sticker:focus-visible,#lightClose:focus-visible{outline:3px solid var(--sage-d);outline-offset:2px}
+
+/* Contextual sticker buttons */
+#actions{position:fixed;z-index:10;left:50%;transform:translateX(-50%);bottom:calc(20px + var(--safe-b));display:flex;gap:10px;flex-wrap:wrap;justify-content:center;width:min(92vw,620px);pointer-events:none}
+.sticker{display:none;appearance:none;pointer-events:auto;text-decoration:none;border:2.5px solid var(--ink);background:var(--paper);color:var(--ink);font:600 15px/1.1 Mali,sans-serif;padding:12px 18px;min-height:46px;border-radius:12px 9px 13px 8px;box-shadow:3px 4px 0 rgba(43,40,38,.22);cursor:pointer;transition:transform .15s,box-shadow .15s}
+.sticker:hover{transform:translate(-1px,-2px);box-shadow:4px 6px 0 rgba(43,40,38,.22)}
+.sticker:active{transform:translate(2px,2px);box-shadow:1px 1px 0 rgba(43,40,38,.22)}
+.sticker.show{display:inline-flex;align-items:center;justify-content:center}
+.sticker.on,.sticker:first-of-type.show{background:#f8e8b0}
+dialog .sticker{display:inline-flex}
+
+#hint{position:fixed;z-index:10;left:50%;transform:translateX(-50%);bottom:calc(26px + var(--safe-b));margin:0;font-weight:600;font-size:15px;background:var(--paper);border:2.5px solid var(--ink);padding:9px 16px;border-radius:12px 9px 13px 8px;white-space:nowrap;transition:opacity .4s;opacity:0;pointer-events:none}
+#hint.on{opacity:1}
+#hint span{display:inline-block;animation:nudge 1.4s ease-in-out infinite}
+@keyframes nudge{50%{transform:translateY(4px)}}
+
+#toast{position:fixed;z-index:40;left:50%;top:22px;transform:translate(-50%,-90px);margin:0;background:var(--ink);color:var(--paper);padding:10px 16px;border-radius:10px;font-weight:600;font-size:14px;transition:transform .3s}
+#toast.on{transform:translate(-50%,0)}
+
+/* Dialogs */
+dialog{border:0;padding:0;background:transparent;max-width:none;max-height:none}
+dialog::backdrop{background:rgba(35,38,48,.78)}
+#lightbox{position:fixed;inset:0;width:100vw;height:100dvh;margin:0;overflow:hidden}
+#lightbox[open]{display:grid;place-items:center}
+#lightImg{max-width:calc(100vw - 32px);max-height:calc(100dvh - 32px);width:auto;height:auto;object-fit:contain;background:#fffdf6;padding:10px;border-radius:3px}
+#lightClose{position:fixed;top:12px;right:12px;width:48px;height:48px;border-radius:50%;border:2.5px solid var(--ink);background:var(--paper);font:600 26px/1 Mali,sans-serif;color:var(--ink);cursor:pointer}
+#nameBox{margin:auto;width:min(92vw,420px)}
+#nameForm{background:var(--paper);border:2.5px solid var(--ink);border-radius:14px 10px 15px 9px;padding:20px}
+#nameForm label{display:block;font-weight:600;margin-bottom:10px}
+#nameInput{width:100%;font:400 18px Mali,sans-serif;padding:11px 12px;border:2px solid var(--ink);border-radius:9px;background:#fff;color:var(--ink);min-height:46px}
+.name-row{display:flex;justify-content:flex-end;gap:10px;margin-top:14px}
+
+/* Plain invitation: visually hidden while the paper world runs */
+#plain{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:normal;left:0;top:0}
+.no-webgl #stage,.no-webgl #scroller,.no-webgl #tabs,.no-webgl #actions,.no-webgl #hint,.no-webgl #loader{display:none}
+.no-webgl #plain{position:static;width:auto;height:auto;overflow:visible;clip-path:none;max-width:620px;margin:0 auto;padding:40px 20px 60px;line-height:1.7;font-size:17px;text-align:center}
+.no-webgl h1{font:400 clamp(42px,12vw,64px)/1.15 "Great Vibes",cursive;margin:.2em 0}
+.no-webgl h2{color:var(--sage-d);font-size:20px;margin:1.6em 0 .2em}
+.plain-photos{display:grid;gap:12px;margin-top:24px}
+.plain-photos img{width:100%;height:auto;display:block;border:10px solid #fffdf6;box-shadow:0 3px 12px rgba(0,0,0,.18)}
+
+@media (max-aspect-ratio:1/1){
+  #tabs{top:auto;left:5px;right:5px;bottom:calc(8px + var(--safe-b));transform:none;display:grid;grid-template-columns:repeat(6,1fr);gap:3px}
+  #tabs button{border:2px solid var(--ink);border-radius:8px;padding:6px 1px;font-size:clamp(9.5px,2.75vw,12px);transform:none;min-height:36px;white-space:nowrap}
+  #tabs button:hover{transform:none}
+  #actions{bottom:calc(52px + var(--safe-b))}
+  #hint{bottom:calc(56px + var(--safe-b))}
+  .sticker{font-size:14px;padding:10px 14px}
+}
+@media (max-height:480px) and (min-aspect-ratio:1/1){
+  #tabs{gap:3px}
+  #tabs button{font-size:10.5px;padding:4px 7px 4px 9px;min-height:28px}
+  #actions{bottom:calc(8px + var(--safe-b))}
+  .sticker{font-size:13px;padding:7px 12px;min-height:38px}
+  #hint{bottom:calc(10px + var(--safe-b))}
+}
+@media (prefers-reduced-motion:reduce){#hint span{animation:none}#loader{transition:none}}
