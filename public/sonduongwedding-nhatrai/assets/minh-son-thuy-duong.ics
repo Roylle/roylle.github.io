@@ -1,0 +1,13 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Son Duong Wedding//VI
+BEGIN:VEVENT
+UID:sonduong-20261206@roylle.github.io
+DTSTAMP:20261113T000000Z
+DTSTART:20261206T040000Z
+DTEND:20261206T070000Z
+SUMMARY:Lễ thành hôn Minh Sơn & Thùy Dương
+LOCATION:Tư gia nhà trai - Xóm Đồng Sim\, thôn Dương Huy 1\, phường Mông Dương\, Quảng Ninh
+DESCRIPTION:Trân trọng kính mời dự lễ thành hôn. Bản đồ: https://maps.app.goo.gl/JgHsfMdpXWTfHVv48
+END:VEVENT
+END:VCALENDAR
