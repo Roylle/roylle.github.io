@@ -17,7 +17,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Imperial+Script&family=Playfair+Display:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="assets/img/tug09603-800.webp">
-<link rel="stylesheet" href="assets/css/app.css?v=20261113-location-qr">
+<link rel="stylesheet" href="assets/css/app.css?v=20261114-music">
 <script defer src="assets/js/app.js?v=20261113-location-qr"></script>
 </head>
 <body>
@@ -94,4 +94,9 @@
  <footer><p class="script-heading">Rất hân hạnh được đón tiếp!</p><p>Minh Sơn &amp; Thùy Dương</p><p>06.12.2026</p><span aria-hidden="true">♡</span></footer>
 </main>
 <dialog id="lightbox" aria-label="Album ảnh cưới"><button class="close" aria-label="Đóng ảnh">×</button><button class="previous" aria-label="Ảnh trước">‹</button><img id="lightbox-image" alt="Ảnh cưới Minh Sơn và Thùy Dương"><button class="next" aria-label="Ảnh tiếp theo">›</button><p id="photo-count" aria-live="polite"></p></dialog>
+<audio id="wedding-music" src="assets/audio/le-duong-kai-dinh.mp3" preload="metadata" autoplay loop></audio>
+<button id="music-toggle" type="button" aria-controls="wedding-music" title="Lễ Đường · Kai Đinh">
+  <span aria-hidden="true">♫</span> <span id="music-label">Bật nhạc</span>
+</button>
+<script src="assets/js/music.js"></script>
 </body></html>
